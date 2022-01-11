@@ -2,6 +2,7 @@
   "name": "web3-guestbook",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/index.js",
   "description": "Invite your digital guests to leave their digital footprint.",
   "repository": {
     "type": "git",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "build": "webpack --mode production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -56,6 +57,9 @@
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.8"
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-react": "^7.16.7",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   }
 }

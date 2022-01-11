@@ -6,7 +6,7 @@ const app = express()
 const cors = require('cors')
 const Twitter = require('twitter')
 const Cache = require('./cache')
-const {checkIfVerifiedAr, storeVerificationAr, signDocumentAr, } = require("./arweave")
+const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject } = require("./arweave")
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors())
@@ -14,7 +14,7 @@ app.use(cors())
 const port = process.env.PORT || 8080
 
 // TODO: pass through client side
-const TWEET_TEMPLATE = "I am verifying for @web3Guestbook: sig:"
+const TWEET_TEMPLATE = "I am verifying for @imprintxyz: sig:"
 
 const client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
@@ -23,9 +23,10 @@ const client = new Twitter({
 })
 
 const sigCache = new Cache()
+const projCache = new Cache()
 
 // health check
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('ok')
 })
 
@@ -36,15 +37,15 @@ app.post('/sign/:project', (req, res) => {
     name,
     address,
     handle,
-    message,
+    date,
     signature,
   } = req.body
 
   // check if user included handle
   if (handle) {
     // check if user is verified
-    const signPromise = sigCache.has(handle) ?
-      signDocumentAr(projectId, documentId, address, name, handle, message, signature, true) :
+    const promise = sigCache.has(handle) ?
+      signGuestbook(projectId, address, name, handle, date, signature, true) :
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
         return signDocumentAr(documentId, address, name, handle, signature, verified)
@@ -56,7 +57,7 @@ app.post('/sign/:project', (req, res) => {
         res.json(data)
       })
       .catch(e => {
-        console.log(`err @ /sign/:document : ${e}`)
+        console.log(`err @ /sign/:project : ${e}`)
         res.status(500)
       });
   } else {
@@ -64,7 +65,7 @@ app.post('/sign/:project', (req, res) => {
     signDocumentAr(documentId, address, name, '', signature, false)
       .then((data) => res.json(data))
       .catch(e => {
-        console.log(`err @ /sign/:document : ${e}`)
+        console.log(`err @ /sign/:project : ${e}`)
         res.status(500)
       })
   }
@@ -89,7 +90,7 @@ app.post('/verify/:handle', (req, res) => {
     include_rts: false,
     count: 5,
     tweet_mode: 'extended',
-  }, (error, tweets, response) => {
+  }, (error, tweets, _) => {
 
     if (!error) {
       for (const tweet of tweets) {
@@ -127,6 +128,48 @@ app.post('/verify/:handle', (req, res) => {
     }
   })
 })
+
+// POST body provides project id, project name, project website (optional), project twitter (optional)
+app.post('/project', (req, res) => {
+  const {
+    projectId,
+    projectName,
+    projectWebsite,
+    projectTwitter,
+  } = req.body;
+
+  if (projCache.has(projectId)) {
+    const project = projCache.get(project);
+    console.log(`already registered project: ${projectId} called ${project.projectName} with the following params: twitter: ${project.projectTwitter}, website: ${project.projectWebsite}`)
+    res.json(
+      { success: false,
+        msg: `already registered project: ${projectId} called ${project.projectName} with the following params: twitter: ${project.projectTwitter}, website: ${project.projectWebsite}`,
+      })
+    return
+  }
+  else {
+    checkIfProjectRegistered(projectId, projectWebsite, projectTwitter).then((result) => {
+      const { registered, msg, project }  = result;
+      if (registered) {
+        projCache.set(projectId, project);
+        res.status(400).json(msg);
+      } else {
+        addProject(projectId, projectName, projectWebsite, projectTwitter).then((data) => {
+          console.log(`new project: ${projectId}, ${projectName}, ${projectWebsite}, ${projectTwitter}`)
+          res.json(data);
+        }).catch((err) => {
+          console.log(`err @ /project : ${err}`)
+          err.status(500)
+        })
+      }
+    }).catch((err) => {
+      console.log(`err @ /project : ${err}`)
+      res.status(500)
+    })
+  }
+})
+
+
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`)
