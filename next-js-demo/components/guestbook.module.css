@@ -1,0 +1,8 @@
+.guestbookDescription {
+  border: 2px solid #333;
+  padding: 20px;
+  margin: -100px 250px 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

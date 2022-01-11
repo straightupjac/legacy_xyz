@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import MuiNextLink from '@components/MuiNextLink';
+import RequestGuestBookSign from 'components/requestGuestBookSign';
 // import Guestbook from 'web3-guestbook';
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
 
         {/* <Guestbook title="Welcome to demo guestbook" /> */}
         <div>
+        <RequestGuestBookSign/>
+
           <p>Thanks for visiting my corner on the internet</p>
         </div>
 {/* 1 */}

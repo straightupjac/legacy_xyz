@@ -8,7 +8,12 @@ body {
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
+  transition: 75ms;
+}
+
+a:hover {
+  font-style: italic;
 }
 
 * {
