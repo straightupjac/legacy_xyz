@@ -1,18 +1,48 @@
 import React from "react";
 import styles from "./guestbook.module.css"
+import { Chip, Divider } from "@mui/material";
 
 const GuestList = () => {
   return (
     <>
-    <div className={styles.guestbookDescription}>
-    <p>Thank you for visiting my corner on the internet. To leave your digital footprint here, please sign by clicking the button below.  By signing, this document will be part of your endorsement history on the Arweave blockchain. </p>
-    <a href="www.google.com">Learn more here</a>
-    <button className={styles.signButton}>
-      Sign here
-    </button>
+    <div className={styles.guestbookListWrapper}>
+        <div>
+            <h3>Guestbook</h3>
+        </div>
+        <div className={styles.guestbookListContainer}>
+            <GuestListItem/>
+            <GuestListItem/>
+            <GuestListItem/>
+            <GuestListItem/>
+            <GuestListItem/>
+        </div>
     </div>
     </>
   );
 };
 
 export default GuestList;
+
+
+const GuestListItem = () => {
+    return (
+        <>
+        <div className={styles.guestlistItemContainer}>
+            <div>
+            <p>Jaclyn Chan</p>
+            <p className={styles.date}>Jan 10, 2022</p>
+             </div>
+        <div>
+            <p>straightupjac.eth</p>
+        </div>
+        <div>
+        <Chip label="@straightupJac" />
+        </div>
+        </div>
+        <Divider />
+
+        </>
+
+    )
+}
+
