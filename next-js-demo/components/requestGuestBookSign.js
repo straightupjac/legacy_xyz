@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./guestbook.module.css"
+import { Button } from "@mui/material";
+
 
 const RequestGuestBookSign = () => {
   return (
@@ -7,7 +9,7 @@ const RequestGuestBookSign = () => {
     <div className={styles.guestbookDescription}>
     <p>Thank you for visiting my corner on the internet. To leave your digital footprint here, please sign by clicking the button below.  By signing, this document will be part of your endorsement history on the Arweave blockchain. </p>
     <a href="www.google.com">Learn more here</a>
-    <button>
+    <button className={styles.signButton}>
       Sign here
     </button>
     </div>
