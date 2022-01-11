@@ -9,6 +9,7 @@ import HideOnScroll from "@components/HideOnScroll";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import BackToTop from "@components/BackToTop";
+import styles from "./header.module.css"
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -19,25 +20,18 @@ export const navLinks = [
 const Header = () => {
   return (
     <>
-    <HideOnScroll>
-        <AppBar position="fixed" elevation={0}>
-          <Toolbar>
-            <Container
-              maxWidth="lg"
-              sx={{ display: `flex`, justifyContent: `space-between`, alignItems: 'center' }}
-            >
-              <Navbar navLinks={navLinks} />
-              <SideDrawer navLinks={navLinks} />
-            </Container>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      <Offset id="back-to-top-anchor" />
-      <BackToTop>
-        <Fab color="primary" size="large" aria-label="back to top">
-          <KeyboardArrowUp />
-        </Fab>
-      </BackToTop>
+
+    <div className = {styles.navigation}>
+            <div>
+                <p> LOGO </p>
+            </div>
+            <div>
+                <a  href="https://gmail.com/">Docs</a>
+                <a  href="https://google.com/images">Account </a>
+            </div>
+        </div>
+        
+
     </>
   );
 };

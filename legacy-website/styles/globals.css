@@ -10,6 +10,7 @@ a {
   color: inherit;
   text-decoration: underline;
   transition: 75ms;
+  margin: 1rem;
 }
 
 a:hover {
