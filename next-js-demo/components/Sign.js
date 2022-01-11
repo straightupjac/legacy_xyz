@@ -6,10 +6,15 @@ import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import SignModal from "./SignModal";
 import { generateSignature } from "utils/utils";
 
-const signMessage = "I was here. By signing, you are leaving your legacy on this corner of the internet."
+const signMessage = (account, name, twitterHandle) => {
+   return `${name} was here. By signing, you are leaving your legacy on this corner of the internet. \n
+   account: ${account}\n
+   twitter: ${twitterHandle}
+   `
+}
 
 const Sign = () => {
-  const { activate, deactivate, chainId, active, account, library } = useWeb3React();
+  const { activate, account } = useWeb3React();
 
   // for the modal
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,8 +35,8 @@ const Sign = () => {
     }
   }
 
-  const signFromWallet = async () => {
-    return await generateSignature(signMessage)
+  const signFromWallet = async (account, name, twitterHandle) => {
+    return await generateSignature(signMessage(account, name, twitterHandle))
   };
 
   return (
@@ -40,6 +45,7 @@ const Sign = () => {
         Sign here
       </button>
       <SignModal
+        account={account}
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}

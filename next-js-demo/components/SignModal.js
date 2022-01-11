@@ -8,12 +8,13 @@ import { Button, CircularProgress, TextField, Typography } from '@mui/material';
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
-const VERIFY = 2;
-const VERIFYING = 3;
-const FINISH_SIGN = 4;
+const SIGN_MESSAGE = 2;
+const VERIFY = 3;
+const VERIFYING = 4;
+const FINISH_SIGN = 5;
 
 export default function SignModal(props) {
-  const { isModalVisible, handleClose, handleLoginClick, signFromWallet } = props;
+  const { isModalVisible, handleClose, handleLoginClick, signFromWallet, account } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState();
   const [handle, setHandle] = useState();
@@ -29,11 +30,19 @@ export default function SignModal(props) {
     }
   };
 
-  // connects to wallet then requests a signature
+  // connects to wallet
   const handleConnect = async (provider) => {
     try {
       await handleLoginClick(provider);
-      const sig = await signFromWallet();
+      setState(SIGN_MESSAGE);
+    } catch (err) {
+      setAlert(true);
+    }
+  }
+
+  const handleSign = async () => {
+    try {
+      const sig = await signFromWallet(account, name, handle);
       setSignature(sig);
       setState(VERIFY);
     } catch (err) {
@@ -106,7 +115,17 @@ export default function SignModal(props) {
             />
           </Metamask>
           {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
-            An error occurred. Please try connecting your wallet and signing the message again.
+            An error occurred. Please try connecting your wallet again.
+          </Typography>}
+        </Stack>}
+        {state === SIGN_MESSAGE &&
+        <Stack spacing={2}>
+          <Typography sx={{fontSize: 20, textAlign: 'center'}}>Sign a message from your wallet</Typography>
+          <Button onClick={handleSign}>
+            Sign
+          </Button>
+          {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+            An error occurred. Please try signing again.
           </Typography>}
         </Stack>}
         {state === VERIFY && <Stack spacing={2}>
