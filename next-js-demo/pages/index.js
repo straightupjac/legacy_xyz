@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import MuiNextLink from '@components/MuiNextLink';
-import RequestGuestBookSign from '@components/requestGuestBookSign';
-import GuestList from '@components/GuestList';
+import SignLegacy from '@components/SignLegacy';
+import SignersList from '@components/SignersList';
 // import Guestbook from 'web3-guestbook';
 
 export default function Home() {
@@ -16,16 +15,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Hey, I'm XYZ. 
+          Hey, {`I'm`} XYZ.
         </h1>
-
-
         <p className={styles.description}> </p>
-
-        {/* <Guestbook title="Welcome to demo guestbook" /> */}
         <div>
-        <RequestGuestBookSign/>
-        <GuestList/>
+        <SignLegacy/>
+        <SignersList/>
         </div>
       </main>
     </div>
