@@ -1,16 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import Guestbook from 'web3-guestbook';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Guestbook />
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -18,7 +14,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a> */}
+        </a>
       </header>
     </div>
   );
