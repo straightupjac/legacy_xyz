@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Guestbook from 'web3-guestbook';
+import { SignButton } from 'web3-guestbook';
 
 function App() {
   return (
@@ -9,9 +9,9 @@ function App() {
         {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Guestbook />
-        <a
+        </p> */}
+        <SignButton />
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
