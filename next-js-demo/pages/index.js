@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import MuiNextLink from '@components/MuiNextLink';
-import Guestbook from 'web3-guestbook';
+// import Guestbook from 'web3-guestbook';
 
 export default function Home() {
   return (
@@ -14,27 +14,17 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <MuiNextLink href="https://nextjs.org" target="_blank">Next.js</MuiNextLink> X <MuiNextLink href="https://mui.com/" target="_blank">MUI5</MuiNextLink>
+          Hey, I'm XYZ. 
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
 
-        <Guestbook title="Welcome to demo guestbook" />
+        <p className={styles.description}> </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        {/* <Guestbook title="Welcome to demo guestbook" /> */}
+        <div>
+          <p>Thanks for visiting my corner on the internet</p>
         </div>
+{/* 1 */}
       </main>
     </div>
   )
