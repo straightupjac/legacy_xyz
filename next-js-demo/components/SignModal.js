@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
-import { Button, CircularProgress, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, FormControl, TextField, Typography } from '@mui/material';
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
@@ -13,19 +13,37 @@ const VERIFYING = 3;
 const FINISH_SIGN = 4;
 
 export default function SignModal(props) {
-  const { isModalVisible, handleClose, handleLoginClick } = props;
+  const { isModalVisible, handleClose, handleLoginClick, signFromWallet } = props;
   const [state, setState] = useState(START_SIGN);
+  const [name, setName] = useState();
+  const [handle, setHandle] = useState();
+  const [alert, setAlert] = useState();
+  const [signature, setSignature] = useState(false);
 
-  const handleConnect = (provider) => {
-    handleLoginClick(provider);
+  const handleFormSubmit = () => {
+    if (name && handle) {
+      setAlert(false);
+      setState(CONNECT_WALLET);
+    } else {
+      setAlert(true);
+    }
+  };
+
+  const handleConnect = async (provider) => {
+    await handleLoginClick(provider);
+    const sig = await signFromWallet();
+    setSignature(sig);
     setState(VERIFY);
+  }
+
+  const generateTweet = (sig) => {
+    const str = `I am verifying for @legacy_xyz. signature:${sig}`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
   }
 
   // TODO: populate with actual verify twitter
   const verifyTwitter = async () => {
-    await new Promise(resolve => {
-      setTimeout(resolve, 4000)
-    })
+    generateTweet(signature);
   }
 
   const handleTwitterVerifyAndSign = async () => {
@@ -45,9 +63,22 @@ export default function SignModal(props) {
         {state === START_SIGN &&
         <Stack spacing={2}>
           <Typography sx={{fontSize: 20, textAlign: 'center'}}>Leave your legacy</Typography>
-          <TextField id="outlined-basic" label="name" variant="outlined" />
-          <TextField id="outlined-basic" label="Twitter handle (optional)" variant="outlined" />
-          <Button onClick={() => setState(CONNECT_WALLET)}>Connect wallet to sign</Button>
+            <TextField
+              label="name"
+              variant="outlined"
+              value={name}
+              required
+              onInput={ e=>setName(e.target.value)}
+            />
+            <TextField
+              label="twitter handle"
+              variant="outlined"
+              value={handle}
+              required
+              onInput={ e=>setHandle(e.target.value)}
+            />
+            {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>Name and Twitter handle are required.</Typography>}
+          <Button onClick={handleFormSubmit}>Connect wallet to sign</Button>
         </Stack>}
         {state === CONNECT_WALLET &&
         <Stack spacing={2}>
@@ -86,7 +117,7 @@ export default function SignModal(props) {
         <Stack spacing={2}>
           <Typography sx={{fontSize: 20, textAlign: 'center'}}>Done</Typography>
           <Typography sx={{fontSize: 12, textAlign: 'center'}}>Thanks for signing and leaving your legacy. See you soon :)</Typography>
-        </Stack> }
+        </Stack>}
         </Box>
       </Modal>
     </>

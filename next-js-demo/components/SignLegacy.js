@@ -15,7 +15,7 @@ const SignLegacy = () => {
     <>
     <Web3ReactProvider getLibrary={getLibrary}>
       <div className={styles.guestbookDescription}>
-        <p>Thank you for visiting my corner on the internet. To leave your digital footprint here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain. </p>
+        <p>Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain. </p>
         <a href="/">Learn more here</a>
         <Sign />
       </div>

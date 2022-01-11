@@ -47,6 +47,37 @@ const SignersList = () => {
         },
     ];
 
+    function abridgeAddress(hex, length = 4) {
+        return `${hex.substring(0, length + 2)}…${hex.substring(
+          hex.length - length
+        )}`;
+      }
+
+      const useENSName = (library, address) => {
+        const [ENSName, setENSName] = useState("");
+        useEffect(() => {
+          if (library && typeof address === "string") {
+            let stale = false;
+
+            library
+              .lookupAddress(address)
+              .then((name) => {
+                if (!stale && typeof name === "string") {
+                  setENSName(name);
+                }
+              })
+              .catch(() => {});
+
+            return () => {
+              stale = true;
+              setENSName("");
+            };
+          }
+        }, [library, address]);
+
+        return ENSName;
+      }
+
   return (
     <>
     <Box sx={{
@@ -101,7 +132,7 @@ const ListItem = ({name, date, address, twitter}) => {
                 </Box>
                 <Box textAlign="end">
                     {twitter && <div style={{alignContent: 'flex-end'}}>
-                        <Chip label={twitter} />
+                        <Chip label={`@${twitter}`} />
                     </div>}
                 </Box>
             </Stack>

@@ -4,6 +4,9 @@ import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import SignModal from "./SignModal";
+import { generateSignature } from "utils/utils";
+
+const signMessage = "I was here. By signing, you are leaving your legacy on this corner of the internet."
 
 const Sign = () => {
   const { activate, deactivate, chainId, active, account, library } = useWeb3React();
@@ -14,17 +17,10 @@ const Sign = () => {
   const handleConnect = () => {
     setIsModalVisible(true);
   };
-
   const injected = new InjectedConnector();
   const walletlink = new WalletLinkConnector({
-  appName: 'legacy_xyz',
-})
-
-  function abridgeAddress(hex, length = 4) {
-    return `${hex.substring(0, length + 2)}…${hex.substring(
-      hex.length - length
-    )}`;
-  }
+    appName: 'legacy_xyz',
+  })
 
   const handleLoginClick = async (type) => {
     if (type === 'coinbase') {
@@ -34,30 +30,9 @@ const Sign = () => {
     }
   }
 
-  const useENSName = (library, address) => {
-    const [ENSName, setENSName] = useState("");
-    useEffect(() => {
-      if (library && typeof address === "string") {
-        let stale = false;
-
-        library
-          .lookupAddress(address)
-          .then((name) => {
-            if (!stale && typeof name === "string") {
-              setENSName(name);
-            }
-          })
-          .catch(() => {});
-
-        return () => {
-          stale = true;
-          setENSName("");
-        };
-      }
-    }, [library, address]);
-
-    return ENSName;
-  }
+  const signFromWallet = async () => {
+    return await generateSignature(signMessage)
+  };
 
   return (
     <>
@@ -68,6 +43,7 @@ const Sign = () => {
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}
+        signFromWallet={signFromWallet}
       />
     </>
   )
