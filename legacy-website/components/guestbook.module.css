@@ -1,0 +1,45 @@
+.guestbookDescription {
+  border: 2px solid #333;
+  padding: 20px 250px;
+  margin: -2rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.signButton {
+  border-radius: 20px;
+  height: 50px;
+  width: 200px;
+  background-color: #c4c4c4;
+  align-items: center;
+  margin: 10px;
+}
+
+.guestbookListWrapper {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2rem 2rem 1rem;
+}
+
+.guestbookListContainer {
+  border: 2px solid #333;
+  padding: 10px;
+}
+
+.guestlistItemContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  padding: 10px;
+}
+
+.date {
+  font-size: 12px;
+  margin-top: -20px;
+}
