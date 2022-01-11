@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./guestbook.module.css"
 
-const RequestGuestBookSign = () => {
+const GuestList = () => {
   return (
     <>
     <div className={styles.guestbookDescription}>
@@ -15,4 +15,4 @@ const RequestGuestBookSign = () => {
   );
 };
 
-export default RequestGuestBookSign;
+export default GuestList;
