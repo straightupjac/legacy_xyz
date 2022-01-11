@@ -1,7 +1,7 @@
 const path = require('path');
 const pkg = require('./package.json');
 module.exports = {
-    entry: "./src/SignButton.js",
+    entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: "main.js",

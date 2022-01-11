@@ -1,4 +1,5 @@
 import React from 'react';
+
 const SignButton = (props) => {
    return (
       <button className={`btn btn--${props.kind} CTA`}
