@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
-import { Button, CircularProgress, FormControl, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, TextField, Typography } from '@mui/material';
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
@@ -29,11 +29,16 @@ export default function SignModal(props) {
     }
   };
 
+  // connects to wallet then requests a signature
   const handleConnect = async (provider) => {
-    await handleLoginClick(provider);
-    const sig = await signFromWallet();
-    setSignature(sig);
-    setState(VERIFY);
+    try {
+      await handleLoginClick(provider);
+      const sig = await signFromWallet();
+      setSignature(sig);
+      setState(VERIFY);
+    } catch (err) {
+      setAlert(true);
+    }
   }
 
   const generateTweet = (sig) => {
@@ -43,10 +48,13 @@ export default function SignModal(props) {
 
   // TODO: populate with actual verify twitter
   const verifyTwitter = async () => {
-    generateTweet(signature);
+    await new Promise(resolve => {
+      setTimeout(resolve, 4000)
+    })
   }
 
   const handleTwitterVerifyAndSign = async () => {
+    generateTweet(signature);
     setState(VERIFYING);
     await verifyTwitter();
     setState(FINISH_SIGN);
@@ -97,6 +105,9 @@ export default function SignModal(props) {
               alt="login with Metamask!"
             />
           </Metamask>
+          {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+            An error occurred. Please try connecting your wallet and signing the message again.
+          </Typography>}
         </Stack>}
         {state === VERIFY && <Stack spacing={2}>
           <Typography sx={{fontSize: 20, textAlign: 'center'}}>Verify your signature</Typography>
