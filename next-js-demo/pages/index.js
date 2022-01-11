@@ -18,24 +18,13 @@ export default function Home() {
         </h1>
 
 
-        <p className={styles.description}>
+        <p className={styles.description}> </p>
 
         {/* <Guestbook title="Welcome to demo guestbook" /> */}
         <div>
           <p>Thanks for visiting my corner on the internet</p>
         </div>
-{/* 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-        </div> */}
+{/* 1 */}
       </main>
     </div>
   )
