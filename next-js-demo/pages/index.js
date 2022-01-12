@@ -2,7 +2,6 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SignLegacy from '@components/SignLegacy';
 import SignersList from '@components/SignersList';
-// import Guestbook from 'web3-guestbook';
 
 export default function Home() {
   return (

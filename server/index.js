@@ -9,6 +9,7 @@ const Cache = require('./cache')
 const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject, checkIfProjectRegistered } = require("./arweave")
 
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded())
 app.use(cors())
 
 const port = process.env.PORT || 8080
@@ -42,7 +43,7 @@ app.post('/sign/:project', (req, res) => {
   } = req.body
 
   checkIfProjectRegistered(projectId).then((result) => {
-    const { registered }  = result;
+    const { registered, msg }  = result;
     if (!registered) {
       res.status(400).json(`This project (${projectId}) is not registered`);
       return;
@@ -59,7 +60,7 @@ app.post('/sign/:project', (req, res) => {
       signGuestbook(projectId, address, name, handle, date, signature, true) :
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
-        return signDocumentAr(documentId, address, name, handle, signature, verified)
+        return signGuestbook(projectId, address, name, handle, signature, verified)
       })
 
     promise
@@ -73,7 +74,7 @@ app.post('/sign/:project', (req, res) => {
       });
   } else {
     // only wallet signature without twitter
-    signDocumentAr(documentId, address, name, '', signature, false)
+    signGuestbook(projectId, address, name, '', signature, false)
       .then((data) => res.json(data))
       .catch(e => {
         console.log(`err @ /sign/:project : ${e}`)
@@ -87,9 +88,9 @@ app.post('/verify/:handle', (req, res) => {
   const handle = req.params.handle
   const {
     signature,
-  } = req.body
+  } = req.body;
 
-  console.log('verifying', handle);
+  console.log('verifying', handle, signature);
 
   if (sigCache.has(handle)) {
     console.log(`already verified user: @${handle}`)

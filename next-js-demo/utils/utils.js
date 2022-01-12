@@ -27,37 +27,52 @@ export const jsonOrErrorHandler = async response => {
   }
 }
 
-export async function verify(sig, handle) {
+const cleanHandle = handle => handle[0] === "@" ? handle.substring(1) : handle;
 
+export async function verify(sig, handle) {
   return fetch(`${SERVER_URL}/verify/${cleanHandle(handle)}`, {
     method: 'post',
-    body: {
-      signature: sig,
+    headers: {
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(
+      {
+        signature: sig,
+      }
+    ),
   }).then(jsonOrErrorHandler)
 }
 
 export async function sign(projectId, name, account, twitter, signature) {
   return fetch(`${SERVER_URL}/sign/${projectId}`, {
-    method: 'post',
-    body: {
-      name,
-      address: account,
-      handle: twitter,
-      date: Date.now(),
-      signature,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(
+      {
+        name: name,
+        address: account,
+        handle: cleanHandle(twitter),
+        date: Date.now(),
+        signature,
+      }),
   }).then(jsonOrErrorHandler)
 }
 
 export async function add(projectId, name, twitter, website) {
   return fetch(`${SERVER_URL}/add`, {
     method: 'post',
-    body: {
-      projectId,
-      projectName: name,
-      projectTwitter: twitter,
-      projectWebsite: website,
+    headers: {
+      'Content-Type': 'application/json',
     },
+    body: new JSON.stringify(
+      {
+        projectId,
+        projectName: name,
+        projectTwitter: twitter,
+        projectWebsite: website,
+      }
+    ),
   }).then(jsonOrErrorHandler)
 }

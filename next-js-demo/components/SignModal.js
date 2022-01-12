@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import { Button, CircularProgress, TextField, Typography } from '@mui/material';
 import { verify, sign } from "utils/utils";
 
-const projectId = 'legacy_xyz';
+const projectId = 'legacyxyz';
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
@@ -59,6 +59,11 @@ export default function SignModal(props) {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
   }
 
+  const handleTweet = () => {
+    generateTweet();
+    setState(VERIFY_TWEET);
+  }
+
   const handleTwitterVerifyAndSign = () => {
     setState(VERIFYING);
     verify(signature, handle).then(() => { // verifying that they signed
@@ -67,9 +72,11 @@ export default function SignModal(props) {
         setState(FINISH_SIGN);
       }).catch((err) => {
         setAlert("An error occurred with signing to the blockchain.");
+        setState(VERIFY_TWEET);
       })
     }).catch((err) => {
       setAlert("An error occurred. Did you tweet a message?");
+      setState(VERIFY);
     })
   }
 
@@ -145,10 +152,11 @@ export default function SignModal(props) {
             {alert}
           </Typography>}
         </Stack>}
-        {state === VERIFY && <Stack spacing={2}>
+        {state === VERIFY &&
+        <Stack spacing={2}>
           <Typography sx={{fontSize: 20, textAlign: 'center'}}>Verify your signature</Typography>
           <Typography sx={{fontSize: 12, textAlign: 'center'}}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
-          <Button onClick={generateTweet && setState(VERIFY_TWEET)}>Verify Twitter Handle</Button>
+          <Button onClick={handleTweet}>Verify Twitter Handle</Button>
           {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
             {alert}
           </Typography>}
