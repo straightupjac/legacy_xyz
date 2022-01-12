@@ -7,8 +7,6 @@ import Stack from '@mui/material/Stack';
 import { Button, CircularProgress, TextField, Typography } from '@mui/material';
 import { verify, sign } from "utils/utils";
 
-const projectId = 'legacyxyz';
-
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
 const SIGN_MESSAGE = 2;
@@ -18,7 +16,7 @@ const VERIFYING = 5;
 const FINISH_SIGN = 6;
 
 export default function SignModal(props) {
-  const { isModalVisible, handleClose, handleLoginClick, signFromWallet, account } = props;
+  const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState();
   const [handle, setHandle] = useState();

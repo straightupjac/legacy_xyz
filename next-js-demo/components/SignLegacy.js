@@ -10,7 +10,7 @@ function getLibrary(provider) {
   return library;
 }
 
-const SignLegacy = () => {
+const SignLegacy = ({projectId}) => {
   return (
     <>
     <Web3ReactProvider getLibrary={getLibrary}>
