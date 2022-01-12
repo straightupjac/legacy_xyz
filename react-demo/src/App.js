@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { SignButton } from 'web3-guestbook';
+import { SignLegacy } from 'legacy_xyz';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <SignButton label="Leave your legacy" />
+        <SignLegacy projectid="legacyxyz" />
       </header>
     </div>
   );
