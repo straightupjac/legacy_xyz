@@ -10,6 +10,8 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import BackToTop from "@components/BackToTop";
 import styles from "./header.module.css"
+import Link from 'next/link'
+
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -23,10 +25,11 @@ const Header = () => {
 
     <div className = {styles.navigation}>
             <div>
-                <p> LOGO </p>
+                <p className={styles.logo}> 🌱 </p>
+                <Link href="/Docs">Docs</Link> 
             </div>
             <div>
-                <a  href="https://gmail.com/">Docs</a>
+            <a  href="https://gmail.com/">Find guestbooks to sign</a>
                 <a  href="https://google.com/images">Account </a>
             </div>
         </div>

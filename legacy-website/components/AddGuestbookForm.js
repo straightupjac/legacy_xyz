@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 
 const AddGuestListForm = () => {
     return (
+      <div className={styles.formContainer}>
         <Box
           component="form"
           sx={{
@@ -14,7 +15,7 @@ const AddGuestListForm = () => {
           noValidate
           autoComplete="off"
         >
-          <div className={styles.formContainer}>
+          <div>
               <div>
               <TextField
               required
@@ -28,6 +29,7 @@ const AddGuestListForm = () => {
           </div>
           </div>
         </Box>
+        </div>
       );
     }
 export default AddGuestListForm;

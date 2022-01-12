@@ -3,6 +3,9 @@ import styles from '../styles/Home.module.css';
 import MuiNextLink from '@components/MuiNextLink';
 import HeaderInfo from '@components/HeaderInfo';
 import AddGuestListForm from '@components/AddGuestbookForm';
+import Image from 'next/image'
+import headerBackground from "../public/background.svg"
+
 // import Guestbook from 'web3-guestbook';
 
 export default function Home() {
@@ -16,13 +19,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Legacy.xyz 
+        curate your digital legacy.
         </h1>
+        <p className={styles.description}>Enable supporters of your project to leave a digital signature once they’ve visited your website.  A new era of social proof, and discovery of content. </p>
+        <button className={styles.installButton}>Install</button>
 
-
-        <p className={styles.description}> </p>
-
-        {/* <Guestbook title="Welcome to demo guestbook" /> */}
+      <Image src={headerBackground}/>
         <div>
         <HeaderInfo/>
         <AddGuestListForm/>

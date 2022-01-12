@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 const HeaderInfo= () => {
   return (
     <>
-    <div className={styles.guestbookDescription}>
+    {/* <div className={styles.guestbookDescription}>
     Join the movement in getting your readers or project supporters to include your site in their digital legacy. 
     <p>[Include copy here XYZ why it’s important]    </p>
 <a href="www.google.com">Learn more here</a>
@@ -17,9 +17,9 @@ const HeaderInfo= () => {
     <button data-inline="true" className={styles.signButton}>
       View your legacy on the internet
     </button>
-</div>
+</div> */}
     
-    </div>
+    {/* </div> */}
     </>
   );
 };

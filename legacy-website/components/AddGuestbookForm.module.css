@@ -1,5 +1,7 @@
 .formContainer {
   display: flex;
   flex-direction: row;
-  color: red;
+  background-color: #257c5e;
+  width: 100vw;
+  margin-top: 4rem;
 }

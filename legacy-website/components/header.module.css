@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: center;
   margin: 10px;
-  padding: 10px;
 }
 
 .guestbookDescription {
@@ -54,4 +53,10 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 36px;
+  margin-left: 1rem;
+  display: inline;
 }

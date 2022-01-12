@@ -4,7 +4,6 @@
 
 .main {
   min-height: 100vh;
-  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -40,8 +39,10 @@
 
 .title {
   margin: 0;
-  line-height: 1.15;
   font-size: 4rem;
+  font-family: "Lora", serif;
+  font-weight: bold;
+  color: #2a9954;
 }
 
 .title,
@@ -50,9 +51,9 @@
 }
 
 .description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 1.25rem;
 }
 
 .code {
@@ -112,4 +113,26 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.installButton {
+  color: white;
+  font-size: 1rem;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+  width: 151px;
+  height: 64px;
+  background: #3f8758;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.installButton:hover {
+  background: #2e7948;
+}
+
+.installButton:active {
+  background: #2e7948;
+  color: orange;
 }
