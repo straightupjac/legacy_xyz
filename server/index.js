@@ -6,20 +6,21 @@ const app = express()
 const cors = require('cors')
 const Twitter = require('twitter')
 const Cache = require('./cache')
-const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject } = require("./arweave")
+const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject, checkIfProjectRegistered } = require("./arweave")
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded())
 app.use(cors())
 
 const port = process.env.PORT || 8080
 
 // TODO: pass through client side
-const TWEET_TEMPLATE = "I am verifying for @imprintxyz: sig:"
+const TWEET_TEMPLATE = "I am verifying for @legacy_xyz. signature:"
 
 const client = new Twitter({
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  bearer_token: process.env.BEARER_TOKEN
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  bearer_token: process.env.TWITTER_BEARER_TOKEN,
 })
 
 const sigCache = new Cache()
@@ -41,6 +42,17 @@ app.post('/sign/:project', (req, res) => {
     signature,
   } = req.body
 
+  checkIfProjectRegistered(projectId).then((result) => {
+    const { registered, msg }  = result;
+    if (!registered) {
+      res.status(400).json(`This project (${projectId}) is not registered`);
+      return;
+    }
+    }).catch((err) => {
+      console.log(`err @ /project : ${err}`)
+      res.status(500)
+    })
+
   // check if user included handle
   if (handle) {
     // check if user is verified
@@ -48,7 +60,7 @@ app.post('/sign/:project', (req, res) => {
       signGuestbook(projectId, address, name, handle, date, signature, true) :
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
-        return signDocumentAr(documentId, address, name, handle, signature, verified)
+        return signGuestbook(projectId, address, name, date, handle, signature, verified)
       })
 
     promise
@@ -62,7 +74,7 @@ app.post('/sign/:project', (req, res) => {
       });
   } else {
     // only wallet signature without twitter
-    signDocumentAr(documentId, address, name, '', signature, false)
+    signGuestbook(projectId, address, name, '', date, signature, false)
       .then((data) => res.json(data))
       .catch(e => {
         console.log(`err @ /sign/:project : ${e}`)
@@ -75,8 +87,10 @@ app.post('/sign/:project', (req, res) => {
 app.post('/verify/:handle', (req, res) => {
   const handle = req.params.handle
   const {
-    address: signature,
-  } = req.body
+    signature,
+  } = req.body;
+
+  console.log('verifying', handle, signature);
 
   if (sigCache.has(handle)) {
     console.log(`already verified user: @${handle}`)
@@ -124,7 +138,8 @@ app.post('/verify/:handle', (req, res) => {
       }
       res.status(500).json({message: 'No matching Tweets found'})
     } else {
-      res.status(500).send({message: 'Internal Error'})
+      console.log('verifying error', error);
+      res.status(500).send({message: 'Twitter Client Internal Error'})
     }
   })
 })
@@ -136,7 +151,10 @@ app.post('/project', (req, res) => {
     projectName,
     projectWebsite,
     projectTwitter,
+    projectTags,
   } = req.body;
+
+  console.log('adding project', projectId);
 
   if (projCache.has(projectId)) {
     const project = projCache.get(project);
@@ -154,16 +172,16 @@ app.post('/project', (req, res) => {
         projCache.set(projectId, project);
         res.status(400).json(msg);
       } else {
-        addProject(projectId, projectName, projectWebsite, projectTwitter).then((data) => {
+        addProject(projectId, projectName, projectWebsite, projectTwitter, projectTags).then((data) => {
           console.log(`new project: ${projectId}, ${projectName}, ${projectWebsite}, ${projectTwitter}`)
           res.json(data);
         }).catch((err) => {
-          console.log(`err @ /project : ${err}`)
-          err.status(500)
+          console.log(`err @ /project addProject: ${err}`)
+          res.status(500)
         })
       }
     }).catch((err) => {
-      console.log(`err @ /project : ${err}`)
+      console.log(`err @ /project checkIfProjectRegistered: ${err}`)
       res.status(500)
     })
   }
