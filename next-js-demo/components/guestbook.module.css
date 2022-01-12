@@ -1,6 +1,6 @@
 .guestbookDescription {
   border: 2px solid #333;
-  padding: 20px 250px;
+  padding: 20px;
   margin: -2rem 2rem 1rem;
   display: flex;
   flex-direction: column;
@@ -28,6 +28,8 @@
 .guestbookListContainer {
   border: 2px solid #333;
   padding: 10px;
+  max-height: 600px;
+  overflow-y: scroll;
 }
 
 .guestlistItemContainer {
