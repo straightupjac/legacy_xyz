@@ -6,9 +6,9 @@ const app = express()
 const cors = require('cors')
 const Twitter = require('twitter')
 const Cache = require('./cache')
-const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject } = require("./arweave")
+const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject, checkIfProjectRegistered } = require("./arweave")
 
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
 app.use(cors())
 
 const port = process.env.PORT || 8080
@@ -19,7 +19,7 @@ const TWEET_TEMPLATE = "I am verifying for @imprintxyz: sig:"
 const client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
-  bearer_token: process.env.BEARER_TOKEN
+  bearer_token: process.env.BEARER_TOKEN,
 })
 
 const sigCache = new Cache()
@@ -40,6 +40,17 @@ app.post('/sign/:project', (req, res) => {
     date,
     signature,
   } = req.body
+
+  checkIfProjectRegistered(projectId).then((result) => {
+    const { registered }  = result;
+    if (!registered) {
+      res.status(400).json(`This project (${projectId}) is not registered`);
+      return;
+    }
+    }).catch((err) => {
+      console.log(`err @ /project : ${err}`)
+      res.status(500)
+    })
 
   // check if user included handle
   if (handle) {
@@ -75,8 +86,10 @@ app.post('/sign/:project', (req, res) => {
 app.post('/verify/:handle', (req, res) => {
   const handle = req.params.handle
   const {
-    address: signature,
+    signature,
   } = req.body
+
+  console.log('verifying', handle);
 
   if (sigCache.has(handle)) {
     console.log(`already verified user: @${handle}`)
@@ -124,7 +137,8 @@ app.post('/verify/:handle', (req, res) => {
       }
       res.status(500).json({message: 'No matching Tweets found'})
     } else {
-      res.status(500).send({message: 'Internal Error'})
+      console.log('verifying error', error);
+      res.status(500).send({message: 'Twitter Client Internal Error'})
     }
   })
 })
@@ -136,7 +150,10 @@ app.post('/project', (req, res) => {
     projectName,
     projectWebsite,
     projectTwitter,
+    projectTags,
   } = req.body;
+
+  console.log('adding project', projectId);
 
   if (projCache.has(projectId)) {
     const project = projCache.get(project);
@@ -154,16 +171,16 @@ app.post('/project', (req, res) => {
         projCache.set(projectId, project);
         res.status(400).json(msg);
       } else {
-        addProject(projectId, projectName, projectWebsite, projectTwitter).then((data) => {
+        addProject(projectId, projectName, projectWebsite, projectTwitter, projectTags).then((data) => {
           console.log(`new project: ${projectId}, ${projectName}, ${projectWebsite}, ${projectTwitter}`)
           res.json(data);
         }).catch((err) => {
-          console.log(`err @ /project : ${err}`)
-          err.status(500)
+          console.log(`err @ /project addProject: ${err}`)
+          res.status(500)
         })
       }
     }).catch((err) => {
-      console.log(`err @ /project : ${err}`)
+      console.log(`err @ /project checkIfProjectRegistered: ${err}`)
       res.status(500)
     })
   }

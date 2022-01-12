@@ -69,6 +69,14 @@ export default function SignModal(props) {
     setState(FINISH_SIGN);
   }
 
+  const handleWithoutVerifying = async () => {
+    setState(VERIFYING);
+    await new Promise(resolve => {
+      setTimeout(resolve, 4000)
+    })
+    setState(FINISH_SIGN);
+  }
+
   return (
     <>
       <Modal
@@ -133,7 +141,7 @@ export default function SignModal(props) {
           <Typography sx={{fontSize: 12, textAlign: 'center'}}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
           <Button onClick={handleTwitterVerifyAndSign}>Verify Twitter</Button>
           <a>
-            <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={() => setState(FINISH_SIGN)}>
+            <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={handleWithoutVerifying}>
               Continue without verifying
             </Typography>
           </a>

@@ -116,13 +116,14 @@ async function signGuestbook(projectId, address, name, handle, date, signature, 
 }
 
 async function addProject(projectId, projectName, projectTwitter, projectWebsite, projectTags) {
-  let transaction = await arweave.createTransaction({ data: address }, KEY)
+  let transaction = await arweave.createTransaction({ data: projectName }, KEY)
   transaction.addTag(DOC_TYPE, 'project')
   transaction.addTag(PROJECT_ID, projectId)
   transaction.addTag(PROJECT_NAME, projectName)
   transaction.addTag(PROJECT_TAGS, projectTags)
   transaction.addTag(PROJECT_TWITTER, projectTwitter)
   transaction.addTag(PROJECT_WEBSITE, projectWebsite)
+  transaction.addTag(PROJECT_TAGS, projectTags)
 
   await arweave.transactions.sign(transaction, KEY)
   return await arweave.transactions.post(transaction)
