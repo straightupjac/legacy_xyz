@@ -1,10 +1,10 @@
 import Docs from "@components/Docs";
 import { Container, Stack } from "@mui/material";
 
-const About = () => {
+const Docs = () => {
   return (
     <Docs/>
   )
 };
 
-export default About;
+export default Docs;
