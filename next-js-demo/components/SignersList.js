@@ -1,57 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./guestbook.module.css"
 import { Chip, Stack, Divider, Box } from "@mui/material";
-import { getSigners } from "utils/utils";
+import { getSigners, dedupe } from "utils/utils";
 import { useWeb3React } from '@web3-react/core';
 
 const SignersList = ({projectId}) => {
     const { library } = useWeb3React();
-
     const [signers, setSigners] = useState([]);
-    const mockSigners = [
-        {
-            name: 'Jaclyn Chan',
-            date: 1641960623,
-            address: 'straightupjac.eth',
-            twitter: 'straightupjac'
-        },
-        {
-            name: 'Mathu R',
-            date: 1641931575,
-            address: 'someone.eth',
-            twitter: 'mathurahravi'
-        },
-        {
-            name: 'Hacklodge',
-            date: 1641931575,
-            address: 'another.eth',
-            twitter: 'hacklodge'
-        },
-        {
-            name: 'John Doe',
-            date: 1621931575,
-            address: 'E93...398',
-            twitter: 'johndoe'
-        },
-        {
-            name: 'Jane Doe',
-            date: 1611931575,
-            address: 'janedoe.eth',
-            twitter: 'janedoe'
-        },
-        {
-            name: 'Anon',
-            date: 1626931575,
-            address: '0x6F0...07fC',
-        },
-        {
-            name: 'Jaclyn Chan',
-            date: 1631931575,
-            address: 'straightupjac.eth',
-            twitter: 'straightupjac'
-        },
-    ];
-
+    const [processedSigners, setProcessedSigners] = useState([]);
 
     useEffect(() => {
         async function fetchSigners() {
@@ -61,6 +17,10 @@ const SignersList = ({projectId}) => {
         }
         fetchSigners();
     }, [projectId])
+
+    useEffect(() => {
+        setProcessedSigners(dedupe(signers));
+    }, [signers])
 
     function abridgeAddress(hex, length = 4) {
         if (!hex) { return ''; }
@@ -102,7 +62,7 @@ const SignersList = ({projectId}) => {
             maxHeight: '600px',
             overflowY: 'scroll'
         }}>
-            {signers.map((signer, idx) => {
+            {processedSigners.map((signer, idx) => {
                 return (
                     <ListItem
                         key={idx}
