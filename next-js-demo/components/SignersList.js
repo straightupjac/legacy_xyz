@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./guestbook.module.css"
 import { Chip, Stack, Divider, Box } from "@mui/material";
+import { getSigners } from "utils/utils";
+import { useWeb3React } from '@web3-react/core';
 
-const SignersList = () => {
-    const signers = [
+const SignersList = ({projectId}) => {
+    const { library } = useWeb3React();
+
+    const [signers, setSigners] = useState([]);
+    const mockSigners = [
         {
             name: 'Jaclyn Chan',
             date: 1641960623,
@@ -47,36 +52,39 @@ const SignersList = () => {
         },
     ];
 
+
+    useEffect(() => {
+        async function fetchSigners() {
+            const res = await getSigners(projectId);
+            console.log('getSigners', res)
+            setSigners(res)
+        }
+        fetchSigners();
+    }, [projectId])
+
     function abridgeAddress(hex, length = 4) {
+        if (!hex) { return ''; }
         return `${hex.substring(0, length + 2)}…${hex.substring(
           hex.length - length
         )}`;
       }
 
-      const useENSName = (library, address) => {
-        const [ENSName, setENSName] = useState("");
-        useEffect(() => {
-          if (library && typeof address === "string") {
-            let stale = false;
+    const getENSName = (address) => {
+        if (library && typeof address === "string") {
+        let stale = false;
 
-            library
-              .lookupAddress(address)
-              .then((name) => {
-                if (!stale && typeof name === "string") {
-                  setENSName(name);
-                }
-              })
-              .catch(() => {});
-
-            return () => {
-              stale = true;
-              setENSName("");
-            };
-          }
-        }, [library, address]);
-
-        return ENSName;
-      }
+        library
+            .lookupAddress(address)
+            .then((name) => {
+            if (!stale && typeof name === "string") {
+                return name;
+            }
+            })
+            .catch(() => {return abridgeAddress(address)});
+        } else {
+            return abridgeAddress(address);
+        }
+    }
 
   return (
     <>
@@ -99,8 +107,8 @@ const SignersList = () => {
                     <ListItem
                         key={idx}
                         name={signer.name}
-                        date={signer.date}
-                        address={signer.address}
+                        date={parseInt(signer.date, 10)}
+                        address={getENSName(signer.address)}
                         twitter={signer.twitter}
                     />
                 )

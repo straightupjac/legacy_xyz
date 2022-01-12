@@ -14,12 +14,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Hey, {`I'm`} XYZ.
+          Hey, {`I'm`} Legacy XYZ.
         </h1>
         <p className={styles.description}> </p>
         <div>
-        <SignLegacy/>
-        <SignersList/>
+        <SignLegacy projectId={'legacyxyz'}/>
+        <SignersList projectId={'legacyxyz'}/>
         </div>
       </main>
     </div>

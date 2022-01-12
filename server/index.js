@@ -60,7 +60,7 @@ app.post('/sign/:project', (req, res) => {
       signGuestbook(projectId, address, name, handle, date, signature, true) :
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
-        return signGuestbook(projectId, address, name, handle, signature, verified)
+        return signGuestbook(projectId, address, name, date, handle, signature, verified)
       })
 
     promise
@@ -74,7 +74,7 @@ app.post('/sign/:project', (req, res) => {
       });
   } else {
     // only wallet signature without twitter
-    signGuestbook(projectId, address, name, '', signature, false)
+    signGuestbook(projectId, address, name, '', date, signature, false)
       .then((data) => res.json(data))
       .catch(e => {
         console.log(`err @ /sign/:project : ${e}`)

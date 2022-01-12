@@ -76,3 +76,103 @@ export async function add(projectId, name, twitter, website) {
     ),
   }).then(jsonOrErrorHandler)
 }
+
+/* unauthed request (don't need to use the server) */
+
+const CONTROLLER_ADDR = "AaaKkDKK4yEllFoZtzv_oFjtlw7LjCZzhpZRWThIJqA";
+const DOC_TYPE = "legacy_xyz_doc_type"
+/* document types are
+- project
+- signature
+- verification
+*/
+
+const PROJECT_ID = "legacy_xyz_project_id"
+const PROJECT_NAME = "legacy_xyz_project_name"
+const PROJECT_TWITTER = "legacy_xyz_project_twitter"
+const PROJECT_WEBSITE = "legacy_xyz_project_website"
+const PROJECT_TAGS = "legacy_xyz_project_tags"
+
+const SIG_NAME = "legacy_xyz_name"
+const SIG_DATE = "legacy_xyz_date"
+const SIG_TWITTER_HANDLE = "legacy_xyz_twitter_handle"
+const SIG_ADDR = "legacy_xyz_address"
+// const SIG_MESSAGE = "legacy_xyz_message" // omitting from MVP because we don't want to deal with hiding unwanted messages
+const SIG_ISVERIFIED = "legacy_xyz_is_verified"
+const SIG_SIG = "legacy_xyz_signature"
+
+const VERIFICATION_HANDLE = "legacy_xyz_verif_handle"
+const VERIFICATION_ADDRESS = "legacy_xyz_verif_address"
+
+export async function getSigners(projectId) {
+  const req = await fetch('https://arweave.net/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+      query {
+        transactions(
+          first: 50,
+          sort: HEIGHT_ASC,
+          tags: [
+            {
+              name: "${DOC_TYPE}",
+              values: ["signature"]
+            },
+            {
+              name: "${PROJECT_ID}",
+              values: ["${projectId}"]
+            }
+          ],
+          owners: ["${CONTROLLER_ADDR}"],
+        ) {
+          edges {
+            cursor
+            node {
+              id
+              tags {
+                name
+                value
+              }
+              block {
+                  id
+                  timestamp
+                  height
+              }
+            }
+          }
+        }
+      }
+      `
+    })
+  }).then(jsonOrErrorHandler);
+
+  const safeTag = (node, tagName, defaultValue) => {
+    const tag = node.tags.find(tag => tag.name === tagName)
+    return tag ? tag.value : defaultValue;
+  }
+
+  console.log('req', req);
+
+  return req.data.transactions.edges.flatMap(nodeItem => {
+    const cursor = nodeItem.cursor;
+    const n = nodeItem.node;
+    const sig = safeTag(n, SIG_ADDR, "UNKWN");
+    const handle = safeTag(n, SIG_TWITTER_HANDLE, "UNSIGNED");
+    const verified = safeTag(n, SIG_ISVERIFIED, 'false') === 'true'
+
+    return [{
+      CURSOR: cursor,
+      SIG_ID: n.id,
+      address: safeTag(n, SIG_ADDR, ""),
+      name: safeTag(n, SIG_NAME, "Anonymous"),
+      twitter: handle === 'null' ? 'UNSIGNED' : handle,
+      date: safeTag(n, SIG_DATE, ''),
+      SIG_ISVERIFIED: verified,
+      SIG_SIG: sig,
+    }];
+  });
+}
