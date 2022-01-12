@@ -14,12 +14,12 @@ app.use(cors())
 const port = process.env.PORT || 8080
 
 // TODO: pass through client side
-const TWEET_TEMPLATE = "I am verifying for @imprintxyz: sig:"
+const TWEET_TEMPLATE = "I am verifying for @legacy_xyz. signature:"
 
 const client = new Twitter({
-  consumer_key: process.env.CONSUMER_KEY,
-  consumer_secret: process.env.CONSUMER_SECRET,
-  bearer_token: process.env.BEARER_TOKEN,
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  bearer_token: process.env.TWITTER_BEARER_TOKEN,
 })
 
 const sigCache = new Cache()

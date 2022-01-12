@@ -5,13 +5,17 @@ import Modal from '@mui/material/Modal';
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 import { Button, CircularProgress, TextField, Typography } from '@mui/material';
+import { verify, sign } from "utils/utils";
+
+const projectId = 'legacy_xyz';
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
 const SIGN_MESSAGE = 2;
 const VERIFY = 3;
-const VERIFYING = 4;
-const FINISH_SIGN = 5;
+const VERIFY_TWEET = 4;
+const VERIFYING = 5;
+const FINISH_SIGN = 6;
 
 export default function SignModal(props) {
   const { isModalVisible, handleClose, handleLoginClick, signFromWallet, account } = props;
@@ -23,58 +27,61 @@ export default function SignModal(props) {
 
   const handleFormSubmit = () => {
     if (name && handle) {
-      setAlert(false);
+      setAlert('');
       setState(CONNECT_WALLET);
     } else {
-      setAlert(true);
+      setAlert('Name and Twitter handle are required.');
     }
   };
 
   // connects to wallet
-  const handleConnect = async (provider) => {
-    try {
-      await handleLoginClick(provider);
+  const handleConnect = (provider) => {
+    handleLoginClick(provider).then(() => {
+      setAlert('');
       setState(SIGN_MESSAGE);
-    } catch (err) {
-      setAlert(true);
-    }
+    }).catch((err) => {
+      setAlert('An error occured. Please try connecting your wallet again.');
+    })
   }
 
   const handleSign = async () => {
-    try {
-      const sig = await signFromWallet(account, name, handle);
+    signFromWallet(account, name, handle).then((sig) => {
       setSignature(sig);
+      setAlert('');
       setState(VERIFY);
-    } catch (err) {
-      setAlert(true);
-    }
+    }).catch((err) => {
+      setAlert('An error occurred. Please try signing again.');
+    });
   }
 
-  const generateTweet = (sig) => {
-    const str = `I am verifying for @legacy_xyz. signature:${sig}`;
+  const generateTweet = () => {
+    const str = `I am verifying for @legacy_xyz. signature:${signature}`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
   }
 
-  // TODO: populate with actual verify twitter
-  const verifyTwitter = async () => {
-    await new Promise(resolve => {
-      setTimeout(resolve, 4000)
+  const handleTwitterVerifyAndSign = () => {
+    setState(VERIFYING);
+    verify(signature, handle).then(() => { // verifying that they signed
+      sign(projectId, name, account, handle, signature).then((result) => {
+        setAlert('');
+        setState(FINISH_SIGN);
+      }).catch((err) => {
+        setAlert("An error occurred with signing to the blockchain.");
+      })
+    }).catch((err) => {
+      setAlert("An error occurred. Did you tweet a message?");
     })
   }
 
-  const handleTwitterVerifyAndSign = async () => {
-    generateTweet(signature);
+  const handleWithoutVerifying = () => {
     setState(VERIFYING);
-    await verifyTwitter();
-    setState(FINISH_SIGN);
-  }
-
-  const handleWithoutVerifying = async () => {
-    setState(VERIFYING);
-    await new Promise(resolve => {
-      setTimeout(resolve, 4000)
-    })
-    setState(FINISH_SIGN);
+    sign(projectId, name, account, handle, signature).then((result) => {
+      setAlert('');
+      setState(FINISH_SIGN);
+    }).catch((err) => {
+      setAlert("An error occurred with signing to the blockchain.");
+      setState(VERIFY);
+    });
   }
 
   return (
@@ -102,7 +109,9 @@ export default function SignModal(props) {
               required
               onInput={ e=>setHandle(e.target.value)}
             />
-            {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>Name and Twitter handle are required.</Typography>}
+            {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+              {alert}
+              </Typography>}
           <Button onClick={handleFormSubmit}>Connect wallet to sign</Button>
         </Stack>}
         {state === CONNECT_WALLET &&
@@ -123,7 +132,7 @@ export default function SignModal(props) {
             />
           </Metamask>
           {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
-            An error occurred. Please try connecting your wallet again.
+            {alert}
           </Typography>}
         </Stack>}
         {state === SIGN_MESSAGE &&
@@ -133,13 +142,28 @@ export default function SignModal(props) {
             Sign
           </Button>
           {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
-            An error occurred. Please try signing again.
+            {alert}
           </Typography>}
         </Stack>}
         {state === VERIFY && <Stack spacing={2}>
           <Typography sx={{fontSize: 20, textAlign: 'center'}}>Verify your signature</Typography>
           <Typography sx={{fontSize: 12, textAlign: 'center'}}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
-          <Button onClick={handleTwitterVerifyAndSign}>Verify Twitter</Button>
+          <Button onClick={generateTweet && setState(VERIFY_TWEET)}>Verify Twitter Handle</Button>
+          {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+            {alert}
+          </Typography>}
+          <a>
+            <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={handleWithoutVerifying}>
+              Continue without verifying
+            </Typography>
+          </a>
+        </Stack> }
+        {state === VERIFY_TWEET && <Stack spacing={2}>
+          <Typography sx={{fontSize: 12, textAlign: 'center'}}>After sending your tweet, click the button below to complete verification:</Typography>
+          <Button onClick={handleTwitterVerifyAndSign}>Verify Tweet</Button>
+          {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+            {alert}
+          </Typography>}
           <a>
             <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={handleWithoutVerifying}>
               Continue without verifying
