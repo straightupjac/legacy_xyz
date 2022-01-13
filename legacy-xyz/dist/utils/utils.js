@@ -154,8 +154,6 @@ export async function getSigners(projectId) {
     return tag ? tag.value : defaultValue;
   }
 
-  console.log('req', req);
-
   return req.data.transactions.edges.flatMap(nodeItem => {
     const cursor = nodeItem.cursor;
     const n = nodeItem.node;
