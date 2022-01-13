@@ -55,7 +55,7 @@ const AddGuestListForm = () => {
         <InputLabel htmlFor="my-input">Project Twitter</InputLabel>
         <Input id="my-input" aria-describedby="my-helper-text" />
         <FormHelperText id="my-helper-text">
-          Add your project's twitter handle if you have one!
+          Add your project twitter handle if you have one!
         </FormHelperText>
       </FormControl>
       <FormControl>
