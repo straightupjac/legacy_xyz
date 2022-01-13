@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from "./guestbook.module.css"
 import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import SignModal from "./SignModal";
 import { generateSignature } from "utils/utils";
+import { Button } from "@mui/material";
 
 const signMessage = (account, name, twitterHandle) => {
    return `${name} was here. By signing, you are leaving your legacy on this corner of the internet. \n
@@ -41,9 +41,15 @@ const Sign = ({projectId}) => {
 
   return (
     <>
-      <button className={styles.signButton} onClick={handleConnect}>
+      <Button
+        variant="contained" size="large"
+        sx={
+          {maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 }}
+        }
+        onClick={handleConnect}
+      >
         Sign here
-      </button>
+      </Button>
       <SignModal
         projectId={projectId}
         account={account}

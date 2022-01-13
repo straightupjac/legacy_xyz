@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "./guestbook.module.css"
-import { Chip, Stack, Divider, Box } from "@mui/material";
-import { getSigners, dedupe } from "utils/utils";
+import { Chip, Stack, Divider, Box, Typography } from "@mui/material";
+import { getSigners } from "utils/utils";
 import { useWeb3React } from '@web3-react/core';
 
 const SignersList = ({projectId}) => {
@@ -54,6 +53,8 @@ const SignersList = ({projectId}) => {
         textAlign: 'center',
         p: 2,
         px: 4,
+        borderRadius: 10,
+        width: '100%'
     }}>
         <div>
             <h3>Guestbook</h3>
@@ -92,11 +93,11 @@ const ListItem = ({name, date, address, twitter}) => {
                 sx={{py: 2}}
             >
                 <Box textAlign="start">
-                    <p>{name}</p>
-                    <p className={styles.date}>{new Date(date*1000).toLocaleDateString("en-US")}</p>
+                    <Typography variant='body1'>{name}</Typography>
+                    <Typography variant='caption'>{new Date(date*1000).toLocaleDateString("en-US")}</Typography>
                 </Box>
                 <Box textAlign="start">
-                    <p>{address}</p>
+                    <Typography variant='body1'>{address}</Typography>
                 </Box>
                 <Box textAlign="end">
                     {twitter && <div style={{alignContent: 'flex-end'}}>
@@ -109,4 +110,3 @@ const ListItem = ({name, date, address, twitter}) => {
 
     )
 }
-

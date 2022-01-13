@@ -31,17 +31,17 @@ const SideDrawer = ({ navLinks }) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <Stack>
-      {navLinks.map(({ title, path }, i) => (
+      {navLinks.map(({ title, path, target }, i) => (
         <Typography
           variant='button'
           key={`${title}${i}`}
           sx={{
-            ml: 5,
+            ml: 2,
             my: 2,
             textTransform: 'none',
           }}
         >
-          <MuiNextLink sx={{ fontSize: '20px', textDecoration: 'none'}} href={path}>
+          <MuiNextLink sx={{ color: 'black', fontSize: '20px', textDecoration: 'none'}} href={path} target={target}>
             {title}
           </MuiNextLink>
         </Typography>
@@ -57,7 +57,7 @@ const SideDrawer = ({ navLinks }) => {
         aria-label="menu"
         onClick={toggleDrawer("right", true)}
         sx={{
-          color: `black`,
+          color: `white`,
           display: { xs: `inline`, md: `none` },
         }}
       >

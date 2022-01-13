@@ -9,23 +9,32 @@ import HideOnScroll from "@components/core-components/HideOnScroll";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
 import BackToTop from "@components/core-components/BackToTop";
+import { IconButton, Stack } from "@mui/material";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 export const navLinks = [
-  { title: 'home', path: '/' },
+  { title: 'Docs', path: 'https://legacy-xyz-docs.vercel.app/', target: '_blank' },
+  { title: 'Find websites to sign', path: '/' },
 ];
 
 const Header = () => {
   return (
     <>
     <HideOnScroll>
-        <AppBar position="fixed" color="transparent" elevation={0}>
+        <AppBar position="fixed" color='white' elevation={0}>
           <Toolbar>
             <Container
               maxWidth="lg"
               sx={{ display: `flex`, justifyContent: `space-between`, alignItems: 'center' }}
             >
+              <Stack>
+                <IconButton>
+                  <MuiNextLink activeClassName="active" sx={{textDecoration: 'none'}} href='/'>
+                  🌱
+                  </MuiNextLink>
+                </IconButton>
+              </Stack>
               <Navbar navLinks={navLinks} />
               <SideDrawer navLinks={navLinks} />
             </Container>
