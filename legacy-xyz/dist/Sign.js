@@ -24,6 +24,7 @@ const Sign = ({
 }) => {
   const {
     activate,
+    active,
     account
   } = useWeb3React(); // for the modal
 
@@ -40,11 +41,23 @@ const Sign = ({
     appName: 'legacy_xyz'
   });
 
-  const handleLoginClick = async type => {
+  const handleLoginClick = type => {
     if (type === 'coinbase') {
-      await activate(walletlink);
+      activate(walletlink).then(() => {
+        console.log('coinbase connect', active, account);
+
+        if (!active) {
+          throw new Error('Failed to connect wallet');
+        }
+      });
     } else if (type === 'metamask') {
-      await activate(injected);
+      activate(injected).then(() => {
+        console.log('metamask connect', active, account);
+
+        if (!active) {
+          throw new Error('Failed to connect wallet');
+        }
+      });
     }
   };
 

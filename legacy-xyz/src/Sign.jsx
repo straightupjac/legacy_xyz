@@ -20,7 +20,7 @@ const signMessage = (account, name, twitterHandle) => {
 }
 
 const Sign = ({projectId}) => {
-  const { activate, account } = useWeb3React();
+  const { activate, active, account } = useWeb3React();
 
   // for the modal
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -33,12 +33,15 @@ const Sign = ({projectId}) => {
     appName: 'legacy_xyz',
   })
 
-  const handleLoginClick = async (type) => {
+  const handleLoginClick = (type) => {
     if (type === 'coinbase') {
       await activate(walletlink);
     } else if (type === 'metamask') {
       await activate(injected);
     }
+      })
+    }
+
   }
 
   const signFromWallet = async (account, name, twitterHandle) => {

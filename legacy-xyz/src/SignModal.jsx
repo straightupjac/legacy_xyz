@@ -7,8 +7,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import { verify, sign } from "./utils/utils";
-import metamaskImg from './utils/metamaskImg';
-import coinbaseImg from './utils/coinbase.png';
+import metamask from "./utils/metamask.svg";
+import coinbase from "./utils/coinbase.png"
+
+const img = require('./utils/coinbase.png');
+
+console.log(img);
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
@@ -83,7 +87,7 @@ const ConnectWallet = ({alert, handleConnect}) => {
         }}
       >
         <img
-          src={coinbaseImg}
+          src={coinbase}
           style={{height:50, width: 300}}
           alt="login with Coinbase Wallet!"
         />
@@ -95,7 +99,7 @@ const ConnectWallet = ({alert, handleConnect}) => {
         }}
       >
         <img
-          src={metamaskImg}
+          src={metamask}
           style={{height:100, width: 300}}
           alt="login with Metamask!"
         />
@@ -156,11 +160,13 @@ const Verify = ({alert, handleTweet, handleWithoutVerifying}) => {
       {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
         {alert}
       </Typography>}
-      <a>
+
         <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={handleWithoutVerifying}>
+          <a>
           Continue without verifying
+          </a>
         </Typography>
-      </a>
+
     </Stack>
   )
 }
@@ -217,8 +223,8 @@ const FinishSign = () => {
 export default function SignModal(props) {
   const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account } = props;
   const [state, setState] = useState(START_SIGN);
-  const [name, setName] = useState();
-  const [handle, setHandle] = useState();
+  const [name, setName] = useState('');
+  const [handle, setHandle] = useState('');
   const [alert, setAlert] = useState();
   const [signature, setSignature] = useState(false);
 
@@ -233,7 +239,7 @@ export default function SignModal(props) {
 
   // connects to wallet
   const handleConnect = (provider) => {
-    handleLoginClick(provider).then(() => {
+    handleLoginClick(provider).then((res) => {
       setAlert('');
       setState(SIGN_MESSAGE);
     }).catch((err) => {

@@ -16,7 +16,7 @@
     "url": "https://github.com/straightupjac/legacy_xyz/issues"
   },
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir dist"
+    "build": "./node_modules/.bin/babel src --out-dir dist && cp -r src/utils dist"
   },
   "keywords": [
     "web3",
@@ -47,6 +47,8 @@
   "devDependencies": {
     "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.7",
-    "@babel/preset-react": "^7.16.7"
+    "@babel/preset-react": "^7.16.7",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "file-loader": "^6.2.0"
   }
 }
