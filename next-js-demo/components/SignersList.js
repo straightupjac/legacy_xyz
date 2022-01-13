@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Chip, Stack, Divider, Box, Typography } from "@mui/material";
-import { getSigners } from "utils/utils";
+import { getSigners, dedupe } from "utils/utils";
 import { useWeb3React } from '@web3-react/core';
 
 const SignersList = ({projectId}) => {
@@ -101,7 +101,13 @@ const ListItem = ({name, date, address, twitter}) => {
                 </Box>
                 <Box textAlign="end">
                     {twitter && <div style={{alignContent: 'flex-end'}}>
-                        <Chip label={`@${twitter}`} />
+                        <a
+                            href={`https://twitter.com/${twitter}`}
+                            target="_blank" rel="noreferrer"
+                            style={{textDecoration: 'none'}}
+                        >
+                            <Chip label={`@${twitter}`} />
+                        </a>
                     </div>}
                 </Box>
             </Stack>
