@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-const SERVER_URL = "http://localhost:8080";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:8080";
 
 export async function generateSignature(message) {
   if (!window.ethereum) {
@@ -140,7 +140,6 @@ export async function getSigners(projectId) {
               block {
                   id
                   timestamp
-                  height
               }
             }
           }
@@ -175,4 +174,21 @@ export async function getSigners(projectId) {
       SIG_SIG: sig,
     }];
   });
+}
+
+export function dedupe(sigs) {
+  const unique_set = sigs.reduce((total, cur) => {
+    if (!total.hasOwnProperty(cur.SIG_ADDR)) {
+      // unique addr
+      total[cur.SIG_ADDR] = cur
+    } else {
+      const old = total[cur.SIG_ADDR]
+      // dupe, can overwrite it current one is verified or old one is not verified
+      if (cur.SIG_ISVERIFIED || !old.SIG_ISVERIFIED) {
+        total[cur.SIG_ADDR] = cur
+      }
+    }
+    return total
+  }, {})
+  return Object.values(unique_set)
 }

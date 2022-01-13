@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { SignLegacy } from 'legacy-xyz';
+import { SignLegacy, SignersList } from 'legacy-xyz';
 
 function App() {
   return (
@@ -10,8 +10,13 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <SignLegacy projectid="legacyxyz" />
       </header>
+      <main className="App-main">
+        <SignLegacy projectid="legacyxyz" />
+        <br />
+        <SignersList projectid="legacyxyz" />
+      </main>
+
     </div>
   );
 }

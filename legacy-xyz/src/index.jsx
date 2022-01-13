@@ -1,3 +1,4 @@
 import SignLegacy from "./SignLegacy";
+import SignersList from "./SignersList";
 
-export { SignLegacy };
+export { SignLegacy, SignersList };
