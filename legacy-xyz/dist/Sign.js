@@ -20,7 +20,9 @@ const signMessage = (account, name, twitterHandle) => {
 };
 
 const Sign = ({
-  projectId
+  projectId,
+  buttonLabel,
+  buttonStyle
 }) => {
   const {
     activate,
@@ -56,7 +58,7 @@ const Sign = ({
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
     variant: "contained",
     size: "large",
-    sx: {
+    sx: buttonStyle ? buttonStyle : {
       maxWidth: '200px',
       background: '#000000',
       textTransform: 'none',
@@ -68,7 +70,7 @@ const Sign = ({
       }
     },
     onClick: handleConnect
-  }, "Sign here"), /*#__PURE__*/React.createElement(SignModal, {
+  }, buttonLabel || `Sign here`), /*#__PURE__*/React.createElement(SignModal, {
     projectId: projectId,
     account: account,
     active: active,

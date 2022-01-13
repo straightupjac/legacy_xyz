@@ -11,13 +11,19 @@ function getLibrary(provider) {
 }
 
 const SignLegacy = ({
-  projectId
+  projectId,
+  buttonLabel,
+  buttonStyle,
+  message,
+  cardStyle,
+  showLegacy = true
 }) => {
+  const defaultMsg = "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.";
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Web3ReactProvider, {
     getLibrary: getLibrary
   }, /*#__PURE__*/React.createElement(Stack, {
     spacing: 2,
-    sx: {
+    sx: cardStyle || {
       border: '2px solid #333',
       p: 4,
       maxWidth: '500px',
@@ -26,9 +32,13 @@ const SignLegacy = ({
     alignItems: "center"
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "body1"
-  }, "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain."), /*#__PURE__*/React.createElement(Typography, {
+  }, message || defaultMsg), /*#__PURE__*/React.createElement(Sign, {
+    projectId: projectId,
+    buttonLabel: buttonLabel,
+    buttonStyle: buttonStyle
+  }), showLegacy && /*#__PURE__*/React.createElement(Typography, {
     sx: {
-      fontSize: 20,
+      fontSize: 18,
       textAlign: 'center',
       mt: 3
     }
@@ -43,9 +53,7 @@ const SignLegacy = ({
     style: {
       color: '#257C5E'
     }
-  }, "legacy")), " to learn more"), /*#__PURE__*/React.createElement(Sign, {
-    projectId: projectId
-  }))));
+  }, "legacy")), " to learn more"))));
 };
 
 export default SignLegacy;
