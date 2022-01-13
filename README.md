@@ -1,2 +1,2 @@
-# legacy-xyz
+# 🌱 legacy-xyz
 Leave your digital legacy.
