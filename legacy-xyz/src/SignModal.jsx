@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
-import { verify, sign } from "utils/utils";
+import { verify, sign } from "./utils/utils";
 
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;

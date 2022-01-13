@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { SignLegacy } from 'legacy_xyz';
+import { SignLegacy } from 'legacy-xyz';
 
 function App() {
   return (

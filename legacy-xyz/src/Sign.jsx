@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import SignModal from "./SignModal";
-import { generateSignature } from "utils/utils";
+import { generateSignature } from "./utils/utils";
 import { Button } from "@mui/material";
 
 const signMessage = (account, name, twitterHandle) => {
