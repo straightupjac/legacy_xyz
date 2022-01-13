@@ -1,0 +1,55 @@
+{
+  "name": "legacy-xyz",
+  "version": "0.1.1",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "description": "Invite your guests to leave their digital legacy.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/straightupjac/legacy_xyz.git"
+  },
+  "author": "@straightupjac, @mathurah",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/straightupjac/legacy_xyz/issues"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir dist && cp -r src/utils dist"
+  },
+  "keywords": [
+    "web3",
+    "guestbook",
+    "digital",
+    "footprint",
+    "legacy"
+  ],
+  "homepage": "https://github.com/straightupjac/legacy_xyz#readme",
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@ethersproject/providers": "^5.5.2",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.8",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/walletlink-connector": "^6.2.8",
+    "ethers": "^5.5.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "file-loader": "^6.2.0"
+  }
+}
