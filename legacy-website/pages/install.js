@@ -1,13 +1,14 @@
+
+
 import Head from 'next/head';
 import MuiNextLink from '@components/core-components/MuiNextLink';
 import AddGuestListForm from '@components/AddGuestbookForm';
 import Image from 'next/image'
 import headerBackground from "../public/background.svg"
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Button, Container, Stack, Typography } from '@mui/material';export default function Install() {
 
-export default function Home() {
-  return (
-    <div>
+    return (
+<div>
       <Head>
         <title>Legacy.xyz</title>
         <meta name="description" content="Leave your online legacy" />
@@ -15,9 +16,9 @@ export default function Home() {
       </Head>
 
       <Stack alignItems="center" spacing={4}>
-        <Typography variant='h1' sx={{pt: 2}}>curate your digital legacy.</Typography>
+        <Typography variant='h2' sx={{pt: 2}}>Add a guestbook to your website</Typography>
         <Typography variant="body1">
-          Enable supporters of your project to leave a digital signature once they’ve visited your website.  A new era of social proof, and discovery of content.
+          Fill the form below to allow users to discover and sign your website as part of their digital legacy
         </Typography>
         <Stack direction="row" spacing={3}>
           <Button variant="contained" size="large" sx={{
@@ -34,11 +35,13 @@ export default function Home() {
             width: '150px',
             height: '60px',
           }}>
-            Add to site 
+            Install
           </Button>
         </Stack>
         <Image alt="header background" src={headerBackground}/>
+        <AddGuestListForm/>
       </Stack>
     </div>
-  )
+    )
+
 }
