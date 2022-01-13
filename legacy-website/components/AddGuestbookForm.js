@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import headerBackground from "../public/background.svg";
 import ChipInput from "material-ui-chip-input";
 import {
   Button,
