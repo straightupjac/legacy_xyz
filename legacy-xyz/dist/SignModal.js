@@ -1,11 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import styled from 'styled-components'; // TODO: replace with emotion
-
 import Stack from '@mui/material/Stack';
-import { Button, CircularProgress, TextField, Typography } from '@mui/material';
-import { verify, sign } from "./utils/utils";
+import CloseIcon from '@mui/icons-material/Close';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { Button, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
+import { verify, sign } from "utils/utils";
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
 const SIGN_MESSAGE = 2;
@@ -13,6 +14,301 @@ const VERIFY = 3;
 const VERIFY_TWEET = 4;
 const VERIFYING = 5;
 const FINISH_SIGN = 6;
+
+const CloseButton = ({
+  handleClose
+}) => {
+  return /*#__PURE__*/React.createElement(IconButton, {
+    onClick: handleClose,
+    sx: {
+      position: 'absolute',
+      right: 15,
+      top: 15,
+      background: 'rgba(196, 196, 196, 0.2)',
+      height: 48,
+      width: 48,
+      borderRadius: 2
+    }
+  }, /*#__PURE__*/React.createElement(CloseIcon, null));
+};
+
+const StartSign = ({
+  name,
+  handle,
+  alert,
+  setName,
+  setHandle,
+  handleFormSubmit
+}) => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Leave your ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "legacy"), "."), /*#__PURE__*/React.createElement(TextField, {
+    label: "name",
+    variant: "outlined",
+    value: name,
+    required: true,
+    onInput: e => setName(e.target.value)
+  }), /*#__PURE__*/React.createElement(TextField, {
+    label: "twitter handle",
+    variant: "outlined",
+    value: handle,
+    onInput: e => setHandle(e.target.value)
+  }), alert && /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 10,
+      color: 'red',
+      textAlign: 'center'
+    }
+  }, alert), /*#__PURE__*/React.createElement(Button, {
+    onClick: handleFormSubmit,
+    variant: "contained",
+    size: "large",
+    sx: {
+      background: '#000000',
+      textTransform: 'none',
+      fontSize: 20,
+      borderRadius: 3,
+      borderRadius: 3,
+      ':hover': {
+        background: '#000000',
+        opacity: 0.8
+      }
+    }
+  }, "Connect wallet to sign"));
+};
+
+const ConnectWallet = ({
+  alert,
+  handleConnect
+}) => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Connect your ", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "wallet"), "."), /*#__PURE__*/React.createElement(Box, {
+    onClick: () => handleConnect('coinbase'),
+    sx: {
+      cursor: 'pointer',
+      borderBottom: '1px solid #eee',
+      textAlign: 'center',
+      py: 2,
+      ':hover': {
+        opacity: 0.8
+      }
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "/wallets/coinbase.png",
+    style: {
+      height: 50,
+      width: 300
+    },
+    alt: "login with Coinbase Wallet!"
+  })), /*#__PURE__*/React.createElement(Box, {
+    onClick: () => handleConnect('metamask'),
+    sx: {
+      cursor: 'pointer',
+      textAlign: 'center',
+      ':hover': {
+        opacity: 0.8
+      }
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "/wallets/metamask.svg",
+    style: {
+      height: 100,
+      width: 300
+    },
+    alt: "login with Metamask!"
+  })), alert && /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 10,
+      color: 'red',
+      textAlign: 'center'
+    }
+  }, alert));
+};
+
+const SignMessage = ({
+  alert,
+  handleSign
+}) => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Sign a ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "message"), " with your wallet."), /*#__PURE__*/React.createElement(Button, {
+    onClick: handleSign,
+    variant: "contained",
+    size: "large",
+    sx: {
+      background: '#000000',
+      textTransform: 'none',
+      fontSize: 20,
+      borderRadius: 3,
+      ':hover': {
+        background: '#000000',
+        opacity: 0.8
+      }
+    }
+  }, "Sign message"), alert && /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 10,
+      color: 'red',
+      textAlign: 'center'
+    }
+  }, alert));
+};
+
+const Verify = ({
+  alert,
+  handleTweet,
+  handleWithoutVerifying
+}) => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Verify your ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "signature"), "."), /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 18
+    }
+  }, "Tweet a message to prove that you control this address. Return here afterwards to complete verification."), /*#__PURE__*/React.createElement(Button, {
+    onClick: handleTweet,
+    startIcon: /*#__PURE__*/React.createElement(TwitterIcon, null),
+    variant: "contained",
+    sx: {
+      background: '#000000',
+      textTransform: 'none',
+      fontSize: 20,
+      borderRadius: 3,
+      ':hover': {
+        background: '#000000',
+        opacity: 0.8
+      }
+    }
+  }, "Post Proof"), alert && /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 10,
+      color: 'red',
+      textAlign: 'center'
+    }
+  }, alert), /*#__PURE__*/React.createElement("a", null, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 12,
+      textAlign: 'center'
+    },
+    onClick: handleWithoutVerifying
+  }, "Continue without verifying")));
+};
+
+const Verifying = () => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Verifying"), /*#__PURE__*/React.createElement(CircularProgress, {
+    size: "large"
+  }));
+};
+
+const VerifyTweet = ({
+  alert,
+  handleTwitterVerifyAndSign
+}) => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, "Complete ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "verification"), "."), /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 18
+    }
+  }, "After sending your tweet, click the button below to complete verification:"), /*#__PURE__*/React.createElement(Button, {
+    onClick: handleTwitterVerifyAndSign,
+    startIcon: /*#__PURE__*/React.createElement(TwitterIcon, null),
+    variant: "contained",
+    sx: {
+      background: '#000000',
+      textTransform: 'none',
+      fontSize: 20,
+      borderRadius: 3,
+      ':hover': {
+        background: '#000000',
+        opacity: 0.8
+      }
+    }
+  }, "Verify Tweet"), alert && /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 10,
+      color: 'red',
+      textAlign: 'center'
+    }
+  }, alert));
+};
+
+const FinishSign = () => {
+  return /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 36,
+      fontWeight: 'bold'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "YOU"), " did it!"), /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 20
+    }
+  }, "Thanks for signing and building your ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "legacy"), "."));
+};
+
 export default function SignModal(props) {
   const {
     projectId,
@@ -29,11 +325,11 @@ export default function SignModal(props) {
   const [signature, setSignature] = useState(false);
 
   const handleFormSubmit = () => {
-    if (name && handle) {
+    if (name) {
       setAlert('');
       setState(CONNECT_WALLET);
     } else {
-      setAlert('Name and Twitter handle are required.');
+      setAlert('Name is required.');
     }
   }; // connects to wallet
 
@@ -101,176 +397,62 @@ export default function SignModal(props) {
     onBackdropClick: handleClose
   }, /*#__PURE__*/React.createElement(Box, {
     sx: style
-  }, state === START_SIGN && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
+  }, /*#__PURE__*/React.createElement(CloseButton, {
+    handleClose: handleClose
+  }), /*#__PURE__*/React.createElement(Stack, {
     sx: {
-      fontSize: 20,
-      textAlign: 'center'
+      pt: 2
     }
-  }, "Leave your legacy"), /*#__PURE__*/React.createElement(TextField, {
-    label: "name",
-    variant: "outlined",
-    value: name,
-    required: true,
-    onInput: e => setName(e.target.value)
-  }), /*#__PURE__*/React.createElement(TextField, {
-    label: "twitter handle",
-    variant: "outlined",
-    value: handle,
-    required: true,
-    onInput: e => setHandle(e.target.value)
-  }), alert && /*#__PURE__*/React.createElement(Typography, {
+  }, state === START_SIGN && /*#__PURE__*/React.createElement(StartSign, {
+    name: name,
+    handle: handle,
+    alert: alert,
+    setName: setName,
+    setHandle: setHandle,
+    handleFormSubmit: handleFormSubmit
+  }), state === CONNECT_WALLET && /*#__PURE__*/React.createElement(ConnectWallet, {
+    alert: alert,
+    handleConnect: handleConnect
+  }), state === SIGN_MESSAGE && /*#__PURE__*/React.createElement(SignMessage, {
+    alert: alert,
+    handleSign: handleSign
+  }), state === VERIFY && /*#__PURE__*/React.createElement(Verify, {
+    alert: alert,
+    handleTweet: handleTweet,
+    handleWithoutVerifying: handleWithoutVerifying
+  }), state === VERIFY_TWEET && /*#__PURE__*/React.createElement(VerifyTweet, {
+    alert: alert,
+    handleTwitterVerifyAndSign: handleTwitterVerifyAndSign
+  }), state === VERIFYING && /*#__PURE__*/React.createElement(Verifying, null), state === FINISH_SIGN && /*#__PURE__*/React.createElement(FinishSign, null), /*#__PURE__*/React.createElement(Typography, {
     sx: {
-      fontSize: 10,
-      color: 'red',
-      textAlign: 'center'
+      fontSize: 12,
+      textAlign: 'center',
+      mt: 3
     }
-  }, alert), /*#__PURE__*/React.createElement(Button, {
-    onClick: handleFormSubmit
-  }, "Connect wallet to sign")), state === CONNECT_WALLET && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 20,
-      textAlign: 'center'
-    }
-  }, "Connect Wallet"), /*#__PURE__*/React.createElement(Coinbase, {
-    onClick: () => handleConnect('coinbase')
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "/wallets/coinbase.png",
+  }, "\uD83C\uDF31 Check out ", /*#__PURE__*/React.createElement("a", {
+    href: "https://legacy-xyz.vercel.app/",
+    target: "_blank",
     style: {
-      height: 50,
-      width: 300
+      textDecoration: 'none'
     },
-    alt: "login with Coinbase Wallet!"
-  })), /*#__PURE__*/React.createElement(Metamask, {
-    onClick: () => handleConnect('metamask')
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "/wallets/metamask.svg",
+    rel: "noreferrer"
+  }, /*#__PURE__*/React.createElement("span", {
     style: {
-      height: 100,
-      width: 300
-    },
-    alt: "login with Metamask!"
-  })), alert && /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 10,
-      color: 'red',
-      textAlign: 'center'
+      color: '#257C5E'
     }
-  }, alert)), state === SIGN_MESSAGE && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 20,
-      textAlign: 'center'
-    }
-  }, "Sign a message from your wallet"), /*#__PURE__*/React.createElement(Button, {
-    onClick: handleSign
-  }, "Sign"), alert && /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 10,
-      color: 'red',
-      textAlign: 'center'
-    }
-  }, alert)), state === VERIFY && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 20,
-      textAlign: 'center'
-    }
-  }, "Verify your signature"), /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 12,
-      textAlign: 'center'
-    }
-  }, "Tweet a message to prove that you control this address. Return here afterwards to complete verification."), /*#__PURE__*/React.createElement(Button, {
-    onClick: handleTweet
-  }, "Verify Twitter Handle"), alert && /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 10,
-      color: 'red',
-      textAlign: 'center'
-    }
-  }, alert), /*#__PURE__*/React.createElement("a", null, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 12,
-      textAlign: 'center'
-    },
-    onClick: handleWithoutVerifying
-  }, "Continue without verifying"))), state === VERIFY_TWEET && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 12,
-      textAlign: 'center'
-    }
-  }, "After sending your tweet, click the button below to complete verification:"), /*#__PURE__*/React.createElement(Button, {
-    onClick: handleTwitterVerifyAndSign
-  }, "Verify Tweet"), alert && /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 10,
-      color: 'red',
-      textAlign: 'center'
-    }
-  }, alert), /*#__PURE__*/React.createElement("a", null, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 12,
-      textAlign: 'center'
-    },
-    onClick: handleWithoutVerifying
-  }, "Continue without verifying"))), state === VERIFYING && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 20,
-      textAlign: 'center'
-    }
-  }, "Verifying"), /*#__PURE__*/React.createElement(CircularProgress, {
-    size: "large"
-  })), state === FINISH_SIGN && /*#__PURE__*/React.createElement(Stack, {
-    spacing: 2
-  }, /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 20,
-      textAlign: 'center'
-    }
-  }, "Done"), /*#__PURE__*/React.createElement(Typography, {
-    sx: {
-      fontSize: 12,
-      textAlign: 'center'
-    }
-  }, "Thanks for signing and leaving your legacy. See you soon :)")))));
+  }, "legacy")), " to learn more")))));
 }
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 380,
+  width: 445,
   bgcolor: 'white',
   border: '0px',
+  borderRadius: 10,
   boxShadow: 24,
   marginLeft: 'auto',
   marginRight: 'auto',
-  p: 4
+  p: 5
 };
-export const Coinbase = styled.div`
-  padding-top: 20px;
-  padding-bottom: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-
-  :hover {
-    opacity:0.8;
-  }
-`;
-export const Metamask = styled.div`
-  cursor: pointer;
-
-  :hover {
-    opacity:0.8;
-  }
-`;

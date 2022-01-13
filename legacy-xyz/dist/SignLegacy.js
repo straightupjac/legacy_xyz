@@ -2,7 +2,7 @@ import React from "react";
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import Sign from "./Sign";
-import { Container } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider);
@@ -13,13 +13,37 @@ function getLibrary(provider) {
 const SignLegacy = ({
   projectId
 }) => {
-  return /*#__PURE__*/React.createElement(Web3ReactProvider, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Web3ReactProvider, {
     getLibrary: getLibrary
-  }, /*#__PURE__*/React.createElement(Container, null, /*#__PURE__*/React.createElement("p", null, "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain. "), /*#__PURE__*/React.createElement("a", {
-    href: "/"
-  }, "Learn more here"), /*#__PURE__*/React.createElement(Sign, {
-    projectId: projectId
-  })));
+  }, /*#__PURE__*/React.createElement(Stack, {
+    spacing: 2,
+    sx: {
+      border: '2px solid #333',
+      p: 4,
+      maxWidth: '500px',
+      borderRadius: 10
+    },
+    alignItems: "center"
+  }, /*#__PURE__*/React.createElement(Typography, {
+    variant: "body1"
+  }, "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain."), /*#__PURE__*/React.createElement(Typography, {
+    sx: {
+      fontSize: 20,
+      textAlign: 'center',
+      mt: 3
+    }
+  }, "\uD83C\uDF31 Check out ", /*#__PURE__*/React.createElement("a", {
+    href: "https://legacy-xyz.vercel.app/",
+    target: "_blank",
+    style: {
+      textDecoration: 'none'
+    },
+    rel: "noreferrer"
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: '#257C5E'
+    }
+  }, "legacy")), " to learn more"), /*#__PURE__*/React.createElement(Sign, null))));
 };
 
 export default SignLegacy;
