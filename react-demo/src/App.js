@@ -32,7 +32,10 @@ function App() {
           showLegacy={false}
         />
         <br />
-        <SignersList projectId="legacyxyz" />
+        <SignersList
+          projectId="legacyxyz"
+          cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10}}
+        />
       </main>
 
     </div>
