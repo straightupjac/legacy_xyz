@@ -7,10 +7,16 @@ import { generateSignature } from "./utils/utils";
 import { Button } from "@mui/material";
 
 const signMessage = (account, name, twitterHandle) => {
-  return `${name} was here. By signing, you are leaving your legacy on this corner of the internet. \n
-   account: ${account}\n
-   twitter: ${twitterHandle}
-   `;
+  if (name && twitterHandle) {
+    return `${name} was here. By signing, you are leaving your legacy on this corner of the internet. \n
+      account: ${account}\n
+      twitter: ${twitterHandle}
+    `;
+  } else {
+    return `${name} was here. By signing, you are leaving your legacy on this corner of the internet. \n
+    account: ${account}
+    `;
+  }
 };
 
 const Sign = ({

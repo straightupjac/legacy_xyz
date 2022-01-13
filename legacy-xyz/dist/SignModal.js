@@ -7,6 +7,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
 import { verify, sign } from "./utils/utils";
+import metamaskImg from './utils/metamaskImg';
+import coinbaseImg from './utils/coinbase.png';
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
 const SIGN_MESSAGE = 2;
@@ -112,7 +114,7 @@ const ConnectWallet = ({
       }
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "/wallets/coinbase.png",
+    src: coinbaseImg,
     style: {
       height: 50,
       width: 300
@@ -128,7 +130,7 @@ const ConnectWallet = ({
       }
     }
   }, /*#__PURE__*/React.createElement("img", {
-    src: "/wallets/metamask.svg",
+    src: metamaskImg,
     style: {
       height: 100,
       width: 300
