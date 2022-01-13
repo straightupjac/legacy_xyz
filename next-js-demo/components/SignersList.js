@@ -6,6 +6,7 @@ import { useWeb3React } from '@web3-react/core';
 const SignersList = ({projectId}) => {
     const { library } = useWeb3React();
     const [signers, setSigners] = useState([]);
+    const [processedSigners, setProcessedSigners] = useState([]);
 
     useEffect(() => {
         async function fetchSigners() {
@@ -15,6 +16,10 @@ const SignersList = ({projectId}) => {
         }
         fetchSigners();
     }, [projectId])
+
+    useEffect(() => {
+        setProcessedSigners(dedupe(signers));
+    }, [signers])
 
     function abridgeAddress(hex, length = 4) {
         if (!hex) { return ''; }
@@ -58,7 +63,7 @@ const SignersList = ({projectId}) => {
             maxHeight: '600px',
             overflowY: 'scroll'
         }}>
-            {signers.map((signer, idx) => {
+            {processedSigners.map((signer, idx) => {
                 return (
                     <ListItem
                         key={idx}
