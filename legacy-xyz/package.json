@@ -1,16 +1,16 @@
 {
   "name": "legacy-xyz",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "files": [
     "dist/"
   ],
-  "description": "Invite your digital guests to leave their digital footprint.",
+  "description": "Invite your guests to leave their digital legacy.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/straightupjac/legacy_xyz.git"
   },
-  "author": "straightupjac, mathurah",
+  "author": "@straightupjac, @mathurah",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/straightupjac/legacy_xyz/issues"
@@ -22,7 +22,8 @@
     "web3",
     "guestbook",
     "digital",
-    "footprint"
+    "footprint",
+    "legacy"
   ],
   "homepage": "https://github.com/straightupjac/legacy_xyz#readme",
   "dependencies": {
