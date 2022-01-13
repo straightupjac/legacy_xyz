@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SignLegacy from '@components/SignLegacy';
 import SignersList from '@components/SignersList';
+import { Container, Stack, Typography } from '@mui/material';
 
 export default function Home() {
   return (
@@ -12,16 +13,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Hey, {`I'm`} Legacy XYZ.
-        </h1>
-        <p className={styles.description}> </p>
-        <div>
-        <SignLegacy projectId={'legacyxyz'}/>
-        <SignersList projectId={'legacyxyz'}/>
-        </div>
-      </main>
+      <Container sx={{p:5}}>
+        <Stack spacing={5} alignItems="center">
+          <Typography variant="h1" sx={{textAlign: 'center', fontSize: 4}}>
+            Hey, {`I'm`} Legacy XYZ.
+          </Typography>
+          <SignLegacy projectId={'legacyxyz'}/>
+          <SignersList projectId={'legacyxyz'}/>
+        </Stack>
+      </Container>
     </div>
   )
 }

@@ -44,7 +44,7 @@ const Sign = ({projectId}) => {
       <Button
         variant="contained" size="large"
         sx={
-          {background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 }}
+          {maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 }}
         }
         onClick={handleConnect}
       >

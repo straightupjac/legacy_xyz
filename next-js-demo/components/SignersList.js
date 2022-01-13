@@ -48,6 +48,8 @@ const SignersList = ({projectId}) => {
         textAlign: 'center',
         p: 2,
         px: 4,
+        borderRadius: 10,
+        width: '100%'
     }}>
         <div>
             <h3>Guestbook</h3>
