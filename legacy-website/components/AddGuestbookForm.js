@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import ChipInput from "material-ui-chip-input";
 
 import {
   Button,
@@ -15,20 +14,6 @@ import {
 } from "@mui/material";
 
 const AddGuestListForm = () => {
-  const chipRenderer = (
-    { chip, className, handleClick, handleDelete },
-    key
-  ) => (
-    <Chip
-      className={className}
-      key={key}
-      label={chip}
-      onClick={handleClick}
-      onDelete={handleDelete}
-      size="small"
-    />
-  );
-
   return (
     <Stack alignItems="center" spacing={4}>
       <Typography variant="h2" sx={{ pt: 2 }}>
@@ -64,7 +49,6 @@ const AddGuestListForm = () => {
       </FormControl>
       <FormControl>
         <Stack>
-          <ChipInput label="Tags" />
           <FormHelperText id="my-helper-text">
             Add tags that relate to your project (ex. crypto, wriitng,
             personal-website)
