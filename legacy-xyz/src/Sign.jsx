@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core';
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
 import SignModal from "./SignModal";
-import { generateSignature } from "./utils/utils";
+import { generateSignature } from "utils/utils";
 import { Button } from "@mui/material";
 
 const signMessage = (account, name, twitterHandle) => {
@@ -41,7 +41,13 @@ const Sign = ({projectId}) => {
 
   return (
     <>
-      <Button onClick={handleConnect}>
+      <Button
+        variant="contained" size="large"
+        sx={
+          {maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 }}
+        }
+        onClick={handleConnect}
+      >
         Sign here
       </Button>
       <SignModal

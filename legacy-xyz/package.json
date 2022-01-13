@@ -1,5 +1,5 @@
 {
-  "name": "legacy_xyz",
+  "name": "legacy-xyz",
   "version": "0.1.0",
   "main": "dist/index.js",
   "files": [
@@ -35,8 +35,7 @@
     "@web3-react/walletlink-connector": "^6.2.8",
     "ethers": "^5.5.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.3.3"
+    "react-dom": "^17.0.2"
   },
   "eslintConfig": {
     "extends": [
