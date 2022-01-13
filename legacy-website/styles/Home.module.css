@@ -107,32 +107,3 @@
   height: 1em;
   margin-left: 0.5rem;
 }
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-.installButton {
-  color: white;
-  font-size: 1rem;
-  font-family: Lato, sans-serif;
-  font-weight: bold;
-  width: 151px;
-  height: 64px;
-  background: #3f8758;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  box-sizing: border-box;
-  border-radius: 16px;
-}
-
-.installButton:hover {
-  background: #2e7948;
-}
-
-.installButton:active {
-  background: #2e7948;
-  color: orange;
-}

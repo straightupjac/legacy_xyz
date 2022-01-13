@@ -1,6 +1,6 @@
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
-import MuiNextLink from "@components/MuiNextLink";
+import MuiNextLink from "@components/core-components/MuiNextLink";
 
 const Navbar = ({ navLinks }) => {
   return (
@@ -16,7 +16,7 @@ const Navbar = ({ navLinks }) => {
             key={`${title}${i}`}
             href={path}
             variant="button"
-            sx={{ fontSize: '20px', opacity: 0.7, color: 'white', textDecoration: 'none', textTransform: 'none' }}
+            sx={{ fontSize: '20px', opacity: 0.7, color: 'black', textDecoration: 'none', textTransform: 'none' }}
           >
             {title}
           </MuiNextLink>

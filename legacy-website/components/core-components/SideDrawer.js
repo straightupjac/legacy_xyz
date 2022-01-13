@@ -36,12 +36,12 @@ const SideDrawer = ({ navLinks }) => {
           variant='button'
           key={`${title}${i}`}
           sx={{
-            ml: 5,
+            ml: 2,
             my: 2,
             textTransform: 'none',
           }}
         >
-          <MuiNextLink sx={{ fontSize: '20px', textDecoration: 'none'}} href={path}>
+          <MuiNextLink sx={{ color: 'black', fontSize: '20px', textDecoration: 'none'}} href={path}>
             {title}
           </MuiNextLink>
         </Typography>

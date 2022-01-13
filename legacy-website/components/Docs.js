@@ -1,5 +1,5 @@
-import 'nextra-theme-docs/style.css'
+// import 'nextra-theme-docs/style.css'
 
-export default function Docs({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+// export default function Docs({ Component, pageProps }) {
+//   return <Component {...pageProps} />
+// }

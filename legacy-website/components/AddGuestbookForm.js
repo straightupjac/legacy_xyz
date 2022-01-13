@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./AddGuestbookForm.module.css"
-import { Chip, Divider } from "@mui/material";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
