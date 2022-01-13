@@ -43,7 +43,9 @@ const SignLegacy = ({
     style: {
       color: '#257C5E'
     }
-  }, "legacy")), " to learn more"), /*#__PURE__*/React.createElement(Sign, null))));
+  }, "legacy")), " to learn more"), /*#__PURE__*/React.createElement(Sign, {
+    projectId: projectId
+  }))));
 };
 
 export default SignLegacy;

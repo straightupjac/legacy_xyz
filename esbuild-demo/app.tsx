@@ -1,7 +1,7 @@
 
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import { SignLegacy } from 'legacy_xyz'
+import { SignLegacy } from 'legacy-xyz'
 import { Web3ReactProvider } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 

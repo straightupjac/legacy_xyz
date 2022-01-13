@@ -19,7 +19,7 @@ const SignLegacy = ({projectId}) => {
         <Typography sx={{fontSize: 20, textAlign: 'center', mt: 3}}>
           🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{textDecoration: 'none'}} rel="noreferrer"><span style={{color: '#257C5E'}}>legacy</span></a> to learn more
         </Typography>
-        <Sign />
+        <Sign projectId={projectId}/>
       </Stack>
     </Web3ReactProvider>
     </>

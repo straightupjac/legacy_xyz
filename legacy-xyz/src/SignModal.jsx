@@ -59,7 +59,6 @@ const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit}) 
           textTransform: 'none',
           fontSize: 20,
           borderRadius: 3,
-          borderRadius: 3,
           ':hover': { background: '#000000', opacity: 0.8 }}
         }
       >
