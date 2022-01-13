@@ -39,9 +39,6 @@ const Sign = ({projectId}) => {
     } else if (type === 'metamask') {
       await activate(injected);
     }
-      })
-    }
-
   }
 
   const signFromWallet = async (account, name, twitterHandle) => {
