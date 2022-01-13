@@ -34,7 +34,7 @@ const CloseButton = ({handleClose}) => {
   )
 }
 
-const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit}) => {
+const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle}) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
@@ -60,13 +60,7 @@ const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit}) 
         onClick={handleFormSubmit}
         variant="contained"
         size="large"
-        sx={
-          {background: '#000000',
-          textTransform: 'none',
-          fontSize: 20,
-          borderRadius: 3,
-          ':hover': { background: '#000000', opacity: 0.8 }}
-        }
+        sx={buttonStyle || styles.button}
       >
         Connect wallet to sign
       </Button>
@@ -111,7 +105,7 @@ const ConnectWallet = ({alert, handleConnect}) => {
   )
 }
 
-const SignMessage = ({alert, handleSign}) => {
+const SignMessage = ({alert, handleSign, buttonStyle}) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
@@ -121,13 +115,7 @@ const SignMessage = ({alert, handleSign}) => {
         onClick={handleSign}
         variant="contained"
         size="large"
-        sx={
-          {background: '#000000',
-          textTransform: 'none',
-          fontSize: 20,
-          borderRadius: 3,
-          ':hover': { background: '#000000', opacity: 0.8 }}
-        }
+        sx={buttonStyle || styles.button}
       >
         Sign message
       </Button>
@@ -138,7 +126,7 @@ const SignMessage = ({alert, handleSign}) => {
   )
 }
 
-const Verify = ({alert, handleTweet, handleWithoutVerifying}) => {
+const Verify = ({alert, handleTweet, handleWithoutVerifying, buttonStyle}) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
@@ -147,13 +135,7 @@ const Verify = ({alert, handleTweet, handleWithoutVerifying}) => {
       <Typography sx={{fontSize: 18,}}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
       <Button onClick={handleTweet} startIcon={<TwitterIcon />}
         variant="contained"
-        sx={
-          {background: '#000000',
-          textTransform: 'none',
-          fontSize: 20,
-          borderRadius: 3,
-          ':hover': { background: '#000000', opacity: 0.8 }}
-        }
+        sx={buttonStyle || styles.button}
       >
         Post Proof
       </Button>
@@ -182,7 +164,7 @@ const Verifying = () => {
   )
 }
 
-const VerifyTweet = ({alert, handleTwitterVerifyAndSign, }) => {
+const VerifyTweet = ({alert, handleTwitterVerifyAndSign, buttonStyle}) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
@@ -191,13 +173,7 @@ const VerifyTweet = ({alert, handleTwitterVerifyAndSign, }) => {
       <Typography sx={{fontSize: 18}}>After sending your tweet, click the button below to complete verification:</Typography>
       <Button onClick={handleTwitterVerifyAndSign} startIcon={<TwitterIcon />}
         variant="contained"
-        sx={
-          {background: '#000000',
-          textTransform: 'none',
-          fontSize: 20,
-          borderRadius: 3,
-          ':hover': { background: '#000000', opacity: 0.8 }}
-        }
+        sx={buttonStyle || styles.button}
       >
         Verify Tweet</Button>
       {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
@@ -221,7 +197,7 @@ const FinishSign = () => {
 }
 
 export default function SignModal(props) {
-  const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account, active } = props;
+  const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account, active, buttonStyle} = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState('');
   const [handle, setHandle] = useState('');
@@ -306,17 +282,18 @@ export default function SignModal(props) {
         onClose={handleClose}
         onBackdropClick={handleClose}
       >
-        <Box sx={style}>
+        <Box sx={styles.modal}>
           <CloseButton handleClose={handleClose} />
           <Stack sx={{pt:2}}>
             {state === START_SIGN && <StartSign name={name} handle={handle} alert={alert}
                 setName={setName} setHandle={setHandle}
                 handleFormSubmit={handleFormSubmit}
+                buttonStyle={buttonStyle}
               />}
             {state === CONNECT_WALLET && <ConnectWallet alert={alert} handleConnect={handleConnect} />}
-            {state === SIGN_MESSAGE && <SignMessage alert={alert} handleSign={handleSign} />}
-            {state === VERIFY && <Verify alert={alert} handleTweet={handleTweet} handleWithoutVerifying={handleWithoutVerifying} />}
-            {state === VERIFY_TWEET && <VerifyTweet alert={alert} handleTwitterVerifyAndSign={handleTwitterVerifyAndSign} />}
+            {state === SIGN_MESSAGE && <SignMessage alert={alert} handleSign={handleSign} buttonStyle={buttonStyle} />}
+            {state === VERIFY && <Verify alert={alert} handleTweet={handleTweet} handleWithoutVerifying={handleWithoutVerifying} buttonStyle={buttonStyle} />}
+            {state === VERIFY_TWEET && <VerifyTweet alert={alert} handleTwitterVerifyAndSign={handleTwitterVerifyAndSign} buttonStyle={buttonStyle} />}
             {state === VERIFYING && <Verifying /> }
             {state === FINISH_SIGN && <FinishSign />}
             <Typography sx={{fontSize: 12, textAlign: 'center', mt: 3}}>
@@ -329,17 +306,26 @@ export default function SignModal(props) {
   )
 }
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 445,
-  bgcolor: 'white',
-  border: '0px',
-  borderRadius: 10,
-  boxShadow: 24,
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  p: 5,
+const styles = {
+  modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 445,
+    bgcolor: 'white',
+    border: '0px',
+    borderRadius: 10,
+    boxShadow: 24,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    p: 5,
+  },
+  button: {
+    background: '#000000',
+    textTransform: 'none',
+    fontSize: 20,
+    borderRadius: 3,
+    ':hover': { background: '#000000', opacity: 0.8 }
+  }
 };

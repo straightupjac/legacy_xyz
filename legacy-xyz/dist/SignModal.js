@@ -48,7 +48,8 @@ const StartSign = ({
   alert,
   setName,
   setHandle,
-  handleFormSubmit
+  handleFormSubmit,
+  buttonStyle
 }) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
@@ -82,16 +83,7 @@ const StartSign = ({
     onClick: handleFormSubmit,
     variant: "contained",
     size: "large",
-    sx: {
-      background: '#000000',
-      textTransform: 'none',
-      fontSize: 20,
-      borderRadius: 3,
-      ':hover': {
-        background: '#000000',
-        opacity: 0.8
-      }
-    }
+    sx: buttonStyle || styles.button
   }, "Connect wallet to sign"));
 };
 
@@ -155,7 +147,8 @@ const ConnectWallet = ({
 
 const SignMessage = ({
   alert,
-  handleSign
+  handleSign,
+  buttonStyle
 }) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
@@ -172,16 +165,7 @@ const SignMessage = ({
     onClick: handleSign,
     variant: "contained",
     size: "large",
-    sx: {
-      background: '#000000',
-      textTransform: 'none',
-      fontSize: 20,
-      borderRadius: 3,
-      ':hover': {
-        background: '#000000',
-        opacity: 0.8
-      }
-    }
+    sx: buttonStyle || styles.button
   }, "Sign message"), alert && /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 10,
@@ -194,7 +178,8 @@ const SignMessage = ({
 const Verify = ({
   alert,
   handleTweet,
-  handleWithoutVerifying
+  handleWithoutVerifying,
+  buttonStyle
 }) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
@@ -215,16 +200,7 @@ const Verify = ({
     onClick: handleTweet,
     startIcon: /*#__PURE__*/React.createElement(TwitterIcon, null),
     variant: "contained",
-    sx: {
-      background: '#000000',
-      textTransform: 'none',
-      fontSize: 20,
-      borderRadius: 3,
-      ':hover': {
-        background: '#000000',
-        opacity: 0.8
-      }
-    }
+    sx: buttonStyle || styles.button
   }, "Post Proof"), alert && /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 10,
@@ -255,7 +231,8 @@ const Verifying = () => {
 
 const VerifyTweet = ({
   alert,
-  handleTwitterVerifyAndSign
+  handleTwitterVerifyAndSign,
+  buttonStyle
 }) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
@@ -276,16 +253,7 @@ const VerifyTweet = ({
     onClick: handleTwitterVerifyAndSign,
     startIcon: /*#__PURE__*/React.createElement(TwitterIcon, null),
     variant: "contained",
-    sx: {
-      background: '#000000',
-      textTransform: 'none',
-      fontSize: 20,
-      borderRadius: 3,
-      ':hover': {
-        background: '#000000',
-        opacity: 0.8
-      }
-    }
+    sx: buttonStyle || styles.button
   }, "Verify Tweet"), alert && /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 10,
@@ -326,7 +294,8 @@ export default function SignModal(props) {
     handleLoginClick,
     signFromWallet,
     account,
-    active
+    active,
+    buttonStyle
   } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState('');
@@ -412,7 +381,7 @@ export default function SignModal(props) {
     onClose: handleClose,
     onBackdropClick: handleClose
   }, /*#__PURE__*/React.createElement(Box, {
-    sx: style
+    sx: styles.modal
   }, /*#__PURE__*/React.createElement(CloseButton, {
     handleClose: handleClose
   }), /*#__PURE__*/React.createElement(Stack, {
@@ -425,20 +394,24 @@ export default function SignModal(props) {
     alert: alert,
     setName: setName,
     setHandle: setHandle,
-    handleFormSubmit: handleFormSubmit
+    handleFormSubmit: handleFormSubmit,
+    buttonStyle: buttonStyle
   }), state === CONNECT_WALLET && /*#__PURE__*/React.createElement(ConnectWallet, {
     alert: alert,
     handleConnect: handleConnect
   }), state === SIGN_MESSAGE && /*#__PURE__*/React.createElement(SignMessage, {
     alert: alert,
-    handleSign: handleSign
+    handleSign: handleSign,
+    buttonStyle: buttonStyle
   }), state === VERIFY && /*#__PURE__*/React.createElement(Verify, {
     alert: alert,
     handleTweet: handleTweet,
-    handleWithoutVerifying: handleWithoutVerifying
+    handleWithoutVerifying: handleWithoutVerifying,
+    buttonStyle: buttonStyle
   }), state === VERIFY_TWEET && /*#__PURE__*/React.createElement(VerifyTweet, {
     alert: alert,
-    handleTwitterVerifyAndSign: handleTwitterVerifyAndSign
+    handleTwitterVerifyAndSign: handleTwitterVerifyAndSign,
+    buttonStyle: buttonStyle
   }), state === VERIFYING && /*#__PURE__*/React.createElement(Verifying, null), state === FINISH_SIGN && /*#__PURE__*/React.createElement(FinishSign, null), /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 12,
@@ -458,17 +431,29 @@ export default function SignModal(props) {
     }
   }, "legacy")), " to learn more")))));
 }
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 445,
-  bgcolor: 'white',
-  border: '0px',
-  borderRadius: 10,
-  boxShadow: 24,
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  p: 5
+const styles = {
+  modal: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 445,
+    bgcolor: 'white',
+    border: '0px',
+    borderRadius: 10,
+    boxShadow: 24,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    p: 5
+  },
+  button: {
+    background: '#000000',
+    textTransform: 'none',
+    fontSize: 20,
+    borderRadius: 3,
+    ':hover': {
+      background: '#000000',
+      opacity: 0.8
+    }
+  }
 };

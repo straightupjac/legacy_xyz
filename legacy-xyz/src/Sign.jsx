@@ -61,6 +61,7 @@ const Sign = ({projectId, buttonLabel, buttonStyle}) => {
         projectId={projectId}
         account={account}
         active={active}
+        buttonStyle={buttonStyle}
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}

@@ -74,6 +74,7 @@ const Sign = ({
     projectId: projectId,
     account: account,
     active: active,
+    buttonStyle: buttonStyle,
     isModalVisible: isModalVisible,
     handleLoginClick: handleLoginClick,
     handleClose: handleClose,
