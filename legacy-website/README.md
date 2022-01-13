@@ -1,7 +1,4 @@
-# 🧰 nextjs-mui5
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). MUI5 integration inspired by [`@ansonlowzf`](https://twitter.com/AnsonLowZF) and his NextJS MUI5 [tutorial](https://www.ansonlowzf.com/create-a-website-with-material-ui-v5-nextjs/#footer-with-social-icon-link).
-
-Deployed to [nextjs-mui5.vercel.app](https://nextjs-mui5.vercel.app/)
+# 🌱 Legacy XYZ
 
 ## Getting Started
 
