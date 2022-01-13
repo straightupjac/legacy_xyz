@@ -1,9 +1,10 @@
-import Head from 'next/head';
-import MuiNextLink from '@components/core-components/MuiNextLink';
-import AddGuestListForm from '@components/AddGuestbookForm';
-import Image from 'next/image'
-import headerBackground from "../public/background.svg"
-import { Button, Container, Stack, Typography } from '@mui/material';
+import Head from "next/head";
+import MuiNextLink from "@components/core-components/MuiNextLink";
+import AddGuestListForm from "@components/AddGuestbookForm";
+import Image from "next/image";
+import Link from "next/link";
+import headerBackground from "../public/background.svg";
+import { Button, Container, Stack, Typography } from "@mui/material";
 
 export default function Home() {
   return (
@@ -15,30 +16,43 @@ export default function Home() {
       </Head>
 
       <Stack alignItems="center" spacing={4}>
-        <Typography variant='h1' sx={{pt: 2}}>curate your digital legacy.</Typography>
+        <Typography variant="h1" sx={{ pt: 2 }}>
+          curate your digital legacy.
+        </Typography>
         <Typography variant="body1">
-          Enable supporters of your project to leave a digital signature once they’ve visited your website.  A new era of social proof, and discovery of content.
+          Enable supporters of your project to leave a digital signature once
+          they’ve visited your website. A new era of social proof, and discovery
+          of content.
         </Typography>
         <Stack direction="row" spacing={3}>
-          <Button variant="contained" size="large" sx={{
-            border: '4px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '16px',
-            width: '150px',
-            height: '60px',
-            backgroundColor: '#3f8758',
-          }}>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{
+              border: "4px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: "16px",
+              width: "150px",
+              height: "60px",
+              backgroundColor: "#3f8758",
+            }}
+          >
             Sign
           </Button>
-          <Button variant="outlined" sx={{
-            borderRadius: '16px',
-            width: '150px',
-            height: '60px',
-          }}>
-            Add to site 
-          </Button>
+          <Link href="/install">
+            <Button
+              variant="outlined"
+              sx={{
+                borderRadius: "16px",
+                width: "150px",
+                height: "60px",
+              }}
+            >
+              Add to site
+            </Button>
+          </Link>
         </Stack>
-        <Image alt="header background" src={headerBackground}/>
+        <Image alt="header background" src={headerBackground} />
       </Stack>
     </div>
-  )
+  );
 }
