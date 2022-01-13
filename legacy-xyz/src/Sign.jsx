@@ -33,7 +33,7 @@ const Sign = ({projectId}) => {
     appName: 'legacy_xyz',
   })
 
-  const handleLoginClick = (type) => {
+  const handleLoginClick = async (type) => {
     if (type === 'coinbase') {
       await activate(walletlink);
     } else if (type === 'metamask') {
@@ -59,6 +59,7 @@ const Sign = ({projectId}) => {
       <SignModal
         projectId={projectId}
         account={account}
+        active={active}
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}

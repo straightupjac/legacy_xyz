@@ -41,23 +41,11 @@ const Sign = ({
     appName: 'legacy_xyz'
   });
 
-  const handleLoginClick = type => {
+  const handleLoginClick = async type => {
     if (type === 'coinbase') {
-      activate(walletlink).then(() => {
-        console.log('coinbase connect', active, account);
-
-        if (!active) {
-          throw new Error('Failed to connect wallet');
-        }
-      });
+      await activate(walletlink);
     } else if (type === 'metamask') {
-      activate(injected).then(() => {
-        console.log('metamask connect', active, account);
-
-        if (!active) {
-          throw new Error('Failed to connect wallet');
-        }
-      });
+      await activate(injected);
     }
   };
 
@@ -83,6 +71,7 @@ const Sign = ({
   }, "Sign here"), /*#__PURE__*/React.createElement(SignModal, {
     projectId: projectId,
     account: account,
+    active: active,
     isModalVisible: isModalVisible,
     handleLoginClick: handleLoginClick,
     handleClose: handleClose,

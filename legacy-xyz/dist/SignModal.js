@@ -325,7 +325,8 @@ export default function SignModal(props) {
     handleClose,
     handleLoginClick,
     signFromWallet,
-    account
+    account,
+    active
   } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState('');
@@ -353,6 +354,12 @@ export default function SignModal(props) {
   };
 
   const handleSign = async () => {
+    if (!active) {
+      setAlert('Please connect your wallet first.');
+      setState(CONNECT_WALLET);
+      return;
+    }
+
     signFromWallet(account, name, handle).then(sig => {
       setSignature(sig);
       setAlert('');
