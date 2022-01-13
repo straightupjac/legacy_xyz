@@ -14,7 +14,7 @@ import { IconButton, Stack } from "@mui/material";
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 export const navLinks = [
-  { title: 'Docs', path: '/docs' },
+  { title: 'Docs', path: 'https://legacy-xyz-docs.vercel.app/', target: '_blank' },
   { title: 'Find websites to sign', path: '/' },
 ];
 
