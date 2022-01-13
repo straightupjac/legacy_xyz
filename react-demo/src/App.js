@@ -12,9 +12,9 @@ function App() {
         </p>
       </header>
       <main className="App-main">
-        <SignLegacy projectid="legacyxyz" />
+        <SignLegacy projectId="legacyxyz" />
         <br />
-        <SignersList projectid="legacyxyz" />
+        <SignersList projectId="legacyxyz" />
       </main>
 
     </div>
