@@ -1,7 +1,8 @@
 // theme.config.js
 export default {
-    projectLink: 'https://github.com/straightupjac/legacy_xyz', // GitHub link in the navbar
-    docsRepositoryBase: 'https://github.com/straightupjac/legacy_xyz/blob/master', // base URL for the docs repository
+    projectLink: 'https://github.com/straightupjac/legacy_xyz/tree/main/legacy-docs', // GitHub link in the navbar
+    docsRepositoryBase: 'https://github.com/straightupjac/legacy_xyz/tree/main/legacy-docs/pages', // base URL for the docs repository
+    github: "https://github.com/straightupjac/legacy_xyz/tree/main/legacy-docs",
     titleSuffix: ' - legacy_xyz',
     nextLinks: true,
     prevLinks: true,
