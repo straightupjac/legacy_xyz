@@ -15,11 +15,11 @@ import {
 
 const AddGuestListForm = () => {
   return (
-    <Stack alignItems="center" spacing={4}>
-      <Typography variant="h2" sx={{ pt: 2 }}>
+    <Stack alignItems="left" pl={20} pr={20} pt={10} spacing={4}>
+      <Typography align="center" variant="h2" sx={{ pt: 2 }}>
         Add a guestbook to your website
       </Typography>
-      <Typography variant="body1">
+      <Typography align="center" variant="body1">
         Fill the form below to allow users to discover and sign your website as
         part of their digital legacy
       </Typography>
@@ -49,13 +49,16 @@ const AddGuestListForm = () => {
       </FormControl>
       <FormControl>
         <Stack>
+          <InputLabel htmlFor="my-input">Project Tags</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" />
+
           <FormHelperText id="my-helper-text">
             Add tags that relate to your project (ex. crypto, wriitng,
             personal-website)
           </FormHelperText>
         </Stack>
       </FormControl>
-      <Stack direction="row" spacing={3}>
+      <Stack alignItems="center">
         <Button
           variant="contained"
           size="large"
