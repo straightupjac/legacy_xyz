@@ -1,7 +1,10 @@
 {
   "name": "legacy_xyz",
   "version": "0.1.0",
-  "main": "src/index.jsx",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
   "description": "Invite your digital guests to leave their digital footprint.",
   "repository": {
     "type": "git",
@@ -11,6 +14,9 @@
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/straightupjac/legacy_xyz/issues"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir dist"
   },
   "keywords": [
     "web3",
@@ -39,6 +45,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7"
   }
 }
