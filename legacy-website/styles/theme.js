@@ -11,6 +11,7 @@ let theme = createTheme({
     },
     background: {
       default: "#FAEDE2",
+      main: "#FAEDE2",
     },
   },
   typography: {

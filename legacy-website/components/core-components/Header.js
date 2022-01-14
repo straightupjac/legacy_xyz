@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <>
       <HideOnScroll>
-        <AppBar position="fixed" color='white' elevation={0}>
+        <AppBar position="fixed" color='background' elevation={0}>
           <Toolbar>
             <Container
               maxWidth="lg"
