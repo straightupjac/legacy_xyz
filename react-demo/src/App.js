@@ -28,13 +28,13 @@ function App() {
               ':hover': { background: '#3f8758', opacity: 0.8 }
             }
           }
-          cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '500px', borderRadius: 10}}
+          cardStyle={{ border: '0px solid #3f8758', p: 4, maxWidth: '500px', borderRadius: 10 }}
           showLegacy={false}
         />
         <br />
         <SignersList
           projectId="legacyxyz"
-          cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10}}
+          cardStyle={{ border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10 }}
         />
       </main>
 

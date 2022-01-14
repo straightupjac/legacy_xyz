@@ -23,6 +23,7 @@ function App() {
 | buttonLabel | override sign button label| ❌ no  | `buttonLabel={"Sign here"}`|
 | showLegacy | show learn more text | ❌ no  | `showLegacy={true}`|
 | message | override sign info text | ❌ no  | `message={"Click here to sign."}`|
+| modalStyle | override modal style (dangerously set) | ❌ no  | `modalStyle={ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 445, background: 'white', border: '0px', borderRadius: 10, boxShadow: 24, marginLeft: 'auto', marginRight: 'auto', p: 5}`|
 
 <b>For SignersList</b>
 | Prop Name| Description | Required | Example |

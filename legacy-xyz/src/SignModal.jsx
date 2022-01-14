@@ -22,7 +22,7 @@ const VERIFY_TWEET = 4;
 const VERIFYING = 5;
 const FINISH_SIGN = 6;
 
-const CloseButton = ({handleClose}) => {
+const CloseButton = ({ handleClose }) => {
   return (
     <IconButton onClick={handleClose} sx={{
       position: 'absolute', right: 15, top: 15,
@@ -34,28 +34,28 @@ const CloseButton = ({handleClose}) => {
   )
 }
 
-const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle}) => {
+const StartSign = ({ name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle, modalStyle }) => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        Leave your <br/><span style={{color: '#257C5E'}}>legacy</span>.
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        Leave your <br /><span style={{ color: '#257C5E' }}>legacy</span>.
       </Typography>
-        <TextField
-          label="name"
-          variant="outlined"
-          value={name}
-          required
-          onInput={ e=>setName(e.target.value)}
-        />
-        <TextField
-          label="twitter handle"
-          variant="outlined"
-          value={handle}
-          onInput={ e=>setHandle(e.target.value)}
-        />
-        {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
-          {alert}
-          </Typography>}
+      <TextField
+        label="name"
+        variant="outlined"
+        value={name}
+        required
+        onInput={e => setName(e.target.value)}
+      />
+      <TextField
+        label="twitter handle"
+        variant="outlined"
+        value={handle}
+        onInput={e => setHandle(e.target.value)}
+      />
+      {alert && <Typography sx={{ fontSize: 10, color: 'red', textAlign: 'center' }}>
+        {alert}
+      </Typography>}
       <Button
         onClick={handleFormSubmit}
         variant="contained"
@@ -68,48 +68,50 @@ const StartSign = ({name, handle, alert, setName, setHandle, handleFormSubmit, b
   )
 }
 
-const ConnectWallet = ({alert, handleConnect}) => {
+const ConnectWallet = ({ alert, handleConnect }) => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        Connect your <br/><span style={{color: '#257C5E'}}>wallet</span>.
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        Connect your <br /><span style={{ color: '#257C5E' }}>wallet</span>.
       </Typography>
       <Box onClick={() => handleConnect('coinbase')}
-        sx={{cursor: 'pointer', borderBottom: '1px solid #eee',
-        textAlign: 'center', py: 2,
-        ':hover': { opacity: 0.8 },
+        sx={{
+          cursor: 'pointer', borderBottom: '1px solid #eee',
+          textAlign: 'center', py: 2,
+          ':hover': { opacity: 0.8 },
         }}
       >
         <img
           src={coinbase}
-          style={{height:50, width: 300}}
+          style={{ height: 50, width: 300 }}
           alt="login with Coinbase Wallet!"
         />
       </Box>
       <Box onClick={() => handleConnect('metamask')}
-        sx={{cursor: 'pointer',
-        textAlign: 'center',
-        ':hover': { opacity: 0.8 },
+        sx={{
+          cursor: 'pointer',
+          textAlign: 'center',
+          ':hover': { opacity: 0.8 },
         }}
       >
         <img
           src={metamask}
-          style={{height:100, width: 300}}
+          style={{ height: 100, width: 300 }}
           alt="login with Metamask!"
         />
       </Box>
-      {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+      {alert && <Typography sx={{ fontSize: 10, color: 'red', textAlign: 'center' }}>
         {alert}
       </Typography>}
     </Stack>
   )
 }
 
-const SignMessage = ({alert, handleSign, buttonStyle}) => {
+const SignMessage = ({ alert, handleSign, buttonStyle }) => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        Sign a <span style={{color: '#257C5E'}}>message</span> with your wallet.
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        Sign a <span style={{ color: '#257C5E' }}>message</span> with your wallet.
       </Typography>
       <Button
         onClick={handleSign}
@@ -119,35 +121,35 @@ const SignMessage = ({alert, handleSign, buttonStyle}) => {
       >
         Sign message
       </Button>
-      {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+      {alert && <Typography sx={{ fontSize: 10, color: 'red', textAlign: 'center' }}>
         {alert}
       </Typography>}
     </Stack>
   )
 }
 
-const Verify = ({alert, handleTweet, handleWithoutVerifying, buttonStyle}) => {
+const Verify = ({ alert, handleTweet, handleWithoutVerifying, buttonStyle }) => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        Verify your <span style={{color: '#257C5E'}}>signature</span>.
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        Verify your <span style={{ color: '#257C5E' }}>signature</span>.
       </Typography>
-      <Typography sx={{fontSize: 18,}}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
+      <Typography sx={{ fontSize: 18, }}>Tweet a message to prove that you control this address. Return here afterwards to complete verification.</Typography>
       <Button onClick={handleTweet} startIcon={<TwitterIcon />}
         variant="contained"
         sx={buttonStyle || styles.button}
       >
         Post Proof
       </Button>
-      {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+      {alert && <Typography sx={{ fontSize: 10, color: 'red', textAlign: 'center' }}>
         {alert}
       </Typography>}
 
-        <Typography sx={{fontSize: 12, textAlign: 'center'}} onClick={handleWithoutVerifying}>
-          <a>
+      <Typography sx={{ fontSize: 12, textAlign: 'center' }} onClick={handleWithoutVerifying}>
+        <a>
           Continue without verifying
-          </a>
-        </Typography>
+        </a>
+      </Typography>
 
     </Stack>
   )
@@ -156,7 +158,7 @@ const Verify = ({alert, handleTweet, handleWithoutVerifying, buttonStyle}) => {
 const Verifying = () => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
         Verifying
       </Typography>
       <CircularProgress size="large" />
@@ -164,19 +166,19 @@ const Verifying = () => {
   )
 }
 
-const VerifyTweet = ({alert, handleTwitterVerifyAndSign, buttonStyle}) => {
+const VerifyTweet = ({ alert, handleTwitterVerifyAndSign, buttonStyle }) => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        Complete <span style={{color: '#257C5E'}}>verification</span>.
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        Complete <span style={{ color: '#257C5E' }}>verification</span>.
       </Typography>
-      <Typography sx={{fontSize: 18}}>After sending your tweet, click the button below to complete verification:</Typography>
+      <Typography sx={{ fontSize: 18 }}>After sending your tweet, click the button below to complete verification:</Typography>
       <Button onClick={handleTwitterVerifyAndSign} startIcon={<TwitterIcon />}
         variant="contained"
         sx={buttonStyle || styles.button}
       >
         Verify Tweet</Button>
-      {alert && <Typography sx={{fontSize: 10, color: 'red', textAlign: 'center'}}>
+      {alert && <Typography sx={{ fontSize: 10, color: 'red', textAlign: 'center' }}>
         {alert}
       </Typography>}
     </Stack>
@@ -186,18 +188,18 @@ const VerifyTweet = ({alert, handleTwitterVerifyAndSign, buttonStyle}) => {
 const FinishSign = () => {
   return (
     <Stack spacing={2}>
-      <Typography sx={{fontSize: 36, fontWeight: 'bold'}}>
-        <span style={{color: '#257C5E'}}>YOU</span> did it!
+      <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
+        <span style={{ color: '#257C5E' }}>YOU</span> did it!
       </Typography>
-      <Typography sx={{fontSize: 20}}>
-        Thanks for signing and building your <span style={{color: '#257C5E'}}>legacy</span>.
+      <Typography sx={{ fontSize: 20 }}>
+        Thanks for signing and building your <span style={{ color: '#257C5E' }}>legacy</span>.
       </Typography>
     </Stack>
   )
 }
 
 export default function SignModal(props) {
-  const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account, active, buttonStyle} = props;
+  const { projectId, isModalVisible, handleClose, handleLoginClick, signFromWallet, account, active, buttonStyle, modalStyle } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState('');
   const [handle, setHandle] = useState('');
@@ -282,22 +284,35 @@ export default function SignModal(props) {
         onClose={handleClose}
         onBackdropClick={handleClose}
       >
-        <Box sx={styles.modal}>
+        <Box sx={modalStyle || {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 445,
+          background: 'white',
+          border: '0px',
+          borderRadius: 10,
+          boxShadow: 24,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          p: 5,
+        }}>
           <CloseButton handleClose={handleClose} />
-          <Stack sx={{pt:2}}>
+          <Stack sx={{ pt: 2 }}>
             {state === START_SIGN && <StartSign name={name} handle={handle} alert={alert}
-                setName={setName} setHandle={setHandle}
-                handleFormSubmit={handleFormSubmit}
-                buttonStyle={buttonStyle}
-              />}
+              setName={setName} setHandle={setHandle}
+              handleFormSubmit={handleFormSubmit}
+              buttonStyle={buttonStyle}
+            />}
             {state === CONNECT_WALLET && <ConnectWallet alert={alert} handleConnect={handleConnect} />}
             {state === SIGN_MESSAGE && <SignMessage alert={alert} handleSign={handleSign} buttonStyle={buttonStyle} />}
             {state === VERIFY && <Verify alert={alert} handleTweet={handleTweet} handleWithoutVerifying={handleWithoutVerifying} buttonStyle={buttonStyle} />}
             {state === VERIFY_TWEET && <VerifyTweet alert={alert} handleTwitterVerifyAndSign={handleTwitterVerifyAndSign} buttonStyle={buttonStyle} />}
-            {state === VERIFYING && <Verifying /> }
+            {state === VERIFYING && <Verifying />}
             {state === FINISH_SIGN && <FinishSign />}
-            <Typography sx={{fontSize: 12, textAlign: 'center', mt: 3}}>
-              🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{textDecoration: 'none'}} rel="noreferrer"><span style={{color: '#257C5E'}}>legacy</span></a> to learn more
+            <Typography sx={{ fontSize: 12, textAlign: 'center', mt: 3 }}>
+              🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer"><span style={{ color: '#257C5E' }}>legacy</span></a> to learn more
             </Typography>
           </Stack>
         </Box>
@@ -307,20 +322,6 @@ export default function SignModal(props) {
 }
 
 const styles = {
-  modal: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 445,
-    bgcolor: 'white',
-    border: '0px',
-    borderRadius: 10,
-    boxShadow: 24,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    p: 5,
-  },
   button: {
     background: '#000000',
     textTransform: 'none',

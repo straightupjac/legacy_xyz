@@ -7,7 +7,7 @@ let theme = createTheme({
       main: "#2a9954",
     },
     white: {
-      main: "#FAEDE2",
+      main: "#FFF",
     },
     background: {
       default: "#FAEDE2",

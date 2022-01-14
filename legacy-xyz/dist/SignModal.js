@@ -49,7 +49,8 @@ const StartSign = ({
   setName,
   setHandle,
   handleFormSubmit,
-  buttonStyle
+  buttonStyle,
+  modalStyle
 }) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
@@ -295,7 +296,8 @@ export default function SignModal(props) {
     signFromWallet,
     account,
     active,
-    buttonStyle
+    buttonStyle,
+    modalStyle
   } = props;
   const [state, setState] = useState(START_SIGN);
   const [name, setName] = useState('');
@@ -381,7 +383,20 @@ export default function SignModal(props) {
     onClose: handleClose,
     onBackdropClick: handleClose
   }, /*#__PURE__*/React.createElement(Box, {
-    sx: styles.modal
+    sx: modalStyle || {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 445,
+      background: 'white',
+      border: '0px',
+      borderRadius: 10,
+      boxShadow: 24,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      p: 5
+    }
   }, /*#__PURE__*/React.createElement(CloseButton, {
     handleClose: handleClose
   }), /*#__PURE__*/React.createElement(Stack, {
@@ -432,20 +447,6 @@ export default function SignModal(props) {
   }, "legacy")), " to learn more")))));
 }
 const styles = {
-  modal: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 445,
-    bgcolor: 'white',
-    border: '0px',
-    borderRadius: 10,
-    boxShadow: 24,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    p: 5
-  },
   button: {
     background: '#000000',
     textTransform: 'none',

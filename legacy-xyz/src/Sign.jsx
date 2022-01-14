@@ -19,7 +19,7 @@ const signMessage = (account, name, twitterHandle) => {
   }
 }
 
-const Sign = ({ projectId, buttonLabel, buttonStyle }) => {
+const Sign = ({ projectId, buttonLabel, buttonStyle, modalStyle }) => {
   const { activate, active, account } = useWeb3React();
 
   // for the modal
@@ -62,6 +62,7 @@ const Sign = ({ projectId, buttonLabel, buttonStyle }) => {
         account={account}
         active={active}
         buttonStyle={buttonStyle}
+        modalStyle={modalStyle}
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}
