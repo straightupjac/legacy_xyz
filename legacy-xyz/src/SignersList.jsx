@@ -3,7 +3,7 @@ import { Chip, Stack, Divider, Box, Typography } from "@mui/material";
 import { getSigners, dedupe } from "./utils/utils";
 import { useWeb3React } from '@web3-react/core';
 
-const SignersList = ({projectId}) => {
+const SignersList = ({projectId, cardStyle, maxHeight}) => {
     const { library } = useWeb3React();
     const [signers, setSigners] = useState([]);
     const [processedSigners, setProcessedSigners] = useState([]);
@@ -46,7 +46,7 @@ const SignersList = ({projectId}) => {
 
   return (
     <>
-    <Box sx={{
+    <Box sx={cardStyle || {
         border: '2px solid #333',
         textAlign: 'center',
         p: 2,
@@ -57,7 +57,7 @@ const SignersList = ({projectId}) => {
             <h3>Guestbook</h3>
         </div>
         <Box sx={{
-            maxHeight: '600px',
+            maxHeight: maxHeight || '600px',
             overflowY: 'scroll'
         }}>
             {processedSigners.map((signer, idx) => {

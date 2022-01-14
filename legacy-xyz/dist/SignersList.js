@@ -4,7 +4,9 @@ import { getSigners, dedupe } from "./utils/utils";
 import { useWeb3React } from '@web3-react/core';
 
 const SignersList = ({
-  projectId
+  projectId,
+  cardStyle,
+  maxHeight
 }) => {
   const {
     library
@@ -47,7 +49,7 @@ const SignersList = ({
   };
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Box, {
-    sx: {
+    sx: cardStyle || {
       border: '2px solid #333',
       textAlign: 'center',
       p: 2,
@@ -56,7 +58,7 @@ const SignersList = ({
     }
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, "Guestbook")), /*#__PURE__*/React.createElement(Box, {
     sx: {
-      maxHeight: '600px',
+      maxHeight: maxHeight || '600px',
       overflowY: 'scroll'
     }
   }, processedSigners.map((signer, idx) => {

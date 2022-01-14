@@ -10,16 +10,20 @@ function getLibrary(provider) {
   return library;
 }
 
-const SignLegacy = ({projectId}) => {
+const SignLegacy = ({projectId, buttonLabel, buttonStyle, message, cardStyle, showLegacy = true}) => {
+  const defaultMsg = "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.";
+
   return (
     <>
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Stack spacing={2} sx={{border: '2px solid #333', p: 4, maxWidth: '500px', borderRadius: 10,}} alignItems="center">
-        <Typography variant="body1">Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.</Typography>
-        <Typography sx={{fontSize: 20, textAlign: 'center', mt: 3}}>
+      <Stack spacing={2}
+        sx={cardStyle || {border: '2px solid #333', p: 4, maxWidth: '500px', borderRadius: 10}}
+        alignItems="center">
+        <Typography variant="body1">{message || defaultMsg}</Typography>
+        <Sign projectId={projectId} buttonLabel={buttonLabel} buttonStyle={buttonStyle} />
+        {showLegacy &&<Typography sx={{fontSize: 18, textAlign: 'center', mt: 3}}>
           🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{textDecoration: 'none'}} rel="noreferrer"><span style={{color: '#257C5E'}}>legacy</span></a> to learn more
-        </Typography>
-        <Sign projectId={projectId}/>
+        </Typography>}
       </Stack>
     </Web3ReactProvider>
     </>

@@ -19,7 +19,7 @@ const signMessage = (account, name, twitterHandle) => {
   }
 }
 
-const Sign = ({projectId}) => {
+const Sign = ({ projectId, buttonLabel, buttonStyle }) => {
   const { activate, active, account } = useWeb3React();
 
   // for the modal
@@ -50,16 +50,18 @@ const Sign = ({projectId}) => {
       <Button
         variant="contained" size="large"
         sx={
-          {maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 }}
+          buttonStyle ? buttonStyle :
+            { maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 } }
         }
         onClick={handleConnect}
       >
-        Sign here
+        {buttonLabel || `Sign here`}
       </Button>
       <SignModal
         projectId={projectId}
         account={account}
         active={active}
+        buttonStyle={buttonStyle}
         isModalVisible={isModalVisible}
         handleLoginClick={handleLoginClick}
         handleClose={handleClose}
