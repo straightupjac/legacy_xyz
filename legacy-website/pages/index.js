@@ -1,10 +1,9 @@
+import { Button, Stack, Typography } from "@mui/material";
+import { SignLegacy } from 'legacy-xyz';
 import Head from "next/head";
-import MuiNextLink from "@components/core-components/MuiNextLink";
-import AddGuestListForm from "@components/AddGuestbookForm";
 import Image from "next/image";
 import Link from "next/link";
 import headerBackground from "../public/background.svg";
-import { Button, Container, Stack, Typography } from "@mui/material";
 
 export default function Home() {
   return (
@@ -38,7 +37,7 @@ export default function Home() {
           >
             Sign
           </Button>
-          <Link href="/install">
+          <Link passHref href="/install">
             <Button
               variant="outlined"
               sx={{
@@ -49,6 +48,7 @@ export default function Home() {
             >
               Add to site
             </Button>
+            {/* <SignLegacy projectId={'legacyxyz'} /> */}
           </Link>
         </Stack>
         <Image alt="header background" src={headerBackground} />
