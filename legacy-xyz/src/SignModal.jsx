@@ -10,10 +10,6 @@ import { verify, sign } from "./utils/utils";
 import metamask from "./utils/metamask.svg";
 import coinbase from "./utils/coinbase.png"
 
-const img = require('./utils/coinbase.png');
-
-console.log(img);
-
 const START_SIGN = 0;
 const CONNECT_WALLET = 1;
 const SIGN_MESSAGE = 2;

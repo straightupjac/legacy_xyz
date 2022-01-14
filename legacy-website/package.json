@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.0.0-rc.1",
     "@mui/material": "^5.0.0-rc.1",
-    "legacy-xyz": "^0.1.8",
+    "legacy-xyz": "^0.1.9",
     "material-ui-chip-input": "^1.1.0",
     "next": "^12.0.8",
     "react": "^17.0.2",

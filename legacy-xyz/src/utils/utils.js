@@ -181,7 +181,6 @@ export function dedupe(sigs) {
       total[cur.SIG_ADDR] = cur
     } else {
       const old = total[cur.SIG_ADDR]
-      console.log(cur.SIG_ADDR, cur.SIG_SIG)
       // dupe, can overwrite it current one is verified or old one is not verified
       if (cur.SIG_ISVERIFIED || !old.SIG_ISVERIFIED) {
         total[cur.SIG_ADDR] = cur

@@ -18,7 +18,6 @@ const SignersList = ({ projectId, cardStyle, maxHeight }) => {
 
     useEffect(() => {
         setProcessedSigners(dedupe(signers));
-        console.log(signers, processedSigners);
     }, [signers])
 
     function abridgeAddress(hex, length = 4) {
