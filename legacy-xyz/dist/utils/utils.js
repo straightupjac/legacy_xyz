@@ -157,17 +157,17 @@ export async function getSigners(projectId) {
   return req.data.transactions.edges.flatMap(nodeItem => {
     const cursor = nodeItem.cursor;
     const n = nodeItem.node;
-    const sig = safeTag(n, SIG_ADDR, "UNKWN");
+    const sig = safeTag(n, SIG_SIG, "UNKWN");
     const handle = safeTag(n, SIG_TWITTER_HANDLE, "UNSIGNED");
     const verified = safeTag(n, SIG_ISVERIFIED, 'false') === 'true'
 
     return [{
       CURSOR: cursor,
       SIG_ID: n.id,
-      address: safeTag(n, SIG_ADDR, ""),
-      name: safeTag(n, SIG_NAME, "Anonymous"),
-      twitter: handle === 'null' ? 'UNSIGNED' : handle,
-      date: safeTag(n, SIG_DATE, ''),
+      SIG_ADDR: safeTag(n, SIG_ADDR, ""),
+      SIG_NAME: safeTag(n, SIG_NAME, "Anonymous"),
+      SIG_TWITTER_HANDLE: handle === 'null' ? 'UNSIGNED' : handle,
+      SIG_DATE: safeTag(n, SIG_DATE, ''),
       SIG_ISVERIFIED: verified,
       SIG_SIG: sig,
     }];
@@ -181,6 +181,7 @@ export function dedupe(sigs) {
       total[cur.SIG_ADDR] = cur
     } else {
       const old = total[cur.SIG_ADDR]
+      console.log(cur.SIG_ADDR, cur.SIG_SIG)
       // dupe, can overwrite it current one is verified or old one is not verified
       if (cur.SIG_ISVERIFIED || !old.SIG_ISVERIFIED) {
         total[cur.SIG_ADDR] = cur

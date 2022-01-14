@@ -23,6 +23,7 @@ const SignersList = ({
   }, [projectId]);
   useEffect(() => {
     setProcessedSigners(dedupe(signers));
+    console.log(signers, processedSigners);
   }, [signers]);
 
   function abridgeAddress(hex, length = 4) {
@@ -64,10 +65,10 @@ const SignersList = ({
   }, processedSigners.map((signer, idx) => {
     return /*#__PURE__*/React.createElement(ListItem, {
       key: idx,
-      name: signer.name,
-      date: parseInt(signer.date, 10),
-      address: getENSName(signer.address),
-      twitter: signer.twitter
+      name: signer.SIG_NAME,
+      date: parseInt(signer.SIG_DATE, 10),
+      address: getENSName(signer.SIG_ADDR),
+      twitter: signer.SIG_TWITTER_HANDLE
     });
   }))));
 };
@@ -97,7 +98,7 @@ const ListItem = ({
     variant: "body1"
   }, name), /*#__PURE__*/React.createElement(Typography, {
     variant: "caption"
-  }, new Date(date * 1000).toLocaleDateString("en-US"))), /*#__PURE__*/React.createElement(Box, {
+  }, new Date(date).toLocaleDateString("en-US"))), /*#__PURE__*/React.createElement(Box, {
     textAlign: "start"
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "body1"
