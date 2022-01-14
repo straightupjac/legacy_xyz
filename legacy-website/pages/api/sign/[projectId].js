@@ -1,8 +1,5 @@
 import Cors from 'cors'
-import Redis from 'ioredis';
 import { checkIfProjectRegistered, checkIfVerifiedAr, signGuestbook } from '../helpers/arweave';
-
-const redis = new Redis();
 
 // Initializing the cors middleware
 const cors = Cors({
@@ -58,14 +55,13 @@ async function handler(req, res) {
   }).catch((err) => {
     console.log(`err @ /project : ${err}`)
     res.status(500)
-    return;
+    return resolve();
   })
 
   // check if user included handle
   if (handle) {
     // check if user is verified
-    const promise = sigCache.has(handle) ?
-      signGuestbook(projectId, address, name, handle, date, signature, true) :
+    const promise =
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
         return signGuestbook(projectId, address, name, date, handle, signature, verified)

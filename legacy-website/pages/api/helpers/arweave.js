@@ -27,7 +27,6 @@ const SIG_NAME = "legacy_xyz_name"
 const SIG_DATE = "legacy_xyz_date"
 const SIG_TWITTER_HANDLE = "legacy_xyz_twitter_handle"
 const SIG_ADDR = "legacy_xyz_address"
-// const SIG_MESSAGE = "legacy_xyz_message" // omitting from MVP because we don't want to deal with hiding unwanted messages
 const SIG_ISVERIFIED = "legacy_xyz_is_verified"
 const SIG_SIG = "legacy_xyz_signature"
 
@@ -176,31 +175,16 @@ async function checkIfProjectRegistered(projectId, website, twitter) {
         return {
           registered: true,
           msg: `project id is already registered`,
-          project: {
-            projectId: parsedProjectID,
-            projectWebsite: parsedProjectWebsite,
-            projectTwitter: parsedProjectTwitter,
-          }
         }
       } else if (twitter === parsedProjectTwitter) {
         return {
           registered: true,
           msg: `twitter handle (${twitterHandle}) is already registered with project id: ${parsedProjectID}`,
-          project: {
-            projectId: parsedProjectID,
-            projectWebsite: parsedProjectWebsite,
-            projectTwitter: parsedProjectTwitter,
-          },
         }
       } else if (website === parsedProjectWebsite) {
         return {
           registered: true,
           msg: `website is already registered with project id: ${parsedProjectID}`,
-          project: {
-            projectId: parsedProjectID,
-            projectWebsite: parsedProjectWebsite,
-            projectTwitter: parsedProjectTwitter,
-          }
         }
       }
     }
