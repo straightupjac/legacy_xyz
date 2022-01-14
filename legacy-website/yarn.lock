@@ -2617,10 +2617,10 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
-legacy-xyz@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.6.tgz#f67a379a673fe2906e2c81f885813ee410c280b8"
-  integrity sha512-jmIarHS++bl2o11ffQrXVnZK6+WdQThiE6wfrdadHVZMY5pq+e+sdpxxmRoHPSlAPmXZ0tvBysoMj9KyR71zYA==
+legacy-xyz@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.8.tgz#922c77e3f74291bf0a2e8e702539d53348a187ed"
+  integrity sha512-m9YYkt+oSCziixoJRB1zMnxmxZMDj8SQtLseb4Oas82342omHPEBfwNexBOFY+PDglt+vFzRymNxMZgxeTdmmA==
   dependencies:
     "@emotion/react" "^11.7.1"
     "@emotion/styled" "^11.6.0"
