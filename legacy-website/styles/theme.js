@@ -20,6 +20,12 @@ let theme = createTheme({
       fontSize: `4rem`,
       fontWeight: "bold",
     },
+    h6: {
+      color: "#000",
+      fontFamily: `Lora, serif`,
+      fontSize: `1rem`,
+      fontWeight: "bold",
+    }
   },
 });
 

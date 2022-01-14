@@ -15,13 +15,13 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 export const navLinks = [
   { title: 'Docs', path: 'https://legacy-xyz-docs.vercel.app/', target: '_blank' },
-  { title: 'Find websites to sign', path: '/' },
+  { title: 'Find websites to sign', path: '/discover' },
 ];
 
 const Header = () => {
   return (
     <>
-    <HideOnScroll>
+      <HideOnScroll>
         <AppBar position="fixed" color='white' elevation={0}>
           <Toolbar>
             <Container
@@ -30,8 +30,8 @@ const Header = () => {
             >
               <Stack>
                 <IconButton>
-                  <MuiNextLink activeClassName="active" sx={{textDecoration: 'none'}} href='/'>
-                  🌱
+                  <MuiNextLink activeClassName="active" sx={{ textDecoration: 'none' }} href='/'>
+                    🌱
                   </MuiNextLink>
                 </IconButton>
               </Stack>
