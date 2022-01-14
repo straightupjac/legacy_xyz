@@ -1,10 +1,13 @@
 import Cors from 'cors'
+import Redis from 'ioredis';
 
 // Initializing the cors middleware
 // Initializing the cors middleware
 const cors = Cors({
   methods: ['POST'],
 })
+
+const projCache = new Redis();
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
@@ -29,6 +32,7 @@ async function handler(req, res) {
     res.status(400).json({ msg: 'Error' });
     return;
   }
+
 
   const {
     projectId,
