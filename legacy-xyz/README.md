@@ -30,6 +30,19 @@ function App() {
 | projectId          | specify project id for the guestbook | ✅ yes  | `projectId="legacyxyz"` |
 | cardStyle | override card style| ❌ no  | `cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10}}`|
 
+# Next.js Example
+To use with Next.js, you will need to dynamically import. This extension requires components to be rendered in the browser (not server side). The Next.js workaround for this is documented [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr).
+```js
+const SignLegacy = dynamic(() =>
+  import('legacy-xyz').then((legacy) => legacy.SignLegacy),
+  { ssr: false }
+)
+
+const SignersList = dynamic(() =>
+  import('legacy-xyz').then((legacy) => legacy.SignersList),
+  { ssr: false }
+)
+```
 ## Supported wallets
 Current version only supports injected wallet providers - Coinbase Wallet and Metamask. We plan to add support for WalletConnect and more in the future depending on demand.
 
