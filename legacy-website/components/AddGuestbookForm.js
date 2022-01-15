@@ -137,7 +137,7 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
         </FormHelperText>
       </FormControl>
       <FormControl onChange={handleName}>
-        <InputLabel htmlFor="my-input">Project Name</InputLabel>
+        <InputLabel htmlFor="my-input">Name</InputLabel>
         <Input id="my-input" aria-describedby="my-helper-text" value={name} />
         {nameError && <Typography variant="caption" sx={{ color: 'red' }}>{nameError}</Typography>}
         <FormHelperText id="my-helper-text">
@@ -145,21 +145,21 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
         </FormHelperText>
       </FormControl>
       <FormControl onChange={handleTwitter}>
-        <InputLabel htmlFor="my-input">Project Twitter</InputLabel>
+        <InputLabel htmlFor="my-input">Twitter</InputLabel>
         <Input id="my-input" aria-describedby="my-helper-text" value={twitter} />
         {twitterError && <Typography variant="caption" sx={{ color: 'red' }}>{twitterError}</Typography>}
         <FormHelperText id="my-helper-text">
-          Add your twitter handle if you have one!
+          Add your Twitter handle!
         </FormHelperText>
       </FormControl>
       <FormControl onChange={handleWebsite}>
-        <InputLabel htmlFor="my-input">Project Website</InputLabel>
+        <InputLabel htmlFor="my-input">Website</InputLabel>
         <Input id="my-input" aria-describedby="my-helper-text" value={website} />
         {websiteError && <Typography variant="caption" sx={{ color: 'red' }}>{websiteError}</Typography>}
       </FormControl>
       <FormControl onChange={handleTag}>
         <Stack>
-          <InputLabel htmlFor="my-input">Project Tags</InputLabel>
+          <InputLabel htmlFor="my-input">Tags</InputLabel>
           <Input id="my-input" aria-describedby="my-helper-text" />
           <FormHelperText id="my-helper-text">
             Add comma-separated tags that relate to your project (ex. crypto, wriitng, personal website)

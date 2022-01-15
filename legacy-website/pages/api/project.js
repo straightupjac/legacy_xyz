@@ -44,7 +44,7 @@ async function handler(req, res) {
     checkIfProjectRegistered(projectId, projectWebsite, projectTwitter).then((result) => {
       const { registered, msg } = result;
       if (registered) {
-        res.status(400).json(msg);
+        res.status(400).json({ msg });
       } else {
         addProject(projectId, projectName, projectWebsite, projectTwitter, projectTags).then((data) => {
           console.log(`new project: ${projectId}, ${projectName}, ${projectWebsite}, ${projectTwitter}`)
