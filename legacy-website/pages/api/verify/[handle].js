@@ -31,7 +31,7 @@ const client = new Twitter({
 
 const handler = async (req, res) => {
   // Run the middleware
-  // await runMiddleware(req, res, cors)
+  await runMiddleware(req, res, cors)
 
   return new Promise((resolve, reject) => {
     /** validate req type **/

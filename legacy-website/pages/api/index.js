@@ -25,7 +25,6 @@ async function handler(req, res) {
   if (req.method === 'POST') {
     res.json({ message: 'ok', body: req.body })
   }
-
   // Rest of the API logic
   res.json({ message: 'ok' })
 }
