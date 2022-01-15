@@ -25,27 +25,27 @@ const SideDrawer = ({ navLinks }) => {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: 250, marginTop: `auto`, marginBottom: `auto` }}
+      sx={{ width: 250, marginTop: `auto`, marginBottom: `auto`, }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <Stack>
-      {navLinks.map(({ title, path, target }, i) => (
-        <Typography
-          variant='button'
-          key={`${title}${i}`}
-          sx={{
-            ml: 2,
-            my: 2,
-            textTransform: 'none',
-          }}
-        >
-          <MuiNextLink sx={{ color: 'black', fontSize: '20px', textDecoration: 'none'}} href={path} target={target}>
-            {title}
-          </MuiNextLink>
-        </Typography>
-      ))}
+        {navLinks.map(({ title, path, target }, i) => (
+          <Typography
+            variant='button'
+            key={`${title}${i}`}
+            sx={{
+              ml: 2,
+              my: 2,
+              textTransform: 'none',
+            }}
+          >
+            <MuiNextLink sx={{ color: 'black', fontSize: '20px', textDecoration: 'none' }} href={path} target={target}>
+              {title}
+            </MuiNextLink>
+          </Typography>
+        ))}
       </Stack>
     </Box>
   );

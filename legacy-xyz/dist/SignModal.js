@@ -20,6 +20,7 @@ const VERIFY = 3;
 const VERIFY_TWEET = 4;
 const VERIFYING = 5;
 const FINISH_SIGN = 6;
+const SIGNING = 7;
 
 const CloseButton = ({
   handleClose
@@ -213,7 +214,9 @@ const Verify = ({
   }, /*#__PURE__*/React.createElement("a", null, "Continue without verifying")));
 };
 
-const Verifying = () => {
+const LoaderModal = ({
+  title
+}) => {
   return /*#__PURE__*/React.createElement(Stack, {
     spacing: 2
   }, /*#__PURE__*/React.createElement(Typography, {
@@ -221,7 +224,7 @@ const Verifying = () => {
       fontSize: 36,
       fontWeight: 'bold'
     }
-  }, "Verifying"), /*#__PURE__*/React.createElement(CircularProgress, {
+  }, title), /*#__PURE__*/React.createElement(CircularProgress, {
     size: "large"
   }));
 };
@@ -364,7 +367,7 @@ export default function SignModal(props) {
   };
 
   const handleWithoutVerifying = () => {
-    setState(VERIFYING);
+    setState(SIGNING);
     sign(projectId, name, account, handle, signature).then(result => {
       setAlert('');
       setState(FINISH_SIGN);
@@ -423,7 +426,11 @@ export default function SignModal(props) {
     alert: alert,
     handleTwitterVerifyAndSign: handleTwitterVerifyAndSign,
     buttonStyle: buttonStyle
-  }), state === VERIFYING && /*#__PURE__*/React.createElement(Verifying, null), state === FINISH_SIGN && /*#__PURE__*/React.createElement(FinishSign, null), /*#__PURE__*/React.createElement(Typography, {
+  }), state === VERIFYING && /*#__PURE__*/React.createElement(LoaderModal, {
+    title: "Verifying"
+  }), state === SIGNING && /*#__PURE__*/React.createElement(LoaderModal, {
+    title: "Signing"
+  }), state === FINISH_SIGN && /*#__PURE__*/React.createElement(FinishSign, null), /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 12,
       textAlign: 'center',
@@ -444,6 +451,7 @@ export default function SignModal(props) {
 }
 const styles = {
   button: {
+    color: 'white',
     background: '#000000',
     textTransform: 'none',
     fontSize: 20,

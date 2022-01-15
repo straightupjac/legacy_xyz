@@ -28,7 +28,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Stack alignItems="center" spacing={4}>
+      <Stack alignItems="center" spacing={4} sx={{ px: 2 }}>
         <Typography variant="h1" sx={{ pt: 2 }}>
           curate your digital legacy.
         </Typography>

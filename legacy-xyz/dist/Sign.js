@@ -60,6 +60,7 @@ const Sign = ({
     variant: "contained",
     size: "large",
     sx: buttonStyle ? buttonStyle : {
+      color: 'white',
       maxWidth: '200px',
       background: '#000000',
       textTransform: 'none',
