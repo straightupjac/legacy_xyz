@@ -22,7 +22,8 @@ const signMessage = (account, name, twitterHandle) => {
 const Sign = ({
   projectId,
   buttonLabel,
-  buttonStyle
+  buttonStyle,
+  modalStyle
 }) => {
   const {
     activate,
@@ -75,6 +76,7 @@ const Sign = ({
     account: account,
     active: active,
     buttonStyle: buttonStyle,
+    modalStyle: modalStyle,
     isModalVisible: isModalVisible,
     handleLoginClick: handleLoginClick,
     handleClose: handleClose,

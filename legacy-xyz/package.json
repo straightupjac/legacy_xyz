@@ -1,8 +1,7 @@
 {
   "name": "legacy-xyz",
-  "version": "0.1.6",
+  "version": "0.1.9",
   "main": "dist/index.js",
-  "type": "module",
   "files": [
     "dist/"
   ],

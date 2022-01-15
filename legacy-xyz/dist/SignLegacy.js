@@ -16,7 +16,8 @@ const SignLegacy = ({
   buttonStyle,
   message,
   cardStyle,
-  showLegacy = true
+  showLegacy = true,
+  modalStyle
 }) => {
   const defaultMsg = "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.";
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Web3ReactProvider, {
@@ -35,7 +36,8 @@ const SignLegacy = ({
   }, message || defaultMsg), /*#__PURE__*/React.createElement(Sign, {
     projectId: projectId,
     buttonLabel: buttonLabel,
-    buttonStyle: buttonStyle
+    buttonStyle: buttonStyle,
+    modalStyle: modalStyle
   }), showLegacy && /*#__PURE__*/React.createElement(Typography, {
     sx: {
       fontSize: 18,

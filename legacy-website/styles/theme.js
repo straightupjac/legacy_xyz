@@ -7,10 +7,11 @@ let theme = createTheme({
       main: "#2a9954",
     },
     white: {
-      main: "#FAEDE2",
+      main: "#FFF",
     },
     background: {
       default: "#FAEDE2",
+      main: "#FAEDE2",
     },
   },
   typography: {
@@ -20,6 +21,12 @@ let theme = createTheme({
       fontSize: `4rem`,
       fontWeight: "bold",
     },
+    h6: {
+      color: "#000",
+      fontFamily: `Lora, serif`,
+      fontSize: `1rem`,
+      fontWeight: "bold",
+    }
   },
 });
 
