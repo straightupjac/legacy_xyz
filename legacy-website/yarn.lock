@@ -2905,10 +2905,10 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
-legacy-xyz@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.9.tgz#16af25c674c2645886798f483f897fc164a74933"
-  integrity sha512-fYLLLhlECbzC2FdodcSL5MgV6+kzksqvyESMAH1U4ZAWxmUfOx/plu2m+wnDXCkRVP+muvVOqnojPCsXmlL/yQ==
+legacy-xyz@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.10.tgz#ea5075ade08731fc7c28bab34e75d428d96a92b1"
+  integrity sha512-1pNN5lR7Ygc4Qbl7DpmEnuWqNnn4Y4VzJOwVhJZv8Da4hDWOJ+24SYGTIAryuncBzb5HBsnL1IZ/K90evGFhXg==
   dependencies:
     "@emotion/react" "^11.7.1"
     "@emotion/styled" "^11.6.0"
