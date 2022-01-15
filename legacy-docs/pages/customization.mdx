@@ -1,0 +1,19 @@
+# Customize Styles
+Style props are exposed for you to customize the look and feel of your guestbook.
+## Props
+#### For SignLegacy
+| Prop Name| Description | Required | Example |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| projectId          | specify project id for the guestbook | ✅ yes  | `projectId="legacyxyz"` |
+| cardStyle | override card style| ❌ no  | `cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10}}`|
+| buttonStyle | override button style | ❌ no  | `buttonStyle={{border: "4px solid rgba(255, 255, 255, 0.1)", borderRadius: "16px", height: "60px", backgroundColor: "#3f8758", textTransform: 'none', fontSize: 20, ':hover': { background: '#3f8758', opacity: 0.8 } }}`|
+| buttonLabel | override sign button label| ❌ no  | `buttonLabel={"Sign here"}`|
+| showLegacy | show learn more text | ❌ no  | `showLegacy={true}`|
+| message | override sign info text | ❌ no  | `message={"Click here to sign."}`|
+| modalStyle | override modal style (dangerously set) | ❌ no  | `modalStyle={ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 445, background: 'white', border: '0px', borderRadius: 10, boxShadow: 24, marginLeft: 'auto', marginRight: 'auto', p: 5}`|
+
+#### For SignersList
+| Prop Name| Description | Required | Example |
+|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| projectId          | specify project id for the guestbook | ✅ yes  | `projectId="legacyxyz"` |
+| cardStyle | override card style| ❌ no  | `cardStyle={{border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10}}`|

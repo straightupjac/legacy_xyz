@@ -1,12 +1,30 @@
+import Callout from 'nextra-theme-docs/callout'
+
 # How to install
+<Callout emoji="🌱">
+How to integrate a LegacyXYZ guestbook into your website
+</Callout>
+1. First, register your website/project on [legacy-xyz](https://legacy-xyz.vercel.app/install) and submit your project information.
+2. Once you've successfully registered your project, install our npm package
+  ```
+  yarn add legacy-xyz
+  ```
+  or
+  ```
+  npm install legacy-xyz
+  ```
 
-1. First, sign up on our [website](www.legacy.xyz) and enter in your project information so your project can be discoverable by other signers across the internet.
-2. Once you've signed up, install our npm package onto your front-end folder `npm install legacy-xyz`.
+  `legacy-xyz` includes with 2 components: `SignLegacy` prompts users to sign and, `SignersList` displays all the signatures of everyone who's visited your site).
 
-Now, legacy.xyz comes with 2 components: `guestLists` component (displays all the signatures of everyone who's visited your site), and an `addGuestListButton` that prompts users to sign.
+3. To import the components:
+  ```js
+  import {SignLegacy, SignersList} from 'legacy-xyz';
 
-3. To import the components
-
-```js
-import {GuestListComponent, addGuestListButton} from @addGuestListButton;
-```
+  export function default YourApp() {
+    return (
+      <SignLegacy projectId="legacyxyz" />
+      <SignersList projectId="legacyxyz" />
+    )
+  }
+  ```
+In V2, we plan to integrate a social graph so that your project can be discoverable by other signers across the internet.

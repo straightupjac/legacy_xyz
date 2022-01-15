@@ -1,6 +1,8 @@
 # legacy-xyz 🌱
 Leave your digital legacy. An guestbook plug-in to allow your digital guests to leave their legacy by signing a message with their web3 wallet. Curate your digital legacy with legacy-xyz.
 
+Full docs are [here](http://docs.web3legacy.xyz/)
+
 ## Usage
 ```js
 import { SignLegacy, SignersList } from 'legacy-xyz';
@@ -49,3 +51,4 @@ Current version only supports injected wallet providers - Coinbase Wallet and Me
 
 ## Contribute
 Our code is all opensource at [legacy_xyz](https://github.com/straightupjac/legacy_xyz). Please file a ticket or open a pull request!
+We maintain your projects and signatures on chain. This costs Arweave. We would be eternally grateful if you send us Arweave to this address `AaaKkDKK4yEllFoZtzv_oFjtlw7LjCZzhpZRWThIJqA` to keep this project going.
