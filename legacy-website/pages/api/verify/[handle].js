@@ -39,22 +39,23 @@ const handler = async (req, res) => {
   return new Promise((resolve, reject) => {
     /** validate req type **/
     if (req.method !== 'POST') {
-      res.status(400).json({ msg: 'Error' });
+      res.status(400).send({ msg: 'Only POST requests allowed' });
       return;
     }
 
     const { query: { handle } } = req;
-    const {
-      signature,
-    } = req.body;
+
+    const body = JSON.parse(req.body)
+
+    const { signature } = body;
 
     if (!handle) {
-      res.status(400).json(JSON.stringify({ msg: 'Handle is required' }));
+      res.status(400).send({ msg: 'Handle is required' });
       return;
     }
 
     if (!signature) {
-      res.status(400).json(JSON.stringify({ msg: 'Signature is required in the body' }));
+      res.status(400).send({ msg: 'Signature is required in the body' });
       return;
     }
 
@@ -79,25 +80,25 @@ const handler = async (req, res) => {
                   // already linked
                   console.log(`already verified user: @${handle}`)
                   // sigCache.set(handle, result)
-                  res.json(JSON.stringify({ tx: result }))
+                  res.send({ tx: result })
                 } else {
                   // need to link
                   storeVerificationAr(handle, signature)
                     .then((tx) => {
                       console.log(`new verified user: @${handle}, ${signature}`)
                       // sigCache.set(handle, tx)
-                      res.status(201).json(JSON.stringify(tx))
+                      res.status(201).send(tx)
                     })
                     .catch(e => {
                       console.log(`err @ /verify/:handle : ${e}`)
-                      res.status(500).json(JSON.stringify(e))
+                      res.status(500).send(e)
                     });
                 }
               });
             return
           }
         }
-        res.status(500).json({ msg: 'No matching Tweets found' })
+        res.status(400).send({ msg: 'No matching Tweets found' })
       } else {
         console.log('verifying error', error);
         res.status(500).json({ msg: 'Twitter Client Internal Error' })
