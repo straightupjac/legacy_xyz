@@ -50,6 +50,7 @@ const SIG_TWITTER_HANDLE = "legacy_xyz_twitter_handle"
 const SIG_ADDR = "legacy_xyz_address"
 const SIG_ISVERIFIED = "legacy_xyz_is_verified"
 const SIG_SIG = "legacy_xyz_signature"
+const SIG_MSG = "legacy_xyz_message"
 
 const VERIFICATION_HANDLE = "legacy_xyz_verif_handle"
 const VERIFICATION_ADDRESS = "legacy_xyz_verif_address"
@@ -119,7 +120,7 @@ async function storeVerificationAr(handle, address) {
   }
 }
 
-async function signGuestbook(projectId, address, name, handle, date, signature, isVerified) {
+async function signGuestbook(projectId, address, name, handle, date, signature, isVerified, message) {
   console.log('signing guestbook', projectId, address, name, handle, date, signature, isVerified)
   let transaction = await arweave.createTransaction({ data: address }, key)
   transaction.addTag(DOC_TYPE, 'signature')
@@ -130,6 +131,7 @@ async function signGuestbook(projectId, address, name, handle, date, signature, 
   transaction.addTag(SIG_DATE, date)
   transaction.addTag(SIG_SIG, signature)
   transaction.addTag(SIG_ISVERIFIED, isVerified)
+  transaction.addTag(SIG_MSG, message)
   await arweave.transactions.sign(transaction, key)
   return await arweave.transactions.post(transaction)
 }

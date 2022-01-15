@@ -91,7 +91,6 @@ const ListItem = ({ id, name, date, address, twitter, message, verified }) => {
             setResolveVerified(res);
         })
     }, [])
-    // console.log('item', name, verified, resolveVerified)
     return (
         <Stack>
             <Stack

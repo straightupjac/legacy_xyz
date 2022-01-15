@@ -24,7 +24,6 @@ const SignersList = ({
   }, [projectId]);
   useEffect(() => {
     setProcessedSigners(dedupe(signers));
-    console.log(processedSigners);
   }, [signers]);
 
   function abridgeAddress(hex, length = 4) {
@@ -91,11 +90,9 @@ const ListItem = ({
   const [resolveVerified, setResolveVerified] = useState(false);
   useEffect(() => {
     Promise.resolve(verified).then(res => {
-      console.log('resolve', name, res);
       setResolveVerified(res);
     });
-  }, []); // console.log('item', name, verified, resolveVerified)
-
+  }, []);
   return /*#__PURE__*/React.createElement(Stack, null, /*#__PURE__*/React.createElement(Stack, {
     direction: {
       xs: 'column',
