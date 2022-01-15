@@ -24,7 +24,7 @@ function runMiddleware(req, res, fn) {
   })
 }
 
-const TWEET_TEMPLATE = "I am verifying for @legacy_xyz. signature:"
+const TWEET_TEMPLATE = "I'm building my digital legacy today. Verifying for @legacy_xyz signature:"
 
 const client = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -48,6 +48,16 @@ const handler = async (req, res) => {
       signature,
     } = req.body;
 
+    if (!handle) {
+      res.status(400).json(JSON.stringify({ msg: 'Handle is required' }));
+      return;
+    }
+
+    if (!signature) {
+      res.status(400).json(JSON.stringify({ msg: 'Signature is required in the body' }));
+      return;
+    }
+
     console.log('verifying', handle, signature);
 
     client.get('statuses/user_timeline', {
@@ -69,28 +79,28 @@ const handler = async (req, res) => {
                   // already linked
                   console.log(`already verified user: @${handle}`)
                   // sigCache.set(handle, result)
-                  res.json({ tx: result })
+                  res.json(JSON.stringify({ tx: result }))
                 } else {
                   // need to link
                   storeVerificationAr(handle, signature)
                     .then((tx) => {
                       console.log(`new verified user: @${handle}, ${signature}`)
                       // sigCache.set(handle, tx)
-                      res.status(201).json(tx)
+                      res.status(201).json(JSON.stringify(tx))
                     })
                     .catch(e => {
                       console.log(`err @ /verify/:handle : ${e}`)
-                      res.status(500).send(JSON.stringify(e))
+                      res.status(500).json(JSON.stringify(e))
                     });
                 }
               });
             return
           }
         }
-        res.status(500).json({ message: 'No matching Tweets found' })
+        res.status(500).json({ msg: 'No matching Tweets found' })
       } else {
         console.log('verifying error', error);
-        res.status(500).send({ message: 'Twitter Client Internal Error' })
+        res.status(500).json({ msg: 'Twitter Client Internal Error' })
       }
     })
   })
