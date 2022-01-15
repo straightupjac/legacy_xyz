@@ -39,6 +39,7 @@ const SignLegacy = ({
     buttonStyle: buttonStyle,
     modalStyle: modalStyle
   }), showLegacy && /*#__PURE__*/React.createElement(Typography, {
+    variant: "body1",
     sx: {
       fontSize: 18,
       textAlign: 'center',
