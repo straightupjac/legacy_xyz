@@ -18,6 +18,21 @@ or
 ```
 yarn add legacy-xyz
 ```
+
+## Projects using legacy-xyz
+[Discover Projects](https://www.web3legacy.xyz/discover)
+
+Add your project to the list by making a pull request.
+1. Add your project to [legacy-website/pages/discover.js](legacy-website/pages/discover.js)
+    ```js
+    <DiscoverProject
+      name="YOUR PROJECT NAME"
+      link="YOUR PROJECT URL"
+      twitter="YOUR PROJECT TWITTER (optional)"
+      description="(optional)"
+    />
+    ```
+2. Submit a pull request
 ## Contribute
 Our code is all opensource at [legacy_xyz](https://github.com/straightupjac/legacy_xyz). Please file a ticket or open a pull request!
 We maintain your projects and signatures on chain. This costs Arweave. We would be eternally grateful if you send Arweave to this address `AaaKkDKK4yEllFoZtzv_oFjtlw7LjCZzhpZRWThIJqA` to keep this project going.

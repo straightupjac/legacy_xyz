@@ -118,74 +118,76 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
   };
 
   return (
-    <Stack alignItems="left" pl={20} pr={20} pt={10} spacing={4}>
-      <Typography align="center" variant="h2" sx={{ pt: 2 }}>
-        Add a guestbook to your website
-      </Typography>
-      <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
-        Fill the form below to allow users to discover and sign your website as
-        part of their digital legacy
-      </Typography>
-      <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
-        Do you already have a project registered? Install our <MuiNextLink href="https://www.npmjs.com/package/legacy-xyz" target="_blank">npm package</MuiNextLink> to add it to your site!
-      </Typography>
-      <FormControl onChange={handleProjectId}>
-        <InputLabel htmlFor="my-input">Project ID</InputLabel>
-        <Input id="my-input" aria-describedby="my-helper-text" value={projectId} />
-        {projectIdError && <Typography variant="caption" sx={{ color: 'red' }}>{projectIdError}</Typography>}
-        <FormHelperText id="my-helper-text">
-          Create a unique project ID (could be your wallet address)
-        </FormHelperText>
-      </FormControl>
-      <FormControl onChange={handleName}>
-        <InputLabel htmlFor="my-input">Name</InputLabel>
-        <Input id="my-input" aria-describedby="my-helper-text" value={name} />
-        {nameError && <Typography variant="caption" sx={{ color: 'red' }}>{nameError}</Typography>}
-        <FormHelperText id="my-helper-text">
-          What do you want your {`guestbook's`} display name to be?
-        </FormHelperText>
-      </FormControl>
-      <FormControl onChange={handleTwitter}>
-        <InputLabel htmlFor="my-input">Twitter</InputLabel>
-        <Input id="my-input" aria-describedby="my-helper-text" value={twitter} />
-        {twitterError && <Typography variant="caption" sx={{ color: 'red' }}>{twitterError}</Typography>}
-        <FormHelperText id="my-helper-text">
-          Add your Twitter handle!
-        </FormHelperText>
-      </FormControl>
-      <FormControl onChange={handleWebsite}>
-        <InputLabel htmlFor="my-input">Website</InputLabel>
-        <Input id="my-input" aria-describedby="my-helper-text" value={website} />
-        {websiteError && <Typography variant="caption" sx={{ color: 'red' }}>{websiteError}</Typography>}
-      </FormControl>
-      <FormControl onChange={handleTag}>
-        <Stack>
-          <InputLabel htmlFor="my-input">Tags</InputLabel>
-          <Input id="my-input" aria-describedby="my-helper-text" />
+    <Stack alignItems="center" width="100%" >
+      <Stack alignItems="left" px={2} spacing={4} maxWidth="1000px">
+        <Typography align="center" variant="h2" sx={{ pt: 2 }}>
+          Add a guestbook to your website
+        </Typography>
+        <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
+          Fill the form below to allow users to discover and sign your website as
+          part of their digital legacy
+        </Typography>
+        <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
+          Do you already have a project registered? Install our <MuiNextLink href="https://www.npmjs.com/package/legacy-xyz" target="_blank">npm package</MuiNextLink> to add it to your site!
+        </Typography>
+        <FormControl onChange={handleProjectId}>
+          <InputLabel htmlFor="my-input">Project ID</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={projectId} />
+          {projectIdError && <Typography variant="caption" sx={{ color: 'red' }}>{projectIdError}</Typography>}
           <FormHelperText id="my-helper-text">
-            Add comma-separated tags that relate to your project (ex. crypto, wriitng, personal website)
+            Create a unique project ID (could be your wallet address)
           </FormHelperText>
+        </FormControl>
+        <FormControl onChange={handleName}>
+          <InputLabel htmlFor="my-input">Name</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={name} />
+          {nameError && <Typography variant="caption" sx={{ color: 'red' }}>{nameError}</Typography>}
+          <FormHelperText id="my-helper-text">
+            What do you want your {`guestbook's`} display name to be?
+          </FormHelperText>
+        </FormControl>
+        <FormControl onChange={handleTwitter}>
+          <InputLabel htmlFor="my-input">Twitter</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={twitter} />
+          {twitterError && <Typography variant="caption" sx={{ color: 'red' }}>{twitterError}</Typography>}
+          <FormHelperText id="my-helper-text">
+            Add your Twitter handle!
+          </FormHelperText>
+        </FormControl>
+        <FormControl onChange={handleWebsite}>
+          <InputLabel htmlFor="my-input">Website</InputLabel>
+          <Input id="my-input" aria-describedby="my-helper-text" value={website} />
+          {websiteError && <Typography variant="caption" sx={{ color: 'red' }}>{websiteError}</Typography>}
+        </FormControl>
+        <FormControl onChange={handleTag}>
+          <Stack>
+            <InputLabel htmlFor="my-input">Tags</InputLabel>
+            <Input id="my-input" aria-describedby="my-helper-text" />
+            <FormHelperText id="my-helper-text">
+              Add comma-separated tags that relate to your project (ex. crypto, wriitng, personal website)
+            </FormHelperText>
+          </Stack>
+        </FormControl>
+        {submitError && <Typography variant="caption" sx={{ color: 'red' }}>{submitError}</Typography>}
+        <Stack alignItems="center">
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            size="large"
+            disabled={submitting}
+            sx={{
+              border: "4px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: "16px",
+              width: "150px",
+              height: "60px",
+              backgroundColor: "#3f8758",
+            }}
+          >
+            Submit
+          </Button>
         </Stack>
-      </FormControl>
-      {submitError && <Typography variant="caption" sx={{ color: 'red' }}>{submitError}</Typography>}
-      <Stack alignItems="center">
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          size="large"
-          disabled={submitting}
-          sx={{
-            border: "4px solid rgba(255, 255, 255, 0.1)",
-            borderRadius: "16px",
-            width: "150px",
-            height: "60px",
-            backgroundColor: "#3f8758",
-          }}
-        >
-          Submit
-        </Button>
       </Stack>
-    </Stack>
+    </Stack >
   );
 };
 export default AddGuestListForm;
