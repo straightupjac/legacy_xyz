@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import MuiNextLink from '@components/core-components/MuiNextLink';
 
 import {
   Button,
@@ -82,12 +83,12 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
 
   const handleSubmit = async () => {
     if (!projectId || !name) {
-      setSubmitError('Project id and name are required');
+      setSubmitError('Project id, name and Twitter are required');
       return;
     }
     setSubmitting(true);
     try {
-      await fetch('https://legacy-xyz.vercel.app/api/project', {
+      const res = await fetch('https://legacy-xyz.vercel.app/api/project', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,8 +104,12 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
           }
         )
       })
-      setSubmitError('');
-      setState(1);
+      if (res.status === 200) {
+        setSubmitError('')
+        setState(1);
+      } else {
+        setSubmitError('We had trouble adding your project.', res);
+      }
     } catch (err) {
       setSubmitError('We had trouble adding your project. Please try again.', err);
     }
@@ -119,6 +124,9 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
       <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
         Fill the form below to allow users to discover and sign your website as
         part of their digital legacy
+      </Typography>
+      <Typography align="center" variant="body1" sx={{ color: '#4F4F4F' }}>
+        Do you already have a project registered? Install our <MuiNextLink href="https://www.npmjs.com/package/legacy-xyz" target="_blank">npm package</MuiNextLink> to add it to your site!
       </Typography>
       <FormControl onChange={handleProjectId}>
         <InputLabel htmlFor="my-input">Project ID</InputLabel>
