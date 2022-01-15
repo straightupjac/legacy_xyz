@@ -41,6 +41,7 @@ const handler = async (req, res) => {
     }
 
     const { query: { handle } } = req;
+    console.log(req.body);
 
     const body = JSON.parse(req.body)
 
