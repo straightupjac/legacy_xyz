@@ -16,7 +16,7 @@ export default function Install() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {state === 0 && <AddGuestListForm setState={setState} projectId={projectId} setProjectId={setProjectId} />}
-      {state === 1 && <GuestBookSuccess setState={setState} />}
+      {state === 1 && <GuestBookSuccess setState={setState} projectId={projectId} />}
     </div>
   );
 }
