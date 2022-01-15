@@ -1,9 +1,11 @@
 # 🌱 legacy-xyz
 Leave your digital legacy. An guestbook plug-in to allow your digital guests to leave their legacy by signing a message with their web3 wallet. Curate your digital legacy with legacy-xyz.
 
+<b> Full docs are [here](http://docs.web3legacy.xyz/).</b>
+
 Join the movement: [web3legacy.xyz](http://web3legacy.xyz/)
 
-Full docs are [here](http://docs.web3legacy.xyz/).
+
 
 
 | Package                                               | Version                                                                                                                                     | Size                                                                                                                                                           | Description                                 |
@@ -24,7 +26,7 @@ yarn add legacy-xyz
 
 Add your project to the list by making a pull request.
 1. Add your project to [legacy-website/pages/discover.js](legacy-website/pages/discover.js)
-    ```js
+    ```js{:copy}
     <DiscoverProject
       name="YOUR PROJECT NAME"
       link="YOUR PROJECT URL"
