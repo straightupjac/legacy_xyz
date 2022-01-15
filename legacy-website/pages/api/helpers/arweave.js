@@ -9,7 +9,28 @@ const arweave = Arweave.init({
 })
 
 const CONTROLLER_ADDR = process.env.ARWEAVE_ADDRESS;
-const KEY = JSON.parse(process.env.ARWEAVE_KEY);
+const ARWEAVE_KTY = process.env.ARWEAVE_KTY;
+const ARWEAVE_N = process.env.ARWEAVE_N;
+const ARWEAVE_E = process.env.ARWEAVE_E;
+const ARWEAVE_D = process.env.ARWEAVE_D;
+const ARWEAVE_P = process.env.ARWEAVE_P;
+const ARWEAVE_Q = process.env.ARWEAVE_Q;
+const ARWEAVE_DP = process.env.ARWEAVE_DP;
+const ARWEAVE_DQ = process.env.ARWEAVE_DQ;
+const ARWEAVE_QI = process.env.ARWEAVE_QI;
+
+const key = {
+  kty: ARWEAVE_KTY,
+  n: ARWEAVE_N,
+  e: ARWEAVE_E,
+  d: ARWEAVE_D,
+  p: ARWEAVE_P,
+  q: ARWEAVE_Q,
+  dp: ARWEAVE_DP,
+  dq: ARWEAVE_DQ,
+  qi: ARWEAVE_QI,
+}
+
 const DOC_TYPE = "legacy_xyz_doc_type"
 /* document types are
 - project
@@ -87,11 +108,11 @@ async function checkIfVerifiedAr(handle, address) {
 async function storeVerificationAr(handle, address) {
   let transaction = await arweave.createTransaction({
     data: handle
-  }, KEY)
+  }, key)
   transaction.addTag(DOC_TYPE, 'verification')
   transaction.addTag(VERIFICATION_HANDLE, handle)
   transaction.addTag(VERIFICATION_ADDRESS, address)
-  await arweave.transactions.sign(transaction, KEY)
+  await arweave.transactions.sign(transaction, key)
   return {
     ...await arweave.transactions.post(transaction),
     id: transaction.id,
@@ -100,7 +121,7 @@ async function storeVerificationAr(handle, address) {
 
 async function signGuestbook(projectId, address, name, handle, date, signature, isVerified) {
   console.log('signing guestbook', projectId, address, name, handle, date, signature, isVerified)
-  let transaction = await arweave.createTransaction({ data: address }, KEY)
+  let transaction = await arweave.createTransaction({ data: address }, key)
   transaction.addTag(DOC_TYPE, 'signature')
   transaction.addTag(PROJECT_ID, projectId)
   transaction.addTag(SIG_NAME, name)
@@ -109,12 +130,12 @@ async function signGuestbook(projectId, address, name, handle, date, signature, 
   transaction.addTag(SIG_DATE, date)
   transaction.addTag(SIG_SIG, signature)
   transaction.addTag(SIG_ISVERIFIED, isVerified)
-  await arweave.transactions.sign(transaction, KEY)
+  await arweave.transactions.sign(transaction, key)
   return await arweave.transactions.post(transaction)
 }
 
 async function addProject(projectId, projectName, projectTwitter, projectWebsite, projectTags) {
-  let transaction = await arweave.createTransaction({ data: projectName }, KEY)
+  let transaction = await arweave.createTransaction({ data: projectName }, key)
   transaction.addTag(DOC_TYPE, 'project')
   transaction.addTag(PROJECT_ID, projectId)
   transaction.addTag(PROJECT_NAME, projectName)
@@ -123,7 +144,7 @@ async function addProject(projectId, projectName, projectTwitter, projectWebsite
   transaction.addTag(PROJECT_WEBSITE, projectWebsite)
   transaction.addTag(PROJECT_TAGS, projectTags)
 
-  await arweave.transactions.sign(transaction, KEY)
+  await arweave.transactions.sign(transaction, key)
   return await arweave.transactions.post(transaction)
 }
 

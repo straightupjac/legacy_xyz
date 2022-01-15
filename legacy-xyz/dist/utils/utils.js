@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-const SERVER_URL = process.env.SERVER_URL || "http://localhost:8080";
+const SERVER_URL = "https://legacy-xyz.vercel.app/api";
 
 export async function generateSignature(message) {
   if (!window.ethereum) {
