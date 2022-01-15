@@ -41,8 +41,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var SignersList = function SignersList(_ref) {
   var projectId = _ref.projectId,
-      cardStyle = _ref.cardStyle,
-      maxHeight = _ref.maxHeight;
+      _ref$cardStyle = _ref.cardStyle,
+      cardStyle = _ref$cardStyle === void 0 ? undefined : _ref$cardStyle,
+      _ref$maxHeight = _ref.maxHeight,
+      maxHeight = _ref$maxHeight === void 0 ? undefined : _ref$maxHeight;
 
   var _useWeb3React = (0, _core.useWeb3React)(),
       library = _useWeb3React.library;

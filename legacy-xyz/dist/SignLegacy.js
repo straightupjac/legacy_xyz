@@ -25,13 +25,18 @@ function getLibrary(provider) {
 
 var SignLegacy = function SignLegacy(_ref) {
   var projectId = _ref.projectId,
-      buttonLabel = _ref.buttonLabel,
-      buttonStyle = _ref.buttonStyle,
-      message = _ref.message,
-      cardStyle = _ref.cardStyle,
+      _ref$buttonLabel = _ref.buttonLabel,
+      buttonLabel = _ref$buttonLabel === void 0 ? undefined : _ref$buttonLabel,
+      _ref$buttonStyle = _ref.buttonStyle,
+      buttonStyle = _ref$buttonStyle === void 0 ? undefined : _ref$buttonStyle,
+      _ref$message = _ref.message,
+      message = _ref$message === void 0 ? undefined : _ref$message,
+      _ref$cardStyle = _ref.cardStyle,
+      cardStyle = _ref$cardStyle === void 0 ? undefined : _ref$cardStyle,
       _ref$showLegacy = _ref.showLegacy,
       showLegacy = _ref$showLegacy === void 0 ? true : _ref$showLegacy,
-      modalStyle = _ref.modalStyle;
+      _ref$modalStyle = _ref.modalStyle,
+      modalStyle = _ref$modalStyle === void 0 ? undefined : _ref$modalStyle;
   var defaultMsg = "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.";
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_core.Web3ReactProvider, {
     getLibrary: getLibrary
