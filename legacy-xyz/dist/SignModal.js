@@ -437,7 +437,7 @@ export default function SignModal(props) {
       mt: 3
     }
   }, "\uD83C\uDF31 Check out ", /*#__PURE__*/React.createElement("a", {
-    href: "https://legacy-xyz.vercel.app/",
+    href: "http://web3legacy.xyz/",
     target: "_blank",
     style: {
       textDecoration: 'none'

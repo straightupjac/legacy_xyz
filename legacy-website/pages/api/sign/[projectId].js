@@ -38,6 +38,7 @@ async function handler(req, res) {
     handle,
     date,
     signature,
+    message,
   } = req.body
 
   console.log('sign', projectId, name,
@@ -47,7 +48,7 @@ async function handler(req, res) {
     signature);
 
   checkIfProjectRegistered(projectId).then((result) => {
-    const { registered, msg } = result;
+    const { registered } = result;
     if (!registered) {
       res.status(400).json(`This project (${projectId}) is not registered`);
       return;
@@ -64,7 +65,7 @@ async function handler(req, res) {
     const promise =
       checkIfVerifiedAr(handle, signature).then(result => {
         const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
-        return signGuestbook(projectId, address, name, handle, date, signature, verified)
+        return signGuestbook(projectId, address, name, handle, date, signature, verified, message)
       })
 
     promise
@@ -80,7 +81,7 @@ async function handler(req, res) {
       });
   } else {
     // only wallet signature without twitter
-    signGuestbook(projectId, address, name, '', date, signature, false)
+    signGuestbook(projectId, address, name, '', date, signature, false, message)
       .then((data) => res.json(data))
       .catch(e => {
         console.log(`err @ /sign/:project : ${e}`)

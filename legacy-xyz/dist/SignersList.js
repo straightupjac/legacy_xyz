@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chip, Stack, Divider, Box, Typography } from "@mui/material";
 import { getSigners, dedupe } from "./utils/utils";
 import { useWeb3React } from '@web3-react/core';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 const SignersList = ({
   projectId,
@@ -68,7 +69,9 @@ const SignersList = ({
       name: signer.SIG_NAME,
       date: parseInt(signer.SIG_DATE, 10),
       address: getENSName(signer.SIG_ADDR),
-      twitter: signer.SIG_TWITTER_HANDLE
+      twitter: signer.SIG_TWITTER_HANDLE,
+      message: signer.SIG_MESSAGE,
+      verified: signer.SIG_ISVERIFIED
     });
   }))));
 };
@@ -80,9 +83,17 @@ const ListItem = ({
   name,
   date,
   address,
-  twitter
+  twitter,
+  message,
+  verified
 }) => {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Stack, {
+  const [resolveVerified, setResolveVerified] = useState(false);
+  useEffect(() => {
+    Promise.resolve(verified).then(res => {
+      setResolveVerified(res);
+    });
+  }, []);
+  return /*#__PURE__*/React.createElement(Stack, null, /*#__PURE__*/React.createElement(Stack, {
     direction: {
       xs: 'column',
       sm: 'column',
@@ -135,6 +146,7 @@ const ListItem = ({
       margin: 0
     }
   }, /*#__PURE__*/React.createElement(Chip, {
+    icon: resolveVerified ? /*#__PURE__*/React.createElement(VerifiedIcon, null) : /*#__PURE__*/React.createElement(React.Fragment, null),
     label: /*#__PURE__*/React.createElement(Typography, {
       variant: "body2",
       sx: {
@@ -148,5 +160,11 @@ const ListItem = ({
       fontFamily: `Courier`,
       color: 'gray'
     }
-  }, address))), /*#__PURE__*/React.createElement(Divider, null));
+  }, address))), message && /*#__PURE__*/React.createElement(Typography, {
+    variant: "body2",
+    sx: {
+      textAlign: 'start',
+      fontFamily: `"Bradley Hand", "Lucida Console", "Tahoma"`
+    }
+  }, message), /*#__PURE__*/React.createElement(Divider, null));
 };

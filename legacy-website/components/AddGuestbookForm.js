@@ -20,6 +20,8 @@ function validURL(str) {
   }
 }
 
+const baseURI = "https://legacy-xyz.vercel.app"
+
 const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
   const [projectIdError, setProjectIdError] = useState('');
   const [name, setName] = useState('');
@@ -88,7 +90,7 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
     }
     setSubmitting(true);
     try {
-      const res = await fetch('https://legacy-xyz.vercel.app/api/project', {
+      const res = await fetch(`${baseURI}/api/project`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

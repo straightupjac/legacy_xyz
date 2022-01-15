@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chip, Stack, Divider, Box, Typography } from "@mui/material";
 import { getSigners, dedupe } from "./utils/utils";
 import { useWeb3React } from '@web3-react/core';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 const SignersList = ({ projectId, cardStyle, maxHeight }) => {
     const { library } = useWeb3React();
@@ -69,6 +70,8 @@ const SignersList = ({ projectId, cardStyle, maxHeight }) => {
                                 date={parseInt(signer.SIG_DATE, 10)}
                                 address={getENSName(signer.SIG_ADDR)}
                                 twitter={signer.SIG_TWITTER_HANDLE}
+                                message={signer.SIG_MESSAGE}
+                                verified={signer.SIG_ISVERIFIED}
                             />
                         )
                     })}
@@ -81,9 +84,15 @@ const SignersList = ({ projectId, cardStyle, maxHeight }) => {
 export default SignersList;
 
 
-const ListItem = ({ id, name, date, address, twitter }) => {
+const ListItem = ({ id, name, date, address, twitter, message, verified }) => {
+    const [resolveVerified, setResolveVerified] = useState(false);
+    useEffect(() => {
+        Promise.resolve(verified).then((res) => {
+            setResolveVerified(res);
+        })
+    }, [])
     return (
-        <>
+        <Stack>
             <Stack
                 direction={{ xs: 'column', sm: 'column', md: 'row' }}
                 justifyContent={"space-between"}
@@ -110,14 +119,22 @@ const ListItem = ({ id, name, date, address, twitter }) => {
                             target="_blank" rel="noreferrer"
                             style={{ textDecoration: 'none', margin: 0 }}
                         >
-                            <Chip label={
-                                <Typography variant='body2' sx={{ fontFamily: `Tahoma, sans`, color: '#4F4F4F' }}>@{twitter}</Typography>} />
+                            <Chip icon={resolveVerified ? <VerifiedIcon /> : <></>}
+                                label={
+                                    <Typography variant='body2' sx={{ fontFamily: `Tahoma, sans`, color: '#4F4F4F' }}>
+                                        @{twitter}
+                                    </Typography>} />
                         </a>}
                     <Typography variant='body2' sx={{ fontFamily: `Courier`, color: 'gray' }}>{address}</Typography>
                 </Stack>
-            </Stack>
-            <Divider />
-        </>
 
+            </Stack>
+            {
+                message && <Typography variant="body2" sx={{ textAlign: 'start', fontFamily: `"Bradley Hand", "Lucida Console", "Tahoma"` }}>
+                    {message}
+                </Typography>
+            }
+            <Divider />
+        </Stack >
     )
 }
