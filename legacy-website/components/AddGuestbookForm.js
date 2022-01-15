@@ -82,7 +82,7 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
   }
 
   const handleSubmit = async () => {
-    if (!projectId || !name) {
+    if (!projectId || !name || !twitter) {
       setSubmitError('Project id, name and Twitter are required');
       return;
     }
@@ -108,7 +108,8 @@ const AddGuestListForm = ({ projectId, setProjectId, setState }) => {
         setSubmitError('')
         setState(1);
       } else {
-        setSubmitError('We had trouble adding your project.', res);
+        const data = await res.json()
+        setSubmitError(`We had trouble adding your project. Error: ${data.msg}`);
       }
     } catch (err) {
       setSubmitError('We had trouble adding your project. Please try again.', err);
