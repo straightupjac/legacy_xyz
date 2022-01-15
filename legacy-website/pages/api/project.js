@@ -48,7 +48,7 @@ async function handler(req, res) {
       } else {
         addProject(projectId, projectName, projectWebsite, projectTwitter, projectTags).then((data) => {
           console.log(`new project: ${projectId}, ${projectName}, ${projectWebsite}, ${projectTwitter}`)
-          res.json(data);
+          res.status(200).json(data);
         }).catch((err) => {
           console.log(`err @ /project addProject: ${err}`)
           res.status(500)
