@@ -3625,10 +3625,10 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
-legacy-xyz@^0.1.20:
-  version "0.1.20"
-  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.20.tgz#a5fcf9fc8b1bd761c3d129e8651fa70f1b153de6"
-  integrity sha512-n1zJ0faR2f7GsrXnKyxgBM+80F27SP4GfWK2mekGwC2v0dMVEVNCDz3SFbBdMSqOFpVP15Rks33k1bNpAMwaYQ==
+legacy-xyz@^0.1.21:
+  version "0.1.21"
+  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.21.tgz#a3fdcf80c62b2806138b97a44506e83657705c77"
+  integrity sha512-XCqrC+hKFWTMj8rxP9c22SZt4tPXWrBGBT+xfLCK02RVAxkihdo4Rc3jgEkrqnc9e1Z4kviF0D70h9cnPu7FUw==
   dependencies:
     "@babel/preset-env" "^7.16.8"
     "@emotion/react" "^11.7.1"

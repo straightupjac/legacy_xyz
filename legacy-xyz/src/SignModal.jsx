@@ -32,7 +32,7 @@ const CloseButton = ({ handleClose }) => {
   )
 }
 
-const StartSign = ({ name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle, }) => {
+const StartSign = ({ name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle }) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
@@ -183,7 +183,7 @@ const VerifyTweet = ({ alert, handleTwitterVerifyAndSign, buttonStyle }) => {
   )
 }
 
-const FinishSign = ({ }) => {
+const FinishSign = ({ buttonStyle }) => {
   const shareTweet = () => {
     const str = `I just built my digital legacy with @legacy_xyz. Build yours at web3legacy.xyz`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
@@ -331,7 +331,7 @@ export default function SignModal(props) {
             {state === VERIFY_TWEET && <VerifyTweet alert={alert} handleTwitterVerifyAndSign={handleTwitterVerifyAndSign} buttonStyle={buttonStyle} />}
             {state === VERIFYING && <LoaderModal title="Verifying" />}
             {state === SIGNING && <LoaderModal title="Signing" />}
-            {state === FINISH_SIGN && <FinishSign />}
+            {state === FINISH_SIGN && <FinishSign buttonStyle={buttonStyle} />}
             <Typography sx={{ fontSize: 12, textAlign: 'center', mt: 3 }}>
               🌱 Check out <a href="http://web3legacy.xyz/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer"><span style={{ color: '#257C5E' }}>legacy</span></a> to learn more
             </Typography>
