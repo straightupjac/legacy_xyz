@@ -41,11 +41,7 @@ const handler = async (req, res) => {
     }
 
     const { query: { handle } } = req;
-    console.log(req.body);
-
-    const body = JSON.parse(req.body)
-
-    const { signature } = body;
+    const { signature } = req.body;
 
     if (!handle) {
       res.status(400).json({ msg: 'Handle is required' });
