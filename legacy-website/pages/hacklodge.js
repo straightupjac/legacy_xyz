@@ -49,7 +49,6 @@ export default function Install() {
               ':hover': { background: '#3f8758', opacity: 0.8 }
             }
           }
-          showLegacy={false}
         />
         <SignersList projectId={'hacklodge'}
         />
