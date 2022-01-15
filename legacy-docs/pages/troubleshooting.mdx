@@ -17,3 +17,23 @@ const SignersList = dynamic(() =>
   { ssr: false }
 )
 ```
+
+## ESBuild/create-react-app integration
+To use with basic ESBuild or create-react-app pages, you should be able to import the components directly into your page like so:
+```js
+import * as React from 'react'
+import ReactDOM from 'react-dom'
+import { SignLegacy, SignersList } from 'legacy-xyz'
+
+function App() {
+
+  return (<div><h1>hello world</h1>
+    <SignLegacy projectId='legacyxyz' />
+    <br />
+    <SignersList projectId='legacyxyz' />
+  </div>)
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"))
+```
+Take a look at the demos in [esbuild-demo](https://github.com/straightupjac/legacy_xyz/tree/main/esbuild-demo) and [react-demo](https://github.com/straightupjac/legacy_xyz/tree/main/react-demo) for reference.

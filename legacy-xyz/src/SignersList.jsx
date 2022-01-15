@@ -4,7 +4,7 @@ import { getSigners, dedupe } from "./utils/utils";
 import { useWeb3React } from '@web3-react/core';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
-const SignersList = ({ projectId, cardStyle, maxHeight }) => {
+const SignersList = ({ projectId, cardStyle = undefined, maxHeight = undefined }) => {
     const { library } = useWeb3React();
     const [signers, setSigners] = useState([]);
     const [processedSigners, setProcessedSigners] = useState([]);

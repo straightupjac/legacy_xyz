@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, CircularProgress, IconButton, TextField, Typography } from '@mui/material';
-import { verify, sign } from "./utils/utils";
+import { verify, sign, checkIfVerifiedHandle } from "./utils/utils";
 import metamask from "./utils/metamask.svg";
 import coinbase from "./utils/coinbase.png"
 
@@ -32,7 +32,7 @@ const CloseButton = ({ handleClose }) => {
   )
 }
 
-const StartSign = ({ name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle, modalStyle }) => {
+const StartSign = ({ name, handle, alert, setName, setHandle, handleFormSubmit, buttonStyle, }) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
@@ -183,7 +183,12 @@ const VerifyTweet = ({ alert, handleTwitterVerifyAndSign, buttonStyle }) => {
   )
 }
 
-const FinishSign = () => {
+const FinishSign = ({ }) => {
+  const shareTweet = () => {
+    const str = `I just built my digital legacy with @legacy_xyz. Build yours at web3legacy.xyz`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
+  }
+
   return (
     <Stack spacing={2}>
       <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
@@ -192,6 +197,12 @@ const FinishSign = () => {
       <Typography sx={{ fontSize: 20 }}>
         Thanks for signing and building your <span style={{ color: '#257C5E' }}>legacy</span>.
       </Typography>
+      <Button onClick={shareTweet} startIcon={<TwitterIcon />}
+        variant="contained"
+        sx={buttonStyle || styles.button}
+      >
+        Share
+      </Button>
     </Stack>
   )
 }
@@ -207,6 +218,10 @@ export default function SignModal(props) {
   const handleFormSubmit = () => {
     if (name) {
       setAlert('');
+
+      // make sure there are no white spaces
+      setName(name.trim());
+      setHandle(handle.trim());
       setState(CONNECT_WALLET);
     } else {
       setAlert('Name is required.');
@@ -232,7 +247,14 @@ export default function SignModal(props) {
     signFromWallet(account, name, handle).then((sig) => {
       setSignature(sig);
       setAlert('');
-      setState(VERIFY);
+      checkIfVerifiedHandle(handle, sig).then((verified) => {
+        if (verified) {
+          handleWithoutVerifying();
+        }
+        else {
+          setState(VERIFY);
+        }
+      })
     }).catch((err) => {
       setAlert('An error occurred. Please try signing again.');
     });

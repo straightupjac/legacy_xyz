@@ -195,7 +195,7 @@ export function dedupe(sigs) {
   return Object.values(unique_set)
 }
 
-async function checkIfVerifiedHandle(handle, signature) {
+export async function checkIfVerifiedHandle(handle, signature) {
   const req = await fetch('https://arweave.net/graphql', {
     method: 'POST',
     headers: {

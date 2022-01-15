@@ -10,7 +10,7 @@ function getLibrary(provider) {
   return library;
 }
 
-const SignLegacy = ({ projectId, buttonLabel, buttonStyle, message, cardStyle, showLegacy = true, modalStyle }) => {
+const SignLegacy = ({ projectId, buttonLabel = undefined, buttonStyle = undefined, message = undefined, cardStyle = undefined, showLegacy = true, modalStyle = undefined }) => {
   const defaultMsg = "Thank you for visiting my corner on the internet. To leave your legacy here, please sign by clicking the button below. By signing, this signature will be part of your legacy on the blockchain.";
 
   return (
