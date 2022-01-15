@@ -1,6 +1,6 @@
 {
   "name": "legacy-xyz",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "main": "dist/index.js",
   "files": [
     "dist/"
@@ -27,6 +27,7 @@
   ],
   "homepage": "https://github.com/straightupjac/legacy_xyz#readme",
   "dependencies": {
+    "@babel/preset-env": "^7.16.8",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@ethersproject/providers": "^5.5.2",

@@ -1,8 +1,9 @@
 {
 	"presets": [
-			"@babel/preset-react"
+		"@babel/preset-react",
+		"@babel/preset-env"
 	],
 	"plugins": [
-    "inline-import-data-uri"
-  ]
+		"inline-import-data-uri"
+	]
 }
