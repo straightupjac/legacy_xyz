@@ -154,12 +154,16 @@ export async function getSigners(projectId) {
     return tag ? tag.value : defaultValue;
   }
 
-  return req.data.transactions.edges.flatMap(nodeItem => {
+  return req.data.transactions.edges.flatMap((nodeItem) => {
     const cursor = nodeItem.cursor;
     const n = nodeItem.node;
     const sig = safeTag(n, SIG_SIG, "UNKWN");
     const handle = safeTag(n, SIG_TWITTER_HANDLE, "UNSIGNED");
-    const verified = safeTag(n, SIG_ISVERIFIED, 'false') === 'true'
+    let verified = safeTag(n, SIG_ISVERIFIED, 'false') === 'true';
+
+    if (!verified) {
+      verified = checkIfVerifiedHandle(handle, sig);
+    }
 
     return [{
       CURSOR: cursor,
@@ -189,4 +193,59 @@ export function dedupe(sigs) {
     return total
   }, {})
   return Object.values(unique_set)
+}
+
+async function checkIfVerifiedHandle(handle, signature) {
+  const req = await fetch('https://arweave.net/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `
+      query {
+        transactions(
+          tags: [
+            {
+              name: "${DOC_TYPE}",
+              values: ["verification"]
+            },
+            {
+              name: "${VERIFICATION_ADDRESS}",
+              values: ["${signature}"]
+            }
+          ],
+          owners: ["${CONTROLLER_ADDR}"]
+        ) {
+          edges {
+            node {
+              id
+              owner {
+                address
+              }
+              tags {
+                name
+                value
+              }
+            }
+          }
+        }
+      }
+      `
+    })
+  })
+
+  const json = await req.json()
+  for (const edge of json.data.transactions.edges) {
+    const n = edge.node
+    if (n.owner.address === CONTROLLER_ADDR) {
+      const parsedHandle = n.tags.find(tag => tag.name === VERIFICATION_HANDLE).value
+      const parsedAddress = n.tags.find(tag => tag.name === VERIFICATION_ADDRESS).value
+      if (handle.trim() === parsedHandle.trim() && signature === parsedAddress) {
+        return true
+      }
+    }
+  }
+  return false
 }
