@@ -18,6 +18,8 @@ const VERIFY_TWEET = 4;
 const VERIFYING = 5;
 const FINISH_SIGN = 6;
 
+const SIGNING = 7;
+
 const CloseButton = ({ handleClose }) => {
   return (
     <IconButton onClick={handleClose} sx={{
@@ -151,11 +153,11 @@ const Verify = ({ alert, handleTweet, handleWithoutVerifying, buttonStyle }) => 
   )
 }
 
-const Verifying = () => {
+const LoaderModal = ({ title }) => {
   return (
     <Stack spacing={2}>
       <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
-        Verifying
+        {title}
       </Typography>
       <CircularProgress size="large" />
     </Stack>
@@ -263,7 +265,7 @@ export default function SignModal(props) {
   }
 
   const handleWithoutVerifying = () => {
-    setState(VERIFYING);
+    setState(SIGNING);
     sign(projectId, name, account, handle, signature).then((result) => {
       setAlert('');
       setState(FINISH_SIGN);
@@ -305,7 +307,8 @@ export default function SignModal(props) {
             {state === SIGN_MESSAGE && <SignMessage alert={alert} handleSign={handleSign} buttonStyle={buttonStyle} />}
             {state === VERIFY && <Verify alert={alert} handleTweet={handleTweet} handleWithoutVerifying={handleWithoutVerifying} buttonStyle={buttonStyle} />}
             {state === VERIFY_TWEET && <VerifyTweet alert={alert} handleTwitterVerifyAndSign={handleTwitterVerifyAndSign} buttonStyle={buttonStyle} />}
-            {state === VERIFYING && <Verifying />}
+            {state === VERIFYING && <LoaderModal title="Verifying" />}
+            {state === SIGNING && <LoaderModal title="Signing" />}
             {state === FINISH_SIGN && <FinishSign />}
             <Typography sx={{ fontSize: 12, textAlign: 'center', mt: 3 }}>
               🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer"><span style={{ color: '#257C5E' }}>legacy</span></a> to learn more
@@ -319,6 +322,7 @@ export default function SignModal(props) {
 
 const styles = {
   button: {
+    color: 'white',
     background: '#000000',
     textTransform: 'none',
     fontSize: 20,

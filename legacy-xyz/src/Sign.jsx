@@ -51,7 +51,7 @@ const Sign = ({ projectId, buttonLabel, buttonStyle, modalStyle }) => {
         variant="contained" size="large"
         sx={
           buttonStyle ? buttonStyle :
-            { maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 } }
+            { color: 'white', maxWidth: '200px', background: '#000000', textTransform: 'none', fontSize: 20, borderRadius: 3, ':hover': { background: '#000000', opacity: 0.8 } }
         }
         onClick={handleConnect}
       >

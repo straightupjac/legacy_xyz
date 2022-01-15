@@ -2900,10 +2900,10 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
-legacy-xyz@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.12.tgz#22e6ed795a721ec5aabb182f79eda80ddc67b4ef"
-  integrity sha512-X/T/yDUMRBufJlKP45bdmnSci7v8avHccqXoW6N5i+ztTYbCLb6agFytjv0a80p4dIBpGTBs/Vj2nOI5fmOhuA==
+legacy-xyz@^0.1.15:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/legacy-xyz/-/legacy-xyz-0.1.15.tgz#ca4c046525e73d3f55770e784c2335ca104e7c82"
+  integrity sha512-mkxmKOfEZS+AgxLY7UOBBEXa5mRMMiYj6z51HEribWu7+d1hxnLmzerckgOZ7AeyseW9cOoIc882rxRbCxZ9wQ==
   dependencies:
     "@emotion/react" "^11.7.1"
     "@emotion/styled" "^11.6.0"
