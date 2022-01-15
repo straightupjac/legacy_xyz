@@ -2,6 +2,7 @@
 Leave your digital legacy. An guestbook plug-in to allow your digital guests to leave their legacy by signing a message with their web3 wallet. Curate your digital legacy with legacy-xyz.
 
 Join the movement: [web3legacy.xyz](http://web3legacy.xyz/)
+
 Full docs are [here](http://docs.web3legacy.xyz/).
 
 
