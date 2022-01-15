@@ -20,7 +20,7 @@ export default function Install() {
   return (
     <div>
       <Head>
-        <title>Hack lodge -- web3legacy.xyz</title>
+        <title>Hack lodge - web3legacy.xyz</title>
         <meta name="description" content="Leave your online legacy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
