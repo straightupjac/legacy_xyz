@@ -1,9 +1,6 @@
 import Cors from 'cors'
 import Twitter from 'twitter'
-// import Redis from 'ioredis';
 import { checkIfVerifiedAr, storeVerificationAr } from '../helpers/arweave';
-
-// const sigCache = new Redis();
 
 // Initializing the cors middleware
 const cors = Cors({
@@ -34,12 +31,12 @@ const client = new Twitter({
 
 const handler = async (req, res) => {
   // Run the middleware
-  await runMiddleware(req, res, cors)
+  // await runMiddleware(req, res, cors)
 
   return new Promise((resolve, reject) => {
     /** validate req type **/
     if (req.method !== 'POST') {
-      res.status(400).send({ msg: 'Only POST requests allowed' });
+      res.status(400).json({ msg: 'Only POST requests allowed' });
       return;
     }
 
@@ -50,12 +47,12 @@ const handler = async (req, res) => {
     const { signature } = body;
 
     if (!handle) {
-      res.status(400).send({ msg: 'Handle is required' });
+      res.status(400).json({ msg: 'Handle is required' });
       return;
     }
 
     if (!signature) {
-      res.status(400).send({ msg: 'Signature is required in the body' });
+      res.status(400).json({ msg: 'Signature is required in the body' });
       return;
     }
 
@@ -80,25 +77,25 @@ const handler = async (req, res) => {
                   // already linked
                   console.log(`already verified user: @${handle}`)
                   // sigCache.set(handle, result)
-                  res.send({ tx: result })
+                  res.json({ tx: result })
                 } else {
                   // need to link
                   storeVerificationAr(handle, signature)
                     .then((tx) => {
                       console.log(`new verified user: @${handle}, ${signature}`)
                       // sigCache.set(handle, tx)
-                      res.status(201).send(tx)
+                      res.status(201).json(tx)
                     })
                     .catch(e => {
                       console.log(`err @ /verify/:handle : ${e}`)
-                      res.status(500).send(e)
+                      res.status(500).json(e)
                     });
                 }
               });
             return
           }
         }
-        res.status(400).send({ msg: 'No matching Tweets found' })
+        res.status(400).json({ msg: 'No matching Tweets found' })
       } else {
         console.log('verifying error', error);
         res.status(500).json({ msg: 'Twitter Client Internal Error' })
