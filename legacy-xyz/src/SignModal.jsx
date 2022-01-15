@@ -311,7 +311,7 @@ export default function SignModal(props) {
             {state === SIGNING && <LoaderModal title="Signing" />}
             {state === FINISH_SIGN && <FinishSign />}
             <Typography sx={{ fontSize: 12, textAlign: 'center', mt: 3 }}>
-              🌱 Check out <a href="https://legacy-xyz.vercel.app/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer"><span style={{ color: '#257C5E' }}>legacy</span></a> to learn more
+              🌱 Check out <a href="http://web3legacy.xyz/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer"><span style={{ color: '#257C5E' }}>legacy</span></a> to learn more
             </Typography>
           </Stack>
         </Box>
