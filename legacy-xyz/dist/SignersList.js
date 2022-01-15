@@ -64,6 +64,7 @@ const SignersList = ({
   }, processedSigners.map((signer, idx) => {
     return /*#__PURE__*/React.createElement(ListItem, {
       key: idx,
+      id: signer.SIG_ID,
       name: signer.SIG_NAME,
       date: parseInt(signer.SIG_DATE, 10),
       address: getENSName(signer.SIG_ADDR),
@@ -75,6 +76,7 @@ const SignersList = ({
 export default SignersList;
 
 const ListItem = ({
+  id,
   name,
   date,
   address,
@@ -87,34 +89,64 @@ const ListItem = ({
       md: 'row'
     },
     justifyContent: "space-between",
-    alignItems: "center",
     sx: {
       py: 2
-    }
-  }, /*#__PURE__*/React.createElement(Box, {
-    textAlign: "start"
+    },
+    spacing: 1
+  }, /*#__PURE__*/React.createElement(Stack, {
+    direction: "row",
+    justifyContent: "space-between",
+    spacing: 2
+  }, /*#__PURE__*/React.createElement(Stack, {
+    textAlign: "start",
+    spacing: 2
   }, /*#__PURE__*/React.createElement(Typography, {
-    variant: "body1"
+    variant: "body1",
+    sx: {
+      fontFamily: `Tahoma, sans`
+    }
   }, name), /*#__PURE__*/React.createElement(Typography, {
-    variant: "caption"
-  }, new Date(date).toLocaleDateString("en-US"))), /*#__PURE__*/React.createElement(Box, {
-    textAlign: "start"
-  }, /*#__PURE__*/React.createElement(Typography, {
-    variant: "body1"
-  }, address)), /*#__PURE__*/React.createElement(Box, {
-    textAlign: "end"
-  }, twitter && /*#__PURE__*/React.createElement("div", {
-    style: {
-      alignContent: 'flex-end'
+    variant: "caption",
+    sx: {
+      fontFamily: `Tahoma, sans`
     }
-  }, /*#__PURE__*/React.createElement("a", {
-    href: `https://twitter.com/${twitter}`,
+  }, new Date(date).toLocaleDateString("en-US"))), /*#__PURE__*/React.createElement("a", {
+    href: `https://arweave.net/tx/${id}`,
     target: "_blank",
     rel: "noreferrer",
     style: {
       textDecoration: 'none'
     }
+  }, /*#__PURE__*/React.createElement(Typography, {
+    variant: "body2",
+    sx: {
+      fontFamily: `Courier`,
+      color: 'gray'
+    }
+  }, "txId: ", id.substring(0, 5)))), /*#__PURE__*/React.createElement(Stack, {
+    textAlign: "end",
+    spacing: 1
+  }, twitter && /*#__PURE__*/React.createElement("a", {
+    href: `https://twitter.com/${twitter}`,
+    target: "_blank",
+    rel: "noreferrer",
+    style: {
+      textDecoration: 'none',
+      margin: 0
+    }
   }, /*#__PURE__*/React.createElement(Chip, {
-    label: `@${twitter}`
-  }))))), /*#__PURE__*/React.createElement(Divider, null));
+    label: /*#__PURE__*/React.createElement(Typography, {
+      variant: "body2",
+      sx: {
+        fontFamily: `Tahoma, sans`,
+        color: '#4F4F4F'
+      }
+    }, "@", twitter)
+  })), /*#__PURE__*/React.createElement(Typography, {
+    variant: "body2",
+    sx: {
+      fontFamily: `Courier`,
+      color: 'gray'
+    }
+  }, address))), /*#__PURE__*/React.createElement(Divider, null));
 };

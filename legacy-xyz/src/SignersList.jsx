@@ -64,6 +64,7 @@ const SignersList = ({ projectId, cardStyle, maxHeight }) => {
                         return (
                             <ListItem
                                 key={idx}
+                                id={signer.SIG_ID}
                                 name={signer.SIG_NAME}
                                 date={parseInt(signer.SIG_DATE, 10)}
                                 address={getENSName(signer.SIG_ADDR)}
@@ -80,33 +81,40 @@ const SignersList = ({ projectId, cardStyle, maxHeight }) => {
 export default SignersList;
 
 
-const ListItem = ({ name, date, address, twitter }) => {
+const ListItem = ({ id, name, date, address, twitter }) => {
     return (
         <>
             <Stack
                 direction={{ xs: 'column', sm: 'column', md: 'row' }}
                 justifyContent={"space-between"}
-                alignItems={"center"}
                 sx={{ py: 2 }}
+                spacing={1}
             >
-                <Box textAlign="start">
-                    <Typography variant='body1'>{name}</Typography>
-                    <Typography variant='caption'>{new Date(date).toLocaleDateString("en-US")}</Typography>
-                </Box>
-                <Box textAlign="start">
-                    <Typography variant='body1'>{address}</Typography>
-                </Box>
-                <Box textAlign="end">
-                    {twitter && <div style={{ alignContent: 'flex-end' }}>
+                <Stack direction="row" justifyContent="space-between" spacing={2}>
+                    <Stack textAlign="start" spacing={2}>
+                        <Typography variant='body1' sx={{ fontFamily: `Tahoma, sans` }}>{name}</Typography>
+                        <Typography variant='caption' sx={{ fontFamily: `Tahoma, sans` }}>{new Date(date).toLocaleDateString("en-US")}</Typography>
+                    </Stack>
+                    <a
+                        href={`https://arweave.net/tx/${id}`}
+                        target="_blank" rel="noreferrer"
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <Typography variant='body2' sx={{ fontFamily: `Courier`, color: 'gray' }}>txId: {id.substring(0, 5)}</Typography>
+                    </a>
+                </Stack>
+                <Stack textAlign="end" spacing={1}>
+                    {twitter &&
                         <a
                             href={`https://twitter.com/${twitter}`}
                             target="_blank" rel="noreferrer"
-                            style={{ textDecoration: 'none' }}
+                            style={{ textDecoration: 'none', margin: 0 }}
                         >
-                            <Chip label={`@${twitter}`} />
-                        </a>
-                    </div>}
-                </Box>
+                            <Chip label={
+                                <Typography variant='body2' sx={{ fontFamily: `Tahoma, sans`, color: '#4F4F4F' }}>@{twitter}</Typography>} />
+                        </a>}
+                    <Typography variant='body2' sx={{ fontFamily: `Courier`, color: 'gray' }}>{address}</Typography>
+                </Stack>
             </Stack>
             <Divider />
         </>
