@@ -22,6 +22,9 @@ function runMiddleware(req, res, fn) {
 async function handler(req, res) {
   // Run the middleware
   await runMiddleware(req, res, cors)
+  if (req.method === 'POST') {
+    res.json({ message: 'ok', body: req.body })
+  }
 
   // Rest of the API logic
   res.json({ message: 'ok' })

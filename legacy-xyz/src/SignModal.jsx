@@ -237,7 +237,7 @@ export default function SignModal(props) {
   }
 
   const generateTweet = () => {
-    const str = `I am verifying for @legacy_xyz. signature:${signature}`;
+    const str = `I'm building my digital legacy today. Verifying for @legacy_xyz signature:${signature}`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
   }
 
