@@ -183,7 +183,12 @@ const VerifyTweet = ({ alert, handleTwitterVerifyAndSign, buttonStyle }) => {
   )
 }
 
-const FinishSign = () => {
+const FinishSign = ({ }) => {
+  const shareTweet = () => {
+    const str = `I just built my digital legacy with @legacy_xyz. Build yours at web3legacy.xyz`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURI(str)}`);
+  }
+
   return (
     <Stack spacing={2}>
       <Typography sx={{ fontSize: 36, fontWeight: 'bold' }}>
@@ -192,6 +197,12 @@ const FinishSign = () => {
       <Typography sx={{ fontSize: 20 }}>
         Thanks for signing and building your <span style={{ color: '#257C5E' }}>legacy</span>.
       </Typography>
+      <Button onClick={shareTweet} startIcon={<TwitterIcon />}
+        variant="contained"
+        sx={buttonStyle || styles.button}
+      >
+        Share
+      </Button>
     </Stack>
   )
 }
