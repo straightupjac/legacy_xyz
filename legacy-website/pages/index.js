@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Legacy.xyz</title>
+        <title>legacy-xyz</title>
         <meta name="description" content="Leave your online legacy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
