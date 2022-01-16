@@ -45,4 +45,4 @@ This project was inspired by https://www.interdependence.online/ made by [Jacky 
 From seeing how powerful it is to have supporters add their digital signatures to projects and websites they support, we developed an npm package that can easily be added to any existing websites to have any online "guests" sign in to show they visited a website. As visiting personal sites are almost like visiting someone's digital home! 🌱 🏡,
 
 _Created at Hack Lodge 2022 by [@straightupjac](https://github.com/straightupjac) and [@mathurah](https://github.com/mathurah)_
-_Special thanks to Padam[https://github.com/padamchopra] for design support._
+_Special thanks to [Padam](https://github.com/padamchopra) for design support._
