@@ -7,12 +7,21 @@ import createEmotionCache from '../styles/createEmotionCache';
 import "/styles/globals.css";
 import theme from '../styles/theme';
 import Footer from "@components/core-components/Footer";
+import TagManager from "react-gtm-module"
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
+const tagManagerArgs = {
+  id: "G-ZZ263HQB0M",
+}
+
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  useEffect(() => {
+    TagManager.initialize(tagManagerArgs)
+  }, [])
 
   return (
     <CacheProvider value={emotionCache}>

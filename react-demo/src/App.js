@@ -12,8 +12,8 @@ function App() {
         </p>
       </header>
       <main className="App-main">
-        <SignLegacy projectId="legacyxyz" />
-        <SignLegacy projectId="legacyxyz"
+        <SignLegacy projectId="hacklodge" />
+        <SignLegacy projectId="hacklodge"
           // override style examples
           buttonLabel={"Sign"}
           message={" "}
@@ -33,7 +33,7 @@ function App() {
         />
         <br />
         <SignersList
-          projectId="legacyxyz"
+          projectId="hacklodge"
           cardStyle={{ border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10 }}
         />
       </main>
