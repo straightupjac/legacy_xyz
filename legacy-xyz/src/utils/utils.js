@@ -55,7 +55,7 @@ export async function sign(projectId, name, account, twitter, signature) {
         address: account,
         handle: cleanHandle(twitter),
         date: Date.now(),
-        signature,
+        signature: signature,
       }),
   }).then(jsonOrErrorHandler)
 }
@@ -161,10 +161,6 @@ export async function getSigners(projectId) {
     const handle = safeTag(n, SIG_TWITTER_HANDLE, "UNSIGNED");
     let verified = safeTag(n, SIG_ISVERIFIED, 'false') === 'true';
 
-    if (!verified) {
-      verified = checkIfVerifiedHandle(handle, sig);
-    }
-
     return [{
       CURSOR: cursor,
       SIG_ID: n.id,
@@ -181,12 +177,19 @@ export async function getSigners(projectId) {
 export function dedupe(sigs) {
   const unique_set = sigs.reduce((total, cur) => {
     if (!total.hasOwnProperty(cur.SIG_ADDR)) {
+      if (!cur.SIG_ISVERIFIED) {
+        cur.SIG_ISVERIFIED = checkIfVerifiedHandle(cur.SIG_TWITTER_HANDLE, cur.SIG_SIG);
+      }
       // unique addr
       total[cur.SIG_ADDR] = cur
     } else {
-      const old = total[cur.SIG_ADDR]
       // dupe, can overwrite it current one is verified or old one is not verified
-      if (cur.SIG_ISVERIFIED || !old.SIG_ISVERIFIED) {
+      const old = total[cur.SIG_ADDR]
+      if (cur.SIG_ISVERIFIED) {
+        total[cur.SIG_ADDR] = cur;
+      }
+      else if (!old.SIG_ISVERIFIED) {
+        cur.SIG_ISVERIFIED = checkIfVerifiedHandle(old.SIG_TWITTER_HANDLE, old.SIG_SIG)
         total[cur.SIG_ADDR] = cur
       }
     }
@@ -242,6 +245,7 @@ export async function checkIfVerifiedHandle(handle, signature) {
     if (n.owner.address === CONTROLLER_ADDR) {
       const parsedHandle = n.tags.find(tag => tag.name === VERIFICATION_HANDLE).value
       const parsedAddress = n.tags.find(tag => tag.name === VERIFICATION_ADDRESS).value
+      console.log('parsedHandle', parsedHandle, handle)
       if (handle.trim() === parsedHandle.trim() && signature === parsedAddress) {
         return true
       }

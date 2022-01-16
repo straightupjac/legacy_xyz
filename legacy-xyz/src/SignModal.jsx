@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
@@ -213,7 +213,7 @@ export default function SignModal(props) {
   const [name, setName] = useState('');
   const [handle, setHandle] = useState('');
   const [alert, setAlert] = useState();
-  const [signature, setSignature] = useState(false);
+  const [signature, setSignature] = useState('');
 
   const handleFormSubmit = () => {
     if (name) {
@@ -246,19 +246,23 @@ export default function SignModal(props) {
     }
     signFromWallet(account, name, handle).then((sig) => {
       setSignature(sig);
-      setAlert('');
-      checkIfVerifiedHandle(handle, sig).then((verified) => {
-        if (verified) {
-          handleWithoutVerifying();
-        }
-        else {
-          setState(VERIFY);
-        }
-      })
     }).catch((err) => {
       setAlert('An error occurred. Please try signing again.');
     });
   }
+
+  useEffect(() => {
+    if (signature === '') return;
+    setAlert('');
+    checkIfVerifiedHandle(handle, signature).then((verified) => {
+      if (verified) {
+        handleWithoutVerifying();
+      }
+      else {
+        setState(VERIFY);
+      }
+    })
+  }, [signature])
 
   const generateTweet = () => {
     const str = `I'm building my digital legacy today. Verifying for @legacy_xyz signature:${signature}`;
@@ -288,6 +292,7 @@ export default function SignModal(props) {
 
   const handleWithoutVerifying = () => {
     setState(SIGNING);
+    console.log(handleWithoutVerifying, projectId, name, account, handle, signature)
     sign(projectId, name, account, handle, signature).then((result) => {
       setAlert('');
       setState(FINISH_SIGN);

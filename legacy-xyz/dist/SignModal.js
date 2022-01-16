@@ -366,7 +366,7 @@ function SignModal(props) {
       alert = _useState8[0],
       setAlert = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
       signature = _useState10[0],
       setSignature = _useState10[1];
@@ -411,14 +411,6 @@ function SignModal(props) {
             case 4:
               signFromWallet(account, name, handle).then(function (sig) {
                 setSignature(sig);
-                setAlert('');
-                (0, _utils.checkIfVerifiedHandle)(handle, sig).then(function (verified) {
-                  if (verified) {
-                    handleWithoutVerifying();
-                  } else {
-                    setState(VERIFY);
-                  }
-                });
               })["catch"](function (err) {
                 setAlert('An error occurred. Please try signing again.');
               });
@@ -435,6 +427,18 @@ function SignModal(props) {
       return _ref9.apply(this, arguments);
     };
   }();
+
+  (0, _react.useEffect)(function () {
+    if (signature === '') return;
+    setAlert('');
+    (0, _utils.checkIfVerifiedHandle)(handle, signature).then(function (verified) {
+      if (verified) {
+        handleWithoutVerifying();
+      } else {
+        setState(VERIFY);
+      }
+    });
+  }, [signature]);
 
   var generateTweet = function generateTweet() {
     var str = "I'm building my digital legacy today. Verifying for @legacy_xyz signature:".concat(signature);
@@ -465,6 +469,7 @@ function SignModal(props) {
 
   var handleWithoutVerifying = function handleWithoutVerifying() {
     setState(SIGNING);
+    console.log(handleWithoutVerifying, projectId, name, account, handle, signature);
     (0, _utils.sign)(projectId, name, account, handle, signature).then(function (result) {
       setAlert('');
       setState(FINISH_SIGN);

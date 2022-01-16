@@ -102,7 +102,7 @@ const ListItem = ({ id, name, date, address, twitter, message, verified }) => {
                 <Stack direction="row" justifyContent="space-between" spacing={2}>
                     <Stack textAlign="start" spacing={2}>
                         <Typography variant='body1' sx={{ fontFamily: `Tahoma, sans` }}>{name}</Typography>
-                        <Typography variant='caption' sx={{ fontFamily: `Tahoma, sans` }}>{new Date(date).toLocaleDateString("en-US")}</Typography>
+                        <Typography variant='caption' sx={{ fontFamily: `Tahoma, sans` }}>{new Date(date).toLocaleString()}</Typography>
                     </Stack>
                     <a
                         href={`https://arweave.net/tx/${id}`}

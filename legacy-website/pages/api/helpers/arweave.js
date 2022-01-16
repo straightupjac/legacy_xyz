@@ -70,6 +70,10 @@ async function checkIfVerifiedAr(handle, address) {
             {
               name: "${DOC_TYPE}",
               values: ["verification"]
+            },
+            {
+              name: "${VERIFICATION_ADDRESS}",
+              values: ["${address}"]
             }
           ],
           owners: ["${CONTROLLER_ADDR}"]
@@ -98,8 +102,8 @@ async function checkIfVerifiedAr(handle, address) {
     if (n.owner.address === CONTROLLER_ADDR) {
       const parsedHandle = n.tags.find(tag => tag.name === VERIFICATION_HANDLE).value
       const parsedAddress = n.tags.find(tag => tag.name === VERIFICATION_ADDRESS).value
-      if (handle === parsedHandle && address === parsedAddress) {
-        return n.id
+      if (handle.trim() === parsedHandle.trim() && address === parsedAddress) {
+        return true
       }
     }
   }
@@ -121,7 +125,6 @@ async function storeVerificationAr(handle, address) {
 }
 
 async function signGuestbook(projectId, address, name, handle, date, signature, isVerified, message) {
-  console.log('signing guestbook', projectId, address, name, handle, date, signature, isVerified)
   let transaction = await arweave.createTransaction({ data: address }, key)
   transaction.addTag(DOC_TYPE, 'signature')
   transaction.addTag(PROJECT_ID, projectId)

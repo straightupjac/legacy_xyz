@@ -196,7 +196,7 @@ var ListItem = function ListItem(_ref2) {
     sx: {
       fontFamily: "Tahoma, sans"
     }
-  }, new Date(date).toLocaleDateString("en-US"))), /*#__PURE__*/_react["default"].createElement("a", {
+  }, new Date(date).toLocaleString())), /*#__PURE__*/_react["default"].createElement("a", {
     href: "https://arweave.net/tx/".concat(id),
     target: "_blank",
     rel: "noreferrer",

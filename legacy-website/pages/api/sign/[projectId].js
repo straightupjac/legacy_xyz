@@ -41,11 +41,6 @@ async function handler(req, res) {
     message,
   } = req.body
 
-  console.log('sign', projectId, name,
-    address,
-    handle,
-    date,
-    signature);
 
   checkIfProjectRegistered(projectId).then((result) => {
     const { registered } = result;
@@ -64,7 +59,7 @@ async function handler(req, res) {
     // check if user is verified
     const promise =
       checkIfVerifiedAr(handle, signature).then(result => {
-        const verified = !!result; // force into boolean format (if true would be an ID, if false would be false)
+        const verified = result;
         return signGuestbook(projectId, address, name, handle, date, signature, verified, message)
       })
 
