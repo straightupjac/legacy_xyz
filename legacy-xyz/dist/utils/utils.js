@@ -245,7 +245,6 @@ export async function checkIfVerifiedHandle(handle, signature) {
     if (n.owner.address === CONTROLLER_ADDR) {
       const parsedHandle = n.tags.find(tag => tag.name === VERIFICATION_HANDLE).value
       const parsedAddress = n.tags.find(tag => tag.name === VERIFICATION_ADDRESS).value
-      console.log('parsedHandle', parsedHandle, handle)
       if (handle.trim() === parsedHandle.trim() && signature === parsedAddress) {
         return true
       }

@@ -292,7 +292,6 @@ export default function SignModal(props) {
 
   const handleWithoutVerifying = () => {
     setState(SIGNING);
-    console.log(handleWithoutVerifying, projectId, name, account, handle, signature)
     sign(projectId, name, account, handle, signature).then((result) => {
       setAlert('');
       setState(FINISH_SIGN);

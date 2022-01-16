@@ -102,7 +102,6 @@ async function storeVerificationAr(handle, address) {
 }
 
 async function signGuestbook(projectId, address, name, handle, date, signature, isVerified) {
-  console.log('signing guestbook', projectId, address, name, handle, date, signature, isVerified)
   let transaction = await arweave.createTransaction({ data: address }, KEY)
   transaction.addTag(DOC_TYPE, 'signature')
   transaction.addTag(PROJECT_ID, projectId)

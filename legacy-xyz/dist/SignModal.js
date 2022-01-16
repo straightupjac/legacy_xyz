@@ -469,7 +469,6 @@ function SignModal(props) {
 
   var handleWithoutVerifying = function handleWithoutVerifying() {
     setState(SIGNING);
-    console.log(handleWithoutVerifying, projectId, name, account, handle, signature);
     (0, _utils.sign)(projectId, name, account, handle, signature).then(function (result) {
       setAlert('');
       setState(FINISH_SIGN);
