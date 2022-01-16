@@ -8,6 +8,7 @@ import "/styles/globals.css";
 import theme from '../styles/theme';
 import Footer from "@components/core-components/Footer";
 import TagManager from "react-gtm-module"
+import { useEffect } from 'react';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
