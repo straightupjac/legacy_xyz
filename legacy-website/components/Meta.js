@@ -8,7 +8,7 @@ const Meta = () => {
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta
         name="description"
-        content="Leave your online legacy. A new era of social proof, and discovery of content."
+        content="Leave your web3 legacy. A new era of social proof, and discovery of content."
       />
 
       <meta property="og:type" content="website" />
@@ -16,7 +16,7 @@ const Meta = () => {
       <meta property="og:title" content="Legacy XYZ" />
       <meta
         property="og:description"
-        content="Leave your online legacy. A new era of social proof, and discovery of content."
+        content="Leave your web3 legacy. A new era of social proof, and discovery of content."
       />
       <meta property="og:image" content="/social-preview.png" />
 
