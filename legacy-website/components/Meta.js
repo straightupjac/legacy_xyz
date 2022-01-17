@@ -23,6 +23,7 @@ const Meta = () => {
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="https://twitter.com/legacy_xyz" />
       <meta property="twitter:title" content="Leave your web3 legacy. A new era of social proof, and discovery of content." />
+      <meta property="twitter:image" content="/social-preview.png" />
     </Head>
   );
 };
