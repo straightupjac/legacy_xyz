@@ -39,10 +39,9 @@ Add your project to the list by making a pull request.
 Our code is all opensource at [legacy_xyz](https://github.com/straightupjac/legacy_xyz). Please file a ticket or open a pull request!
 We maintain your projects and signatures on chain. This costs Arweave. We would be eternally grateful if you send Arweave to this address `AaaKkDKK4yEllFoZtzv_oFjtlw7LjCZzhpZRWThIJqA` to keep this project going.
 
-_Created at Hack Lodge 2022 by [@straightupjac](https://github.com/straightupjac) and [@mathurah](https://github.com/mathurah)_
-
 ## Inspiration
 This project was inspired by https://www.interdependence.online/ made by [Jacky Zhao](https://twitter.com/_jzhao), [Jasmine Wang](https://twitter.com/j_asminewang) and other technologists from the [Verses.xyz](https://github.com/verses-xyz) organization along with the general digital garden movement. 
 
 From seeing how powerful it is to have supporters add their digital signatures to projects and websites they support, we developed an npm package that can easily be added to any existing websites to have any online "guests" sign in to show they visited a website. As visiting personal sites are almost like visiting someone's digital home! 🌱 🏡,
 
+_Created at Hack Lodge 2022 by [@straightupjac](https://github.com/straightupjac) and [@mathurah](https://github.com/mathurah)_. _Special thanks to [Padam](https://github.com/padamchopra) for design support._
