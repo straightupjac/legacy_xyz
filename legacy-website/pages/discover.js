@@ -7,14 +7,14 @@ import Head from "next/head";
 const DiscoverProject = ({ name, link, twitter, description }) => {
   return (
     <li>
-      <Stack direction={{ xs: 'column', sm: 'column', md: ' row' }}>
-        <Stack direction="row">
+      <Stack spacing={4} direction={{ xs: 'column', sm: 'column', md: ' row' }}>
+        <Stack direction="row" spacing={2} sx={{ mr: 2 }}>
           <MuiNextLink href={link} target="_blank">
             <Typography variant="body1">
               {name}
             </Typography>
           </MuiNextLink>
-          {twitter && <MuiNextLink href={twitter} target="_blank" sx={{ ml: 2, mr: 2 }}>
+          {twitter && <MuiNextLink href={twitter} target="_blank">
             <TwitterIcon />
           </MuiNextLink>}
         </Stack>
@@ -40,6 +40,10 @@ export default function Home() {
           {`Discover digital corners with legacy-xyz guestbooks.`}
         </Typography>
         <ul>
+          <DiscoverProject name="Hacklodge"
+            link="/hacklodge"
+            description="Hacklodge Winter 2022 Demo Day"
+          />
           <DiscoverProject name="straightupjac"
             link="https://jaclynchan.me/"
             twitter="https://twitter.com/straightupjac"

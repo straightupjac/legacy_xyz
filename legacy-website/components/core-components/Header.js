@@ -15,7 +15,7 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 export const navLinks = [
   { title: 'Docs', path: 'https://docs.web3legacy.xyz/', target: '_blank' },
-  { title: 'Find websites to sign', path: '/discover' },
+  { title: 'Find projects to sign', path: '/discover' },
 ];
 
 const Header = () => {
