@@ -30,7 +30,7 @@ export default function Home() {
 
       <Stack alignItems="center" spacing={4} sx={{ px: 2 }}>
         <Typography variant="h1" sx={{ pt: 2 }}>
-          curate your digital legacy.
+          curate your web3 legacy.
         </Typography>
         <Typography variant="body1">
           Enable supporters of your project to leave a digital signature once
