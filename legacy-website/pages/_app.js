@@ -9,6 +9,7 @@ import theme from '../styles/theme';
 import Footer from "@components/core-components/Footer";
 import TagManager from "react-gtm-module"
 import { useEffect } from 'react';
+import Meta from '@components/Meta';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -26,10 +27,7 @@ export default function MyApp(props) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <title>Nextjs X MUI5</title>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
+      <Meta />
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
