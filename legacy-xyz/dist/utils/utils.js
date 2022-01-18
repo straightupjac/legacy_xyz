@@ -115,7 +115,7 @@ export async function getSigners(projectId) {
       query: `
       query {
         transactions(
-          first: 50,
+          first: 100,
           sort: HEIGHT_ASC,
           tags: [
             {
@@ -209,6 +209,7 @@ export async function checkIfVerifiedHandle(handle, signature) {
       query: `
       query {
         transactions(
+          first: 5,
           tags: [
             {
               name: "${DOC_TYPE}",
