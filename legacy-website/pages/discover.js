@@ -49,6 +49,11 @@ export default function Home() {
             twitter="https://twitter.com/straightupjac"
             description="straightupjac's personal website"
           />
+          <DiscoverProject name="Daniela Velez"
+            link="https://www.danielavelez.com/"
+            twitter="https://twitter.com/danielarosevc"
+            description="Daniela Velez's personal website"
+          />
         </ul>
         <Link passHref href="/">
           <Button
