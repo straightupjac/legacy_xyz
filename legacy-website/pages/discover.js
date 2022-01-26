@@ -51,7 +51,7 @@ export default function Home() {
           />
           <DiscoverProject name="Daniela Velez"
             link="https://www.danielavelez.com/"
-            twitter="https://twitter.com/danielarosevc"
+            twitter="https://twitter.com/danielarosev"
             description="Daniela Velez's personal website"
           />
         </ul>
