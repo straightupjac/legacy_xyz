@@ -7,6 +7,8 @@ We will continue to update this guide as we discover more common issues.
 ## Next.js integration
 To use with Next.js, you will need to dynamically import. This extension requires components to be rendered in the browser (not server side). The Next.js workaround for this is documented [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr).
 ```js
+import dynamic from 'next/dynamic'
+
 const SignLegacy = dynamic(() =>
   import('legacy-xyz').then((legacy) => legacy.SignLegacy),
   { ssr: false }
