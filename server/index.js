@@ -6,10 +6,9 @@ const app = express()
 const cors = require('cors')
 const Twitter = require('twitter')
 const Cache = require('./cache')
-const {checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject, checkIfProjectRegistered } = require("./arweave")
+const { checkIfVerifiedAr, storeVerificationAr, signGuestbook, addProject, checkIfProjectRegistered } = require("./arweave")
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded())
 app.use(cors())
 
 const port = process.env.PORT || 8080
@@ -43,15 +42,15 @@ app.post('/sign/:project', (req, res) => {
   } = req.body
 
   checkIfProjectRegistered(projectId).then((result) => {
-    const { registered, msg }  = result;
+    const { registered, msg } = result;
     if (!registered) {
       res.status(400).json(`This project (${projectId}) is not registered`);
       return;
     }
-    }).catch((err) => {
-      console.log(`err @ /project : ${err}`)
-      res.status(500)
-    })
+  }).catch((err) => {
+    console.log(`err @ /project : ${err}`)
+    res.status(500)
+  })
 
   // check if user included handle
   if (handle) {
@@ -136,10 +135,10 @@ app.post('/verify/:handle', (req, res) => {
           return
         }
       }
-      res.status(500).json({message: 'No matching Tweets found'})
+      res.status(500).json({ message: 'No matching Tweets found' })
     } else {
       console.log('verifying error', error);
-      res.status(500).send({message: 'Twitter Client Internal Error'})
+      res.status(500).send({ message: 'Twitter Client Internal Error' })
     }
   })
 })
@@ -160,14 +159,15 @@ app.post('/project', (req, res) => {
     const project = projCache.get(project);
     console.log(`already registered project: ${projectId} called ${project.projectName} with the following params: twitter: ${project.projectTwitter}, website: ${project.projectWebsite}`)
     res.json(
-      { success: false,
+      {
+        success: false,
         msg: `already registered project: ${projectId} called ${project.projectName} with the following params: twitter: ${project.projectTwitter}, website: ${project.projectWebsite}`,
       })
     return
   }
   else {
     checkIfProjectRegistered(projectId, projectWebsite, projectTwitter).then((result) => {
-      const { registered, msg, project }  = result;
+      const { registered, msg, project } = result;
       if (registered) {
         projCache.set(projectId, project);
         res.status(400).json(msg);

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { SignButton } from 'web3-guestbook';
+import { SignLegacy, SignersList } from 'legacy-xyz';
 
 function App() {
   return (
@@ -10,8 +10,34 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <SignButton label="Leave your legacy" />
       </header>
+      <main className="App-main">
+        <SignLegacy projectId="hacklodge" />
+        <SignLegacy projectId="hacklodge"
+          // override style examples
+          buttonLabel={"Sign"}
+          message={" "}
+          buttonStyle={
+            {
+              border: "4px solid rgba(255, 255, 255, 0.1)",
+              borderRadius: "16px",
+              height: "60px",
+              backgroundColor: "#3f8758",
+              textTransform: 'none',
+              fontSize: 20,
+              ':hover': { background: '#3f8758', opacity: 0.8 }
+            }
+          }
+          cardStyle={{ border: '0px solid #3f8758', p: 4, maxWidth: '500px', borderRadius: 10 }}
+          showLegacy={false}
+        />
+        <br />
+        <SignersList
+          projectId="hacklodge"
+          cardStyle={{ border: '0px solid #3f8758', p: 4, maxWidth: '800px', borderRadius: 10 }}
+        />
+      </main>
+
     </div>
   );
 }

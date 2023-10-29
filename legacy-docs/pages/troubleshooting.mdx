@@ -1,0 +1,41 @@
+# Troubleshooting
+Some common issues include:
+- integrating with Next.js requires explicitly enabling browswer side rendering
+
+We will continue to update this guide as we discover more common issues.
+
+## Next.js integration
+To use with Next.js, you will need to dynamically import. This extension requires components to be rendered in the browser (not server side). The Next.js workaround for this is documented [here](https://nextjs.org/docs/advanced-features/dynamic-import#with-no-ssr).
+```js
+import dynamic from 'next/dynamic'
+
+const SignLegacy = dynamic(() =>
+  import('legacy-xyz').then((legacy) => legacy.SignLegacy),
+  { ssr: false }
+)
+
+const SignersList = dynamic(() =>
+  import('legacy-xyz').then((legacy) => legacy.SignersList),
+  { ssr: false }
+)
+```
+
+## ESBuild/create-react-app integration
+To use with basic ESBuild or create-react-app pages, you should be able to import the components directly into your page like so:
+```js
+import * as React from 'react'
+import ReactDOM from 'react-dom'
+import { SignLegacy, SignersList } from 'legacy-xyz'
+
+function App() {
+
+  return (<div><h1>hello world</h1>
+    <SignLegacy projectId='legacyxyz' />
+    <br />
+    <SignersList projectId='legacyxyz' />
+  </div>)
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"))
+```
+Take a look at the demos in [esbuild-demo](https://github.com/straightupjac/legacy_xyz/tree/main/esbuild-demo) and [react-demo](https://github.com/straightupjac/legacy_xyz/tree/main/react-demo) for reference.
